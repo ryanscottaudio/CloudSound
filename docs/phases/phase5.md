@@ -1,11 +1,11 @@
-# Phase 5: Searching for Blogs and Posts
+# Phase 5: Searching for Users and Tracks
 
 ## Rails
 ### Models
 
 ### Controllers
-Api::BlogsController (search)
-Api::PostsController (search)
+Api::UsersController (search)
+Api::TracksController (search)
 
 ### Views
 
@@ -15,8 +15,7 @@ Api::PostsController (search)
 ### Collections
 
 ### Views
-* BlogSearchItem
-* SearchShow (composite view, contains BlogsIndex and PostsIndex subviews)
+* UserSearchItem
+* SearchShow (composite view, contains UsersIndex and TracksIndex subviews)
 
 ## Gems/Libraries
-

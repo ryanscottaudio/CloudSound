@@ -1,4 +1,4 @@
-# Phase 3: Editing and Displaying Posts
+# Phase 3: Editing and Displaying Tracks
 
 ## Rails
 ### Models
@@ -13,9 +13,9 @@
 ### Collections
 
 ### Views
-* PostForm
 
 ## Gems/Libraries
-* Filepicker
-* Markdown-js
-* Bootstrap Markdown
+* webaudiox.js
+* howler.js
+* wavesurfer.js
+* CreateJS (EaselJS, TweenJS, SoundJS, PreloadJS)

@@ -1,29 +1,36 @@
-# Phase 2: Viewing Blogs and Posts
+# Phase 2: Track Creation and Interaction
 
 ## Rails
 ### Models
+* Track
 
 ### Controllers
-Api::BlogsController (create, destroy, index, show)
-Api::PostsController (create, destroy, show, update)
+Api::TracksController (new, create, destroy, index, show, edit, update)
+Api::UsersController (show)
 
 ### Views
-* blogs/show.json.jbuilder
+* tracks/index.json.jbuilder
+* tracks/show.json.jbuilder
+* users/show.json.jbuilder
+
 
 ## Backbone
 ### Models
-* Blog (parses nested `posts` association)
-* Post
+* Track
+* User (parses nested tracks association)
 
 ### Collections
-* Blogs
-* Posts
+* Tracks
+* Users
 
 ### Views
-* BlogForm
-* BlogShow (composite view, contains PostsIndex subview)
-* PostsIndex (composite view, contains PostsIndexItem subviews)
-* PostsIndexItem
+* UserShow (composite view, contains TracksIndex subview)
+* UserForm
+* TrackForm
+* TrackShow
+* TracksIndex (composite view, contains TracksIndexItem subviews)
+* TracksIndexItem
 * PostShow
 
 ## Gems/Libraries
+* Paperclip
