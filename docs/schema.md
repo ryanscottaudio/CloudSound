@@ -17,6 +17,7 @@ title       | string    | not null
 url         | string    | not null
 tags        | string    | not null
 plays       | integer   | not null (must be at least 0)
+pic         | blob      |
 description | text      |
 private     | boolean   | not null
 

@@ -1,0 +1,59 @@
+<div class="sign-in-bar group">
+  <div class="ULC-logo group">
+    <span class="logo"></span>
+    <span class="title">CloudSound</span>
+  </div>
+  <ul class="tabs group">
+    <li class="first">
+      <a href="#tab-sign-in">Sign in</a>
+    </li>
+    <li>
+      <a class="selected" href="#tab-create-account">Create account</a>
+    </li>
+  </ul>
+</div>
+
+<div class="sign-in-barrier">
+  <span>or</span>
+</div>
+
+<form class='sign-in' action="<%= users_url %>" method="POST">
+  <%= csrf_protection %>
+  <label class="sign-in-input-text" for="email">What's your email address?</label> <br>
+  <input class="cs-input" maxlength="255" id="email" type="text" name="user[email]" value="<%= @user.email %>"> <br>
+  <% if flash.now[:email_not_valid] %>
+    <div class="error">
+      <%= flash.now[:email_not_valid] %><br>
+    </div>
+  <% end %>
+
+  <label class="sign-in-input-text" for="password">Choose a password</label> <br>
+  <input class="cs-input" id="password" type="password" name="user[password]" value=""> <br>
+  <% if flash.now[:password_too_short] %>
+    <div class="error">
+      <%= flash.now[:password_too_short] %><br>
+    </div>
+  <% end %>
+
+  <label class="sign-in-input-text" for="password_confirmation">Re-type password</label> <br>
+  <input class="cs-input" id="password_confirmation" type="password" name="user[password_confirmation]" value=""> <br>
+  <% if flash.now[:not_matching] %>
+    <div class="error">
+      <%= flash.now[:not_matching] %><br>
+    </div>
+  <% end %>
+
+  <input id="terms_agree" type="checkbox" name="user[agree]">
+  <label class="sign-in-checkbox-text" for="terms_agree">I agree to the <a class='form-link' href="#">Terms of Use</a> and <a class='form-link' href="#">Privacy Policy</a></label>
+  <% if flash.now[:did_not_agree] %>
+    <div class="error">
+      <%= flash.now[:did_not_agree] %><br>
+    </div>
+  <% end %>
+
+  <div class="form-buttons">
+    <a href="#" class="cancel-link">Cancel</a>
+    <button>Create account</button>
+  </div>
+
+</form>
