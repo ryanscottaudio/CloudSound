@@ -9,10 +9,10 @@
 <body>
 
 <% if logged_in? %>
-  <form class="" action="<%= session_url %>" method="POST">
+  <form action="<%= session_url %>" method="POST">
     <input type="hidden" name="_method" value="DELETE">
     <%= csrf_protection %>
-    <button type="button" name="button">Sign Out</button>
+    <button>Sign Out</button>
   </form>
 <% end %>
 
