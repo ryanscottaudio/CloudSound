@@ -12,15 +12,24 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 author_id   | integer   | not null, foreign key (references users)
-audio       | blob      | not null
 title       | string    | not null
 url         | string    | not null
-tags        | string    | not null
 plays       | integer   | not null (must be at least 0)
 pic         | blob      |
 description | text      |
 private     | boolean   | not null
 
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+text        | string   | not null, unique
+
+## taggings
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+track_id    | integer   | not null, foreign key (references tracks)
+tag_id      | integer   | not null, foreign key (references tags)
 
 ## likes
 column name | data type | details

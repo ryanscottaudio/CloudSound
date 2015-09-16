@@ -38,7 +38,7 @@ I will add API routes to serve track data, then add Backbone models and collecti
 
 [Details][phase-two]
 
-### Phase 3: Editing and Displaying Tracks (~2 days)
+### Phase 3: Displaying Tracks (~2 days)
 I plan to use third-party libraries to add functionality to the `TrackForm` and `TrackShow` views in this phase. Most of this time will be spent implementing the SoundCloud dynamic track bar and allowing comments to be seen at specific times on each track.
 
 [Details][phase-three]
@@ -60,8 +60,8 @@ I'll need to add `search` routes to the Users and Tracks controllers. On the Bac
 - [ ] Custom user/track/playlist urls
 - [ ] Pagination/infinite scroll
 - [ ] Activity history (e.g. likes, reposts)
+- [ ] Editing tracks
 - [ ] Multiple sessions/session management
-- [ ] User avatars
 - [ ] Typeahead search bar
 - [ ] Follow suggestions
 
