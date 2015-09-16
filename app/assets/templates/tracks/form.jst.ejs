@@ -1,0 +1,47 @@
+<label>
+  Picture
+  <input type="file" name="track[image]" id='input-post-image'>
+</label>
+
+<br>
+
+<img src="" id="preview-post-image" width="50">
+
+<br>
+
+<label>
+  Title
+  <input type="text" class="cs-input" name="track[title]" id='input-post-title' value="<%= track.get('title') %>">
+</label>
+
+<br>
+
+<label>
+  URL
+  <input type="text" class="cs-input" name="track[url]" id='input-post-url' value="<%= track.get('url') %>">
+</label>
+
+<br>
+
+<label>
+  Description
+  <textarea name="track[description]" id='input-post-description'>
+    <%= track.get('url') %>
+  </textarea>
+</label>
+
+<br>
+
+<label>
+  Private?
+  <input id='input-post-private' type="checkbox" name="track[private]"
+    <% if (track.get('private')) { %>
+      <%= "checked" %>
+    <% } %>
+  >
+</label>
+
+<br>
+
+<a href="#">Cancel</a>
+<button>Save</button>

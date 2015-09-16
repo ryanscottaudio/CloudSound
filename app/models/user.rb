@@ -4,6 +4,33 @@ class User < ActiveRecord::Base
   validates :email, :session_token, uniqueness: true
   validates :password, length: {minimum: 6, allow_nil: true}
 
+  has_attached_file :image, default_url: "missinguser.png"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+  has_many :tracks,
+    foreign_key: :author_id
+
+  has_many :plays,
+    foreign_key: :player_id
+
+  has_many :played_tracks,
+    through: :plays,
+    source: :track
+
+  has_many :likes,
+    foreign_key: :liker_id
+
+  has_many :liked_tracks,
+    through: :likes,
+    source: :track
+
+  has_many :comments,
+    foreign_key: :commenter_id
+
+  has_many :commented_tracks,
+    through: :comments,
+    source: :track
+
   after_initialize :ensure_session_token
 
   attr_reader :password

@@ -20,11 +20,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find(params[:id])
-    render :show
-  end
-
   # def destroy
   #   User.find(params[:id]).destroy
   #   log_out!

@@ -13,7 +13,6 @@ Api::UsersController (show)
 * tracks/show.json.jbuilder
 * users/show.json.jbuilder
 
-
 ## Backbone
 ### Models
 * Track

@@ -4,8 +4,8 @@ window.CloudSound = {
   Views: {},
   Routers: {},
   initialize: function() {
-    var router = CloudSound.Routers.router({
-      $rootEl: $(div.cscontent),
+    var router = new CloudSound.Routers.Router({
+      $rootEl: $('div.cscontent'),
     });
     Backbone.history.start();
   }
