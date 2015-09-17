@@ -1,4 +1,4 @@
-CloudSound.Models.Track = Backbone.Model.extend({
+CloudSound.Models.Track = Backbone.CFModel.extend({
 
   urlRoot: "api/tracks",
 
@@ -32,5 +32,6 @@ CloudSound.Models.Track = Backbone.Model.extend({
       this._author = new CloudSound.Models.User();
     };
     return this._author
-  }
+  },
+
 })

@@ -1,0 +1,72 @@
+<% var author = track.author() %>
+
+<div class="player-area group">
+
+  <div class="player">
+    <ul class="name-details">
+      <li class="display-name"><%= author.get('display_name') %></li>
+      <li class="track-title"><%= track.get('title') %></li>
+    </ul>
+  </div>
+
+  <% if (track.get('image_url')) { %>
+    <img class="main" src="<%= track.get('image_url') %>" width="340" height="340" />
+  <% } else { %>
+    <img class="main" src="<%= author.get('image_url') %>" width="340" height="340" />
+  <% } %>
+
+</div>
+
+<br>
+
+<div class="comment-area">
+
+  <div class="upper-comment-area">
+
+    <div class="comment-form-area">
+
+    </div>
+
+    <br>
+
+    <div class="info-and-buttons">
+
+      <button class="like-button">Like</button>
+
+      <ul class="track-info">
+        <li>Plays: <%= track.get('plays') %></li>
+        <li>Likes: <%= track.get('likes') %></li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <br>
+
+  <div class="lower-comment-area">
+
+    <div class="author-info-area">
+
+      <img class="mini" src="<%= author.get('image_url') %>" width="120" height="120" />
+
+      <br>
+
+      <div class="author-name"><%= author.get('display_name') %></div>
+
+      <br>
+
+      <ul class="author-info">
+        <!-- <li>Followers: <%= track.author.followers %></li> -->
+        <li>Tracks: <%= author.get('tracks') %></li>
+      </ul>
+
+    </div>
+
+    <ul class="comments">
+
+    </ul>
+
+  </div>
+
+</div>

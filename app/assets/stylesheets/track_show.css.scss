@@ -1,0 +1,73 @@
+div.track {
+  display: block;
+  position: relative;
+  max-width: 1180px;
+  padding: 0 30px;
+  margin: 0 auto;
+  padding-top: 46px;
+  height: 380px;
+}
+
+div.player-area {
+  padding: 30px 560px 20px 30px;
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-image: linear-gradient(to right bottom, #999999 0%, #242424 100%)
+}
+
+div.player {
+  position: absolute;
+  float: left;
+}
+
+img.main {
+  position: absolute;
+  float: left;
+  top: 20px;
+  right: 20px;
+}
+
+div.comment-area {
+  display: block;
+  position: relative;
+}
+
+li {
+  display: inline;
+}
+
+ul.comments li {
+  display: block;
+}
+
+ul.name-details li{
+  display: block;
+  background: #000;
+}
+
+div.player-area li {
+  color: #fff;
+}
+
+ul.name-details li {
+  position: relative;
+  box-shadow: 4px 0 0 0 #000,-4px 0 0 0 #000;
+  font-weight: 100;
+  left: 4px;
+}
+
+li.display-name {
+  padding: 2px 0;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+li.track-title {
+  line-height: 1.4;
+  font-size: 24px;
+  padding: 4px 0;
+}

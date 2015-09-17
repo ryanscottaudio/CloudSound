@@ -1,4 +1,4 @@
-CloudSound.Models.User = Backbone.Model.extend({
+CloudSound.Models.User = Backbone.CFModel.extend({
 
   urlRoot: "api/users",
 

@@ -1,10 +1,15 @@
 class Track < ActiveRecord::Base
 
-  validates :author_id, :title, :url, :private, presence: true
-  validates :url, uniqueness: true
 
-  has_attached_file :image, default_url: "missingtrack.png"
+  has_attached_file :audio
+  validates_attachment_presence :audio
+  validates_attachment_content_type :audio, content_type: /\Aaudio\/.*\Z/
+
+  has_attached_file :image, default_url: "missingtrackpic.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_size :image, less_than: 2.megabytes
+  validates :author_id, :title, :url, presence: true
+  validates :url, uniqueness: true
 
   belongs_to :author,
     class_name: "User"

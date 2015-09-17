@@ -1,6 +1,8 @@
 CloudSound.Models.Comment = Backbone.Model.extend({
 
-  urlRoot: "api/tracks/:track_id/comments",
+  urlRoot: function () {
+    return "api/tracks/" + this.get('track_id') + "/comments";
+  },
 
   toJSON: function() {
     return {

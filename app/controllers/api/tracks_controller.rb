@@ -1,9 +1,8 @@
 class Api::TracksController < ApplicationController
   def create
-    @track = Track.new(track_params)
-    @track.author_id = current_user.id
+    @track = current_user.tracks.new(track_params)
     if @track.save
-      render json: @track
+      render :show
     else
       render json: @track.errors.full_messages, status: :unprocessable_entity
     end
@@ -11,7 +10,7 @@ class Api::TracksController < ApplicationController
 
   def show
     @track = Track.find(params[:id])
-    render json: @track
+    render :show
   end
 
   def destroy
@@ -21,6 +20,6 @@ class Api::TracksController < ApplicationController
 
   private
   def track_params
-    params.require(:user).permit(:title, :url, :description, :private)
+    params.require(:track).permit(:title, :url, :description, :private, :audio, :image)
   end
 end

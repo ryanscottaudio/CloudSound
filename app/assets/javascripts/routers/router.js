@@ -18,7 +18,7 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     var user = new CloudSound.Models.User({id: id})
     var userView = new CloudSound.Views.UserShow({
       model: user,
-      collection: user.tracks,
+      collection: user.tracks(),
     });
     this._swapview(feedView);
     user.fetch();
@@ -36,7 +36,7 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     var track = new CloudSound.Models.Track({id: id})
     var trackView = new CloudSound.Views.TrackShow({
       model: track,
-      collection: track.comments,
+      collection: track.comments(),
     });
     this._swapview(trackView);
     track.fetch();
