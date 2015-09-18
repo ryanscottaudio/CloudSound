@@ -68,7 +68,6 @@ CloudSound.Views.TrackForm = Backbone.View.extend({
 
     var attrs = this.$el.serializeJSON();
     var formData = new FormData();
-    var test = new Object();
     for (var key in attrs.track) {
       formData.append("track[" + key + "]", attrs.track[key]);
     }

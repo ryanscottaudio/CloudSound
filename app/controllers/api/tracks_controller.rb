@@ -9,7 +9,7 @@ class Api::TracksController < ApplicationController
   end
 
   def show
-    @track = Track.find(params[:id])
+    @track = Track.includes(:likes, :plays, comments: :commenter, author: :tracks).find(params[:id])
     render :show
   end
 

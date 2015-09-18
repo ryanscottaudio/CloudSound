@@ -5,15 +5,45 @@ CloudSound.Views.CommentForm = Backbone.View.extend({
 
   template: JST['comments/form'],
 
-  initialize: function() {
-    this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.collection, "sync", this.render);
+  events: {
+    "submit": "addNewComment",
+    "focus input.comment-input": "activate",
+    "blur input.comment-input": "deactivate",
+  },
+
+  initialize: function(options) {
+    this.track = options.track;
   },
 
   render: function() {
     this.$el.html(this.template({comment: this.model}));
 
     return this;
+  },
+
+  addNewComment: function(e) {
+    e.preventDefault();
+    that = this;
+
+    var attrs = this.$el.serializeJSON();
+    attrs.comment.track_id = this.track.get('id');
+    this.model.save(attrs.comment, {
+      success: function() {
+        that.collection.add(that.model);
+        that.model = new CloudSound.Models.Comment();
+        that.render();
+      },
+    });
+  },
+
+  activate: function() {
+    this.$('.comment-input').addClass('focused')
+    this.$('.comment-surround').addClass('focused')
+  },
+
+  deactivate: function() {
+    this.$('.comment-input').removeClass('focused')
+    this.$('.comment-surround').removeClass('focused')
   },
 
 })

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :tracks, only: [:show, :create, :destroy] do
       resources :plays, only: [:create]
       resources :likes, only: [:create, :destroy]
-      resources :comments, only: [:create, :show, :update, :destroy]
+      resources :comments, only: [:create, :update, :destroy]
     end
   end
 

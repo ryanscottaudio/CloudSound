@@ -2,12 +2,15 @@
 
 <div class="player-area group">
 
-  <div class="player">
+  <div class="player group">
+    <button class="play-pause"></button>
     <ul class="name-details">
       <li class="display-name"><%= author.get('display_name') %></li>
       <li class="track-title"><%= track.get('title') %></li>
     </ul>
   </div>
+
+  <div id="audio-wave"></div>
 
   <% if (track.get('image_url')) { %>
     <img class="main" src="<%= track.get('image_url') %>" width="340" height="340" />
@@ -62,10 +65,6 @@
       </ul>
 
     </div>
-
-    <ul class="comments">
-
-    </ul>
 
   </div>
 

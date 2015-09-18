@@ -22,7 +22,8 @@ CloudSound.Models.Track = Backbone.CFModel.extend({
 
   comments: function() {
     if (!this._comments) {
-      this._comments = new CloudSound.Collections.Comments([], {track: this});
+      that = this;
+      this._comments = new CloudSound.Collections.Comments([], {track: that});
     };
     return this._comments;
   },
