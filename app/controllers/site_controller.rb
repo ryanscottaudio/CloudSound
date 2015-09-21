@@ -1,7 +1,7 @@
 class SiteController < ApplicationController
 
   def root
-    render "root"
+    render :root
   end
 
 end

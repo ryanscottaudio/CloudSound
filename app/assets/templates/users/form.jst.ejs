@@ -1,0 +1,47 @@
+<div class="sign-in-bar group">
+  <a class="ULC-logo group" href="#">
+    <span class="logo"></span>
+    <span class="title">CloudSound</span>
+  </a>
+  <ul class="tabs group">
+    <li class="first">
+      <a href="#session/new">Sign in</a>
+    </li>
+    <li>
+      <a class="selected" href="#users/new">Create account</a>
+    </li>
+  </ul>
+</div>
+
+<div class="sign-in-barrier">
+  <span>or</span>
+</div>
+
+<form class="sign-in group">
+  <label class="sign-in-input-text" for="email">What's your email address?</label><br>
+  <input class="cs-input" maxlength="255" id="email" type="text" name="user[email]" value="<%= user.escape('email') %>"> <br>
+  <div class="error"></div>
+
+  <div class="floated-input">
+    <label class="sign-in-input-text" for="password">Choose a password</label><br>
+    <input class="cs-input small" id="password" type="password" name="user[password]" value=""> <br>
+    <div class="error"></div>
+  </div>
+
+  <div class="floated-input last">
+    <label class="sign-in-input-text" for="password_confirmation">Re-type password</label><br>
+    <input class="cs-input small" id="password_confirmation" type="password" name="user[password_confirmation]" value=""> <br>
+    <div class="error"></div>
+  </div>
+
+  <input id="terms_agree" type="checkbox" name="user[agree]">
+  <label class="sign-in-checkbox-text" for="terms_agree">I agree to the <a class='form-link' href="#">Terms of Use</a> and <a class='form-link' href="#">Privacy Policy</a>
+  <div class="error"></div>
+  </label>
+
+  <div class="form-buttons">
+    <a href="#" class="cancel-link">Cancel</a>
+    <button>Create account</button>
+  </div>
+
+</form>

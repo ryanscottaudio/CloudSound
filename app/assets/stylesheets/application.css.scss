@@ -19,7 +19,7 @@
    src: font-url('Interstate-Regular.otf') format('truetype');
  }
 
- html, body, h1, h2, h3, h4, h5, a, li, ul, input, button {
+ html, body, h1, h2, h3, h4, h5, a, li, ul, input, button, label {
    margin: 0;
    padding: 0;
    border: 0;
@@ -109,7 +109,7 @@
    color: #333;
  }
 
- div.ULC-logo span.logo {
+ .ULC-logo span.logo {
    position: relative;
    float: left;
    content: image-url('logo1.png');
@@ -118,7 +118,7 @@
    margin-right: 5px;
  }
 
- div.ULC-logo span.title {
+ .ULC-logo span.title {
    position: relative;
    float: left;
    font-weight: 300;
@@ -126,7 +126,7 @@
    color: #fff;
  }
 
- div.ULC-logo {
+ .ULC-logo {
    position: absolute;
    top: 22px;
    left: 22px;
@@ -157,13 +157,31 @@
    font-weight: 300;
    height: 27px;
    line-height: 20px;
-   margin: 0;
+   margin-top: 2px;
+   margin-bottom: 15px;
    padding: 2px 7px;
    transition: border-color 0.1s ease;
-   transition-property: border-color;
    width: 400px;
    word-spacing: 0px;
    cursor: pointer;
+ }
+
+ input.cs-input:focus {
+   border-color: #999;
+ }
+
+ input.cs-input.small {
+   width: 196px;
+ }
+
+ div.floated-input {
+   float: left;
+   margin-right: 8px;
+   width: 196px;
+ }
+
+ div.floated-input.last {
+   margin-right: 0;
  }
 
  div.sign-in-bar {
@@ -176,7 +194,6 @@
  .sign-in-input-text {
    font-weight: 300;
    font-family: 'Lucida Grande';
-   margin-bottom: 2px;
  }
 
  .sign-in-checkbox-text {
@@ -197,6 +214,7 @@
    color: rgb(153, 153, 153);
    position: absolute;
    left: 50%;
+   transform: translate(-50%, 0);
    top: -9px;
    background: #fff;
    font-weight: 300;

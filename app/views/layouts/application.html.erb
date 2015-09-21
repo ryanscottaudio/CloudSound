@@ -8,14 +8,6 @@
 </head>
 <body>
 
-<% if logged_in? %>
-  <form action="<%= session_url %>" method="POST">
-    <input type="hidden" name="_method" value="DELETE">
-    <%= csrf_protection %>
-    <button>Sign Out</button>
-  </form>
-<% end %>
-
 <%= yield %>
 
 </body>

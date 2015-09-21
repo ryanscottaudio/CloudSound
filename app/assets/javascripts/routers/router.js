@@ -2,16 +2,42 @@ CloudSound.Routers.Router = Backbone.Router.extend({
 
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
+    this.collection = new CloudSound.Collections.Users();
+    this.collection.fetch();
   },
 
   routes: {
-    "": "feedShow",
+    "": "signIn",
 
     "tracks/new": "trackNew",
     "tracks/:id": "trackShow",
 
     "users/new": "userNew",
     "users/:id": "userShow",
+
+    "session/new": "signIn",
+  },
+
+  feedShow: function() {
+    if (!this._requireSignedIn()) {
+
+      return;
+    }
+
+  },
+
+  userNew: function() {
+    if (!this._requireSignedOut()) {
+      return;
+    }
+
+    var model = new this.collection.model();
+    var formView = new CloudSound.Views.UserForm({
+      collection: this.collection,
+      model: model,
+    });
+
+    this._swapview(formView);
   },
 
   userShow: function(id) {
@@ -22,6 +48,17 @@ CloudSound.Routers.Router = Backbone.Router.extend({
       collection: user.tracks(),
     });
     this._swapview(userView);
+  },
+
+  signIn: function(callback) {
+    if (!this._requireSignedOut(callback)) {
+      return;
+    }
+
+    var signInView = new CloudSound.Views.SessionForm({
+      callback: callback,
+    });
+    this._swapview(signInView);
   },
 
   trackNew: function() {
@@ -47,4 +84,29 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     this._currentView = newView;
     this.$rootEl.html(newView.render().$el);
   },
+
+  _requireSignedIn: function(callback) {
+    if (!CloudSound.currentUser.isSignedIn()) {
+      callback = callback || this._goHome.bind(this);
+      this.signIn(callback);
+      return false;
+    }
+
+    return true;
+  },
+
+  _requireSignedOut: function(callback) {
+    if (CloudSound.currentUser.isSignedIn()) {
+      callback = callback || this._goHome.bind(this);
+      callback();
+      return false;
+    }
+
+    return true;
+  },
+
+  _goHome: function() {
+    Backbone.history.navigate("", {trigger: true});
+  },
+
 })

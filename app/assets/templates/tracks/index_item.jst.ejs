@@ -11,9 +11,9 @@
   <div class="player group">
     <button class="play-pause paused"></button>
     <div class="name-details">
-      <div class="display-name"><%= author.get('display_name') %></div>
+      <div class="display-name"><%= author.escape('display_name') %></div>
       <br>
-      <div class="track-title"><%= track.get('title') %></div>
+      <div class="track-title"><a href="#tracks/<%= track.get('id') %>"><%= track.escape('title') %></a></div>
     </div>
   </div>
   <br>

@@ -17,7 +17,7 @@ CloudSound.Views.CommentForm = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template({comment: this.model}));
+    this.$el.html(this.template({comment: this.model, currentUser: CloudSound.currentUser}));
 
     return this;
   },

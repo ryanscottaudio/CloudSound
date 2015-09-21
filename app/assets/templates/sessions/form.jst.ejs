@@ -1,0 +1,39 @@
+<div class="sign-in-bar group">
+  <a class="ULC-logo group" href="#">
+    <span class="logo"></span>
+    <span class="title">CloudSound</span>
+  </a>
+  <ul class="tabs group">
+    <li class="first">
+      <a class="selected" href="#session/new">Sign in</a>
+    </li>
+    <li>
+      <a href="#users/new">Create account</a>
+    </li>
+  </ul>
+</div>
+
+<div class="sign-in-barrier">
+  <span>or</span>
+</div>
+
+<form class="sign-in">
+
+  <label class="sign-in-input-text" for="email">Your email address</label><br>
+  <input class="cs-input" maxlength="255" id="email" type="text" name="user[email]" value=""> <br>
+
+  <label class="sign-in-input-text" for="password">Your password</label><br>
+  <input class="cs-input" id="password" type="password" name="user[password]" value=""> <br>
+
+  <!-- <a class='form-link'href="#">Forgot your password</a> or <a class='form-link'href="#">email address</a>?<br> -->
+
+  <input id="remember" type="checkbox" name="user[remember]" value="">
+  <label class="sign-in-checkbox-text" for="remember">Remember Me
+  <div class="error"></div>
+  </label>
+
+  <div class="form-buttons">
+    <a href="#" class="cancel-link">Cancel</a>
+    <button>Sign In</button>
+  </div>
+</form>

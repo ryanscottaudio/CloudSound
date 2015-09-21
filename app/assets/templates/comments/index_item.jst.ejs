@@ -1,6 +1,6 @@
 <% author = comment.author() %>
 <img class="comment-image" src="<%= author.get('image_url') %>" width="40" height="40" />
-<div><%= author.get('display_name') %> says<%= comment.get('time') ? " at " + secondsToHms(comment.get('time')) : "" %>:</div>
-<div class="comment-content"><%= comment.get('content') %></div>
+<div><%= author.escape('display_name') %> says<%= comment.get('time') ? " at " + secondsToHms(comment.get('time')) : "" %>:</div>
+<div class="comment-content"><%= comment.escape('content') %></div>
 <a class="delete-comment comment-button" href="#">Delete</a>
 <br>
