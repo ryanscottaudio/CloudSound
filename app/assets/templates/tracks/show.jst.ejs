@@ -3,14 +3,22 @@
 <div class="player-area group">
 
   <div class="player group">
-    <button class="play-pause"></button>
-    <ul class="name-details">
-      <li class="display-name"><%= author.get('display_name') %></li>
-      <li class="track-title"><%= track.get('title') %></li>
-    </ul>
+    <button class="play-pause paused"></button>
+    <div class="name-details">
+      <div class="display-name"><%= author.get('display_name') %></div>
+      <br>
+      <div class="track-title"><%= track.get('title') %></div>
+    </div>
   </div>
 
-  <div id="audio-wave"></div>
+  <div id="audio-wave">
+  <div class="cursor-time">
+    0:00
+  </div>
+  <div class="end-time">
+
+  </div>
+  </div>
 
   <% if (track.get('image_url')) { %>
     <img class="main" src="<%= track.get('image_url') %>" width="340" height="340" />

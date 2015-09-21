@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
-    render json: @user
+    @user = User.includes(:likes, :comments, tracks: [:likes, :plays, comments: :commenter]).find(params[:id])
+    render :show
   end
 end

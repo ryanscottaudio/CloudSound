@@ -8,24 +8,28 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   has_many :tracks,
-    foreign_key: :author_id
+    foreign_key: :author_id,
+    dependent: :destroy
 
   has_many :plays,
-    foreign_key: :player_id
+    foreign_key: :player_id,
+    dependent: :destroy
 
   has_many :played_tracks,
     through: :plays,
     source: :track
 
   has_many :likes,
-    foreign_key: :liker_id
+    foreign_key: :liker_id,
+    dependent: :destroy
 
   has_many :liked_tracks,
     through: :likes,
     source: :track
 
   has_many :comments,
-    foreign_key: :commenter_id
+    foreign_key: :commenter_id,
+    dependent: :destroy
 
   has_many :commented_tracks,
     through: :comments,

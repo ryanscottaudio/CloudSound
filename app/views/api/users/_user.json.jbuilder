@@ -3,7 +3,7 @@ json.image_url asset_path(user.image.url(:original))
 
 if !short
   if !medium
-    json.extract!(:location, :fname, :lname)
+    json.extract!(user, :location, :fname, :lname)
   end
   # json.followers user.followers.count
   json.tracks user.tracks.count

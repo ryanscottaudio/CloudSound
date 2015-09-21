@@ -21,7 +21,7 @@ CloudSound.Routers.Router = Backbone.Router.extend({
       model: user,
       collection: user.tracks(),
     });
-    this._swapview(feedView);
+    this._swapview(userView);
   },
 
   trackNew: function() {

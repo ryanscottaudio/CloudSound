@@ -1,8 +1,0 @@
-development:
-  s3_bucket: "cloudsound-dev"
-
-production:
-  s3_bucket: "cloudsound-pro"
-
-s3_access_key_id: "AKIAJ7MJ5CBJKSWH3UFA"
-s3_secret_access_key: "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"

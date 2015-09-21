@@ -14,19 +14,19 @@ class Track < ActiveRecord::Base
   belongs_to :author,
     class_name: "User"
 
-  has_many :plays
+  has_many :plays, dependent: :destroy
 
   has_many :listeners,
     through: :plays,
     source: :player
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
 
   has_many :likers,
     through: :likes,
     source: :liker
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   has_many :commenters,
     through: :comments,

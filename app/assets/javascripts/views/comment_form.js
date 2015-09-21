@@ -13,6 +13,7 @@ CloudSound.Views.CommentForm = Backbone.View.extend({
 
   initialize: function(options) {
     this.track = options.track;
+    this.parent = options.parent;
   },
 
   render: function() {
@@ -26,6 +27,7 @@ CloudSound.Views.CommentForm = Backbone.View.extend({
     that = this;
 
     var attrs = this.$el.serializeJSON();
+    attrs.comment.time = this.parent.wave.getCurrentTime();
     attrs.comment.track_id = this.track.get('id');
     this.model.save(attrs.comment, {
       success: function() {

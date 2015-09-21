@@ -18,7 +18,7 @@ CloudSound.Models.User = Backbone.CFModel.extend({
 
   tracks: function() {
     if (!this._tracks) {
-      this._tracks = new CloudSound.Collections.tracks([], {user: this});
+      this._tracks = new CloudSound.Collections.Tracks([], {user: this});
     };
     return this._tracks;
   },

@@ -25,6 +25,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
     that = this;
     var commentFormView = new CloudSound.Views.CommentForm({
       model: new CloudSound.Models.Comment(),
+      parent: that,
       track: that.model,
       collection: that.collection,
     });
@@ -41,8 +42,6 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
 
   renderWave: function () {
 
-    that = this;
-
     var wave = Object.create(WaveSurfer);
     this.wave = wave;
 
@@ -56,16 +55,39 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
       cursorColor: '#FF5100',
       normalize: true,
       fillParent: true,
+      height: 100,
     });
 
-    wave.load(that.model.get('audio_url'));
+    wave.on("ready", function() {
+      this.$('.end-time').html(secondsToHms(wave.getDuration()));
+      wave.on("audioprocess", function() {
+        this.$('.cursor-time').html(secondsToHms(wave.getCurrentTime()));
+      }.bind(this));
+    }.bind(this));
+
+    wave.on("finish", function() {
+      this.endTrack();
+    }.bind(this));
+
+    $(window).on("resize", function() {
+      wave.drawer.containerWidth = wave.drawer.container.clientWidth;
+      wave.drawBuffer();
+    });
+
+    wave.load(this.model.get('audio_url'));
   },
 
-  playPause: function(e) {
-    e.preventDefault();
-
+  playPause: function() {
     this.wave.playPause();
+    this.$('div#audio-wave').toggleClass('active');
     this.$('button.play-pause').toggleClass('playing');
+    this.$('button.play-pause').toggleClass('paused');
+  },
+
+  endTrack: function() {
+    this.$('div#audio-wave').toggleClass('active');
+    this.$('button.play-pause').toggleClass('playing');
+    this.$('button.play-pause').toggleClass('paused');
   },
 
 })

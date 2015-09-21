@@ -1,0 +1,42 @@
+<% var author = track.author() %>
+
+<div class="player-area-small group">
+
+  <% if (track.get('image_url')) { %>
+    <img class="main" src="<%= track.get('image_url') %>" width="120" height="120" />
+  <% } else { %>
+    <img class="main" src="<%= author.get('image_url') %>" width="120" height="120" />
+  <% } %>
+
+  <div class="player group">
+    <button class="play-pause paused"></button>
+    <div class="name-details">
+      <div class="display-name"><%= author.get('display_name') %></div>
+      <br>
+      <div class="track-title"><%= track.get('title') %></div>
+    </div>
+  </div>
+  <br>
+  <div id="audio-wave" class="small">
+    <div class="cursor-time">0:00</div>
+    <div class="end-time"></div>
+  </div>
+
+</div>
+
+<br>
+
+<div class="comment-form-area">
+
+</div>
+
+<div class="info-and-buttons">
+
+  <button class="like-button">Like</button>
+
+  <ul class="track-info">
+    <li>Plays: <%= track.get('plays') %></li>
+    <li>Likes: <%= track.get('likes') %></li>
+  </ul>
+
+</div>
