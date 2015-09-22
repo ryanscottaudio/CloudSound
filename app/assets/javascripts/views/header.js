@@ -1,19 +1,18 @@
 CloudSound.Views.Header = Backbone.View.extend({
 
   initialize: function(options) {
-    this.listenTo(CloudSound.current_user, "signIn signOut", this.render);
+    this.listenTo(CloudSound.currentUser, "signIn signOut", this.render);
     this.render();
   },
 
   events: {
     "click .sign-out": "signOut",
-    "click .upload": "upload",
   },
 
   template: JST['header/show'],
 
   render: function() {
-    this.$el.html(this.template({currentUser: CloudSound.currentUser}));
+    this.$el.html(this.template());
 
     return this;
   },
@@ -26,12 +25,6 @@ CloudSound.Views.Header = Backbone.View.extend({
         Backbone.history.navigate("", {trigger: true})
       },
     });
-  },
-
-  upload: function(e) {
-    e.preventDefault();
-
-    Backbone.history.navigate("tracks/new", {trigger: true})
   },
 
 })

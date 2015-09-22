@@ -8,7 +8,7 @@ window.CloudSound = {
     this.currentUser = new CloudSound.Models.CurrentUser();
     this.currentUser.fetch();
 
-    this.header = new CloudSound.Views.Header({el: "#header"});
+    this.header = new CloudSound.Views.Header({el: ".header"});
     this.router = new CloudSound.Routers.Router({
       $rootEl: $('div.cscontent'),
     });

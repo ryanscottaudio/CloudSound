@@ -1,4 +1,4 @@
-CloudSound.Views.TrackForm = Backbone.View.extend({
+CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
 
   tagName: 'form',
   className: 'trackForm',
@@ -18,8 +18,15 @@ CloudSound.Views.TrackForm = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template({track: this.model}));
+    this.addHeader();
 
     return this;
+  },
+
+  addHeader: function() {
+    that = this;
+    var headerView = new CloudSound.Views.Header();
+    this.addSubview('div.header', headerView);
   },
 
   pictureChange: function(e) {

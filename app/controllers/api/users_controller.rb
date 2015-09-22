@@ -15,13 +15,13 @@ class Api::UsersController < ApplicationController
         params[:user][:password] == params[:user][:password_confirmation] &&
         @user.save
       log_in!(@user)
-      redirect_to user_url(@user.id)
+      render :show
     else
-      flash.now[:email_not_valid] = "Please enter a valid email address" unless params[:user][:email]
-      flash.now[:password_too_short] = "Please enter at least 6 characters." unless params[:user][:password].length >= 6
-      flash.now[:not_matching] = "Oops, that’s not the same password as the first one" unless params[:user][:password] == params[:user][:password_confirmation]
-      flash.now[:did_not_agree] = "Please read and accept the terms first" unless params[:user][:agree]
-      render :new
+      render json: @user.errors.full_messages, status: :unprocessable_entity
+      # flash.now[:email_not_valid] = "Please enter a valid email address" unless params[:user][:email]
+      # flash.now[:password_too_short] = "Please enter at least 6 characters." unless params[:user][:password].length >= 6
+      # flash.now[:not_matching] = "Oops, that’s not the same password as the first one" unless params[:user][:password] == params[:user][:password_confirmation]
+      # flash.now[:did_not_agree] = "Please read and accept the terms first" unless params[:user][:agree]
     end
   end
 

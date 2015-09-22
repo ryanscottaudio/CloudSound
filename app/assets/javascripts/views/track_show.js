@@ -18,7 +18,14 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
     this.renderWave();
     this.addCommentForm();
     this.addCommentsIndex();
+    this.addHeader();
     return this;
+  },
+
+  addHeader: function() {
+    that = this;
+    var headerView = new CloudSound.Views.Header();
+    this.addSubview('div.header', headerView);
   },
 
   addCommentForm: function () {

@@ -1,0 +1,91 @@
+.header {
+  width: 100%;
+  background: #333;
+}
+
+.header-interior {
+  width: 1240px;
+  margin: auto;
+  border-left: 1px solid #111;
+}
+
+.header-interior * {
+  display: block;
+  float: left;
+}
+
+.header-interior img.thumb {
+  display: block;
+  margin: 10px 14px;
+  text-align: center;
+  background: white;
+}
+
+.header-interior a.username {
+  color: white;
+  padding: 12px 10px;
+  padding-left: 0;
+  width: auto;
+  border-right: 0;
+}
+
+.header-interior div.user-container {
+  width: 104px;
+  display: block;
+  border-right: 1px solid #111;
+}
+
+.header-interior a {
+  display: block;
+  height: 46px;
+  padding: 12px 0;
+  width: 104px;
+  border-right: 1px solid #111;
+  box-sizing: border-box;
+  text-align: center;
+  color: #ccc;
+  font: 100 14px/1.5 "Interstate","Lucida Grande",Arial,sans-serif;
+}
+
+.header-interior a:hover {
+  color: #eee;
+}
+
+.header-interior .search-container {
+  border-right: 1px solid #111;
+  padding: 9px;
+  width: 687px;
+}
+
+.header-interior input {
+  color: #666;
+  outline: 0;
+  padding: 5px 7px;
+  background: #e5e5e5;
+  border-radius: 4px;
+  font-weight: 100;
+  font-size: 14px;
+  line-height: 18px;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+}
+
+.header-interior input:focus {
+  background: #fff;
+}
+
+.header-interior a.logo-block {
+  background-image: linear-gradient(to bottom, #ff7700 0%, #ff3000 100%);
+  width: 70px;
+  position: relative;
+}
+
+.header-interior span.logo-block {
+  content: image-url('logo1.png');
+  width: 30px;
+  display: block;
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}

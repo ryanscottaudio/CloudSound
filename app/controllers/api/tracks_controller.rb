@@ -18,6 +18,11 @@ class Api::TracksController < ApplicationController
     @track.destroy
   end
 
+  def index
+    @tracks = Track.all
+    render :index
+  end
+
   private
   def track_params
     params.require(:track).permit(:title, :url, :description, :private, :audio, :image)

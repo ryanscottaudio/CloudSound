@@ -7,7 +7,7 @@ CloudSound.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    "": "signIn",
+    "": "feedShow",
 
     "tracks/new": "trackNew",
     "tracks/:id": "trackShow",
@@ -19,11 +19,12 @@ CloudSound.Routers.Router = Backbone.Router.extend({
   },
 
   feedShow: function() {
-    if (!this._requireSignedIn()) {
-
-      return;
-    }
-
+    var tracks = new CloudSound.Collections.Tracks({})
+    tracks.fetch();
+    var feedView = new CloudSound.Views.FeedShow({
+      collection: tracks,
+    });
+    this._swapview(feedView);
   },
 
   userNew: function() {

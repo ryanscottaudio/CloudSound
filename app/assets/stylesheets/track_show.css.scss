@@ -1,14 +1,12 @@
 div.track {
   display: block;
   position: relative;
-  max-width: 1240px;
-  padding: 0 30px;
+  max-width: 100%;
   margin: 0 auto;
-  padding-top: 46px;
-  height: 380px;
 }
 
 div.player-area {
+  margin: auto;
   padding: 30px 560px 20px 30px;
   position: relative;
   left: 0;
@@ -41,8 +39,10 @@ img.main {
 }
 
 div.comment-area {
+  margin: auto;
   display: block;
   position: relative;
+  width: 1240px;
 }
 
 li {
@@ -130,7 +130,6 @@ div.track-title {
 
 }
 
-
 a.delete-comment {
   display: none;
   border: solid 1px #e5e5e5;
@@ -157,6 +156,7 @@ input.comment-input {
   cursor: pointer;
   box-sizing: border-box;
   background: white;
+  width: 100%;
 }
 
 input.comment-input.focused {
@@ -166,6 +166,7 @@ input.comment-input.focused {
 div.comment-surround {
   border: solid 1px #e5e5e5;
   background: #f2f2f2;
+  width: 100%;
   padding: 0 5px;
   padding-top: 5px;
   margin-top: 7px;
