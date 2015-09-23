@@ -9,7 +9,7 @@ CloudSound.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "feedShow",
 
-    "_=_": "feedShow",
+    "_=_": "preventLittleMan",
 
     "tracks/new": "trackNew",
     "tracks/:id": "trackShow",
@@ -19,6 +19,10 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     "users/:id/edit": "userEdit",
 
     "session/new": "signIn",
+  },
+
+  preventLittleMan: function() {
+    Backbone.history.navigate("", {trigger: true});
   },
 
   feedShow: function() {

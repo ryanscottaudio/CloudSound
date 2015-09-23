@@ -6,9 +6,9 @@ window.CloudSound = {
   initialize: function() {
 
     this.currentUser = new CloudSound.Models.CurrentUser();
-    // if (currentUserId) {
-    //   this.currentUser.id = currentUserId;
-    // }
+    if (typeof(currentUserId) != "undefined") {
+      this.currentUser.id = currentUserId;
+    }
     this.currentUser.fetch();
 
     this.header = new CloudSound.Views.Header({el: ".header"});
@@ -17,8 +17,7 @@ window.CloudSound = {
     });
     Backbone.history.start();
 
-    if (needsToEdit) {
-      // debugger
+    if (typeof(needsToEdit) != "undefined") {
       Backbone.history.navigate('users/' + currentUserId + '/edit', {trigger: true});
     }
   }
