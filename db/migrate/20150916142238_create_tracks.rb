@@ -10,6 +10,6 @@ class CreateTracks < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :tracks, :author_iddi
+    add_index :tracks, :author_id
   end
 end
