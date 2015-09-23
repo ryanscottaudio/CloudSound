@@ -3,28 +3,30 @@ CloudSound.Routers.Router = Backbone.Router.extend({
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
     this.collection = new CloudSound.Collections.Users();
-    this.collection.fetch();
+    this.tracks = new CloudSound.Collections.Tracks({});
   },
 
   routes: {
     "": "feedShow",
+
+    "_=_": "feedShow",
 
     "tracks/new": "trackNew",
     "tracks/:id": "trackShow",
 
     "users/new": "userNew",
     "users/:id": "userShow",
+    "users/:id/edit": "userEdit",
 
     "session/new": "signIn",
   },
 
   feedShow: function() {
-    var tracks = new CloudSound.Collections.Tracks({})
-    tracks.fetch();
     var feedView = new CloudSound.Views.FeedShow({
-      collection: tracks,
+      collection: this.tracks,
     });
     this._swapview(feedView);
+    this.tracks.fetch();
   },
 
   userNew: function() {
@@ -41,9 +43,24 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     this._swapview(formView);
   },
 
+  userEdit: function(id) {
+    if (!CloudSound.currentUser.id) {
+      this._goHome();
+      return;
+    } else if (CloudSound.currentUser.id !== id) {
+      Backbone.history.navigate("users/" + CloudSound.currentUser.id + "/edit", {trigger: true});
+    }
+
+    var model = this.collection.getOrFetch(id);
+    var editView = new CloudSound.Views.UserEdit({
+      collection: this.collection,
+      model: model,
+    });
+    this._swapview(editView);
+  },
+
   userShow: function(id) {
-    var user = new CloudSound.Models.User({id: id})
-    user.fetch();
+    var user = this.collection.getOrFetch(id)
     var userView = new CloudSound.Views.UserShow({
       model: user,
       collection: user.tracks(),
@@ -66,13 +83,13 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     var track = new CloudSound.Models.Track()
     var trackView = new CloudSound.Views.TrackForm({
       model: track,
+      collection: this.tracks,
     });
     this._swapview(trackView);
   },
 
   trackShow: function(id) {
-    var track = new CloudSound.Models.Track({id: id})
-    track.fetch();
+    var track = this.tracks.getOrFetch(id)
     var trackView = new CloudSound.Views.TrackShow({
       model: track,
       collection: track.comments(),

@@ -7,6 +7,7 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
 
   events: {
     "click button.play-pause": "playPause",
+    "click button.like-button": "likeUnlike",
   },
 
   initialize: function() {
@@ -15,6 +16,7 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
 
   render: function() {
     this.$el.html(this.template({track: this.model}));
+    this.setLiked();
     this.renderWave();
     this.addCommentForm();
     // this.addCommentsIndex();
@@ -44,9 +46,9 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
 
     var wave = Object.create(WaveSurfer);
     this.wave = wave;
+    this.wave.playability = false;
 
     wave.init({
-      backend: 'MediaElement',
       barWidth: 2,
       cursorWidth: 0,
       container: this.$('div#audio-wave')[0],
@@ -59,7 +61,13 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     });
 
     wave.on("ready", function() {
+      this.$('.loading-text').addClass('hidden');
+      this.$('button.play-pause').removeClass('loading');
+      this.$('button.play-pause').addClass('paused');
+      this.$('.track-times').removeClass('hidden');
+      this.$('.cursor-time').html('0:00');
       this.$('.end-time').html(secondsToHms(wave.getDuration()));
+      this.wave.playability = true;
       wave.on("audioprocess", function() {
         this.$('.cursor-time').html(secondsToHms(wave.getCurrentTime()));
       }.bind(this));
@@ -69,25 +77,71 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
       this.endTrack();
     }.bind(this));
 
-    $(window).on("resize", function() {
-      wave.drawer.containerWidth = wave.drawer.container.clientWidth;
-      wave.drawBuffer();
-    });
-
     wave.load(this.model.get('audio_url'));
   },
 
   playPause: function() {
+    if (this.wave.playability === true) {
+      this.addPlay();
+    }
     this.wave.playPause();
     this.$('div#audio-wave').toggleClass('active');
     this.$('button.play-pause').toggleClass('playing');
     this.$('button.play-pause').toggleClass('paused');
   },
 
+  addPlay: function() {
+    var playAttrs = {track_id: this.model.id, player_id: CloudSound.currentUser.id}
+    var play = new CloudSound.Models.Play()
+    play.save(playAttrs, {
+      success: function() {
+        this.model.set({plays: this.model.get('plays') + 1});
+        this.$('li.plays').html('Plays: ' + this.model.get('plays'));
+        this.wave.playability = false;
+      }.bind(this),
+    });
+  },
+
   endTrack: function() {
     this.$('div#audio-wave').toggleClass('active');
     this.$('button.play-pause').toggleClass('playing');
     this.$('button.play-pause').toggleClass('paused');
+    this.wave.stop();
+    this.wave.playability = true;
+  },
+
+  setLiked: function() {
+    this.likeAttrs = {
+      track_id: this.model.id,
+      liker_id: CloudSound.currentUser.id,
+    };
+    this.like = this.model.likes().where(this.likeAttrs)[0]
+    if (typeof this.like !== 'undefined') {
+      this.$('button.like-button').toggleClass('liked');
+    }
+  },
+
+  likeUnlike: function(e) {
+    e.preventDefault();
+    if(typeof this.like === 'undefined') {
+      var like = new CloudSound.Models.Like(this.likeAttrs);
+      like.save({}, {
+        success: function() {
+          this.like = like;
+          this.model.likes().add(like);
+          this.$('button.like-button').toggleClass('liked');
+          this.$('li.likes').html('Likes: ' + this.model.likes().length)
+        }.bind(this),
+      });
+    } else {
+      this.like.destroy({
+        success: function() {
+          this.like = undefined;
+          this.$('button.like-button').toggleClass('liked');
+          this.$('li.likes').html('Likes: ' + this.model.likes().length)
+        }.bind(this),
+      });
+    }
   },
 
 })

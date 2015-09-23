@@ -4,8 +4,12 @@ json.image_url asset_path(track.image.url(:original))
 json.author do
   json.partial!('api/users/user', user: track.author, short: false, medium: true)
 end
-json.plays track.plays.count
-json.likes track.likes.count
+json.plays track.plays.to_a.count
+json.likes do
+  json.array! track.likes do |like|
+    json.partial!('api/likes/like', like: like)
+  end
+end
 json.comments do
   json.array! track.comments do |comment|
     json.partial!('api/comments/comment', comment: comment)

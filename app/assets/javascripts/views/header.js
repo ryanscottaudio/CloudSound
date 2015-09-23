@@ -1,8 +1,7 @@
 CloudSound.Views.Header = Backbone.View.extend({
 
   initialize: function(options) {
-    this.listenTo(CloudSound.currentUser, "signIn signOut", this.render);
-    this.render();
+    this.listenTo(CloudSound.currentUser, "signIn sync signOut", this.render);
   },
 
   events: {

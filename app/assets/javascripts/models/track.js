@@ -17,6 +17,10 @@ CloudSound.Models.Track = Backbone.CFModel.extend({
       this.author().set(response.author);
       delete response.author;
     };
+    if (response.likes) {
+      this.likes().set(response.likes, {parse: true});
+      delete response.likes;
+    };
     return response;
   },
 
@@ -33,6 +37,14 @@ CloudSound.Models.Track = Backbone.CFModel.extend({
       this._author = new CloudSound.Models.User();
     };
     return this._author
+  },
+
+  likes: function() {
+    if (!this._likes) {
+      that = this;
+      this._likes = new CloudSound.Collections.Likes([], {track: that});
+    };
+    return this._likes;
   },
 
 })

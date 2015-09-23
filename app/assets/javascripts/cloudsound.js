@@ -6,6 +6,9 @@ window.CloudSound = {
   initialize: function() {
 
     this.currentUser = new CloudSound.Models.CurrentUser();
+    // if (currentUserId) {
+    //   this.currentUser.id = currentUserId;
+    // }
     this.currentUser.fetch();
 
     this.header = new CloudSound.Views.Header({el: ".header"});
@@ -13,6 +16,11 @@ window.CloudSound = {
       $rootEl: $('div.cscontent'),
     });
     Backbone.history.start();
+
+    if (needsToEdit) {
+      // debugger
+      Backbone.history.navigate('users/' + currentUserId + '/edit', {trigger: true});
+    }
   }
 };
 

@@ -16,7 +16,7 @@
 
 .header-interior img.thumb {
   display: block;
-  margin: 10px 14px;
+  margin: 10px 10px;
   text-align: center;
   background: white;
 }
@@ -30,7 +30,8 @@
 }
 
 .header-interior div.user-container {
-  width: 104px;
+  width: auto;
+  min-width: 103px; 
   display: block;
   border-right: 1px solid #111;
 }

@@ -1,0 +1,57 @@
+<div class="header"></div>
+
+<br>
+
+<label>
+  Picture
+  <input type="file" name="user[image]" id='input-user-image'>
+</label>
+
+<br>
+
+<img src="<%= user.get('image_url') %>" id="preview-user-image" width="300" height="300">
+
+<br>
+
+<label>
+  E-mail address
+  <input type="text" class="cs-input" name="user[email]" id='input-user-email' value="<%= user.escape('email') %>">
+</label>
+
+<br>
+
+<label>
+  Username
+  <input type="text" class="cs-input" name="user[username]" id='input-user-username' value="<%= user.escape('username') %>">
+</label>
+
+<br>
+
+<label>
+  Display Name
+  <input type="text" class="cs-input" name="user[display_name]" id='input-user-display-name' value="<%= user.escape('display_name') %>" placeholder="This is how you will be identified.">
+</label>
+
+<br>
+
+<label>
+  First Name
+  <input type="text" class="cs-input small" name="user[fname]" id='input-user-fname' value="<%= user.escape('fname') %>">
+</label>
+
+<label>
+  Last Name
+  <input type="text" class="cs-input small" name="user[lname]" id='input-user-lname' value="<%= user.escape('lname') %>">
+</label>
+
+<br>
+
+<label>
+  Location
+  <input type="text" class="cs-input" name="user[location]" id='input-user-location' value="<%= user.escape('location') %>">
+</label>
+
+<br>
+
+<a href="#">Cancel</a>
+<button class="save">Save</button>

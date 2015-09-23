@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
 
-  validates :email, :password_digest, :session_token, presence: true
-  validates :email, :session_token, uniqueness: true
+  validates :password_digest, :session_token, presence: true
+  validates :session_token, uniqueness: true
   validates :password, length: {minimum: 6, allow_nil: true}
+
+  validates :email, presence: true, uniqueness: true, unless: :uid?
+  validates :uid, presence: true, uniqueness: {scope: :provider}, unless: :email?
 
   has_attached_file :image, default_url: "missinguser.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
@@ -48,6 +51,26 @@ class User < ActiveRecord::Base
     user && user.is_password?(password) ? user : nil
   end
 
+  def self.find_or_create_by_auth_hash(auth_hash)
+    print auth_hash
+
+    user = User.find_by(
+      uid: auth_hash[:uid],
+      provider: auth_hash[:provider])
+
+    unless user
+      user = User.create!(
+        uid: auth_hash[:uid],
+        provider: auth_hash[:provider],
+        fname: auth_hash[:info][:name].split(" ").first,
+        lname: auth_hash[:info][:name].split(" ").last,
+        password: SecureRandom.urlsafe_base64
+      )
+    end
+
+    user
+  end
+
   def is_password?(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
@@ -65,4 +88,5 @@ class User < ActiveRecord::Base
   def ensure_session_token
     self.session_token ||= User.generate_session_token
   end
+
 end

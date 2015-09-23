@@ -16,7 +16,7 @@
 
  @font-face {
    font-family: "Interstate";
-   src: font-url('Interstate-Regular.otf') format('truetype');
+   src: font-url('Interstate-Light.otf') format('truetype');
  }
 
  html, body, h1, h2, h3, h4, h5, a, li, ul, input, button, label {
@@ -33,6 +33,7 @@
    text-decoration: inherit;
    text-align: inherit;
    box-sizing: inherit;
+   vertical-align: inherit;
    color: #333333;
 
    list-style-type: none;
@@ -232,4 +233,12 @@
    margin-top: 20px;
    padding-top: 4px;
    right: 0;
+ }
+
+ div.author-info-area {
+   float: left;
+ }
+
+ div.comments-index {
+   float: left;
  }

@@ -23,7 +23,6 @@ div.player-area-small {
   width: 100%;
   height: 120px;
   box-sizing: border-box;
-  margin: 0 30px;
 }
 
 div.player {
@@ -71,9 +70,13 @@ div.name-details {
 }
 
 div.display-name {
+  margin-bottom: 2px;
+}
+
+div.display-name a {
+  color: white;
   line-height: 1.4;
   font-size: 16px;
-  margin-bottom: 2px;
 }
 
 div.track-title {
@@ -82,13 +85,7 @@ div.track-title {
   padding: 1px 0;
 }
 
-
 .player-area-small {
-
-  div.name-details {
-    padding-top: 7px;
-    margin-bottom: 6px;
-  }
 
   div.name-details div {
     box-shadow: 4px 0 0 0 #fff,-4px 0 0 0 #fff;
@@ -100,13 +97,20 @@ div.track-title {
     position: relative;
   }
 
-  div.display-name {
+  div.display-name a {
     color: #999;
     font-size: 14px;
+    line-height: normal;
+  }
+
+  div.track-title a {
+    font-size: 16px;
+    font-weight: bold;
   }
 
   div.track-title {
     font-size: 16px;
+    padding: 0;
   }
 
   div.player {
@@ -166,10 +170,8 @@ input.comment-input.focused {
 div.comment-surround {
   border: solid 1px #e5e5e5;
   background: #f2f2f2;
-  width: 100%;
-  padding: 0 5px;
-  padding-top: 5px;
-  margin-top: 7px;
+  width: 805px;
+  padding: 5px;
 }
 
 div.comment-surround.focused {
@@ -193,10 +195,20 @@ div#audio-wave:hover, div#audio-wave.active {
   opacity: 1;
 }
 
+div#audio-wave .loading-text {
+  position: absolute;
+  line-height: 0;
+  font-size: 25px;
+  font-weight: bold;
+  display: block;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+}
+
 div#audio-wave.small {
   float: left;
-  width-max: 682px;
-  width: 80%;
+  width: 682px;
   height: 60px;
   position: relative;
   display: block;
@@ -206,12 +218,16 @@ div#audio-wave.small {
   bottom: 0;
 }
 
+div#audio-wave > div.hidden {
+  display: none;
+}
+
 div.cursor-time, div.end-time {
   position: absolute;
   background-color: #000;
   font-size: 10px;
   font-weight: 100;
-  top: 35px;
+  top: 50%;
   z-index: 10;
   padding: 1px 2px;
   font-family: 'Lucida Grande'
@@ -235,19 +251,66 @@ button.play-pause {
   background-size: 33px 33px;
   background-repeat: no-repeat;
   background-position: center;
+  position: relative;
+  font-size: 32px;
+  line-height: 0;
+  box-sizing: border-box;
 }
 
 .player-area-small button.play-pause {
-  padding: 14px;
+  padding: 15px;
   border-radius: 50%;
   float: left;
   margin: 0px;
   background-size: 13px 13px;
   background-repeat: no-repeat;
   background-position: center;
-  margin-top: 10px;
-  margin-bottom: 6px;
+  margin-top: 3px;
+  margin-right: 3px;
+  font-size: 16px;
+  line-height: 0;
+  box-sizing: border-box;
 }
+
+.loading-animation {
+  position: absolute;
+  display: block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+button.play-pause.loading {
+  .one:after {
+    content: "•";
+    color: white;
+    opacity: 0;
+    animation: dot 1s infinite;
+    animation-delay: 0.0s;
+  }
+
+  .two:after {
+    content: "•";
+    color: white;
+    opacity: 0;
+    animation: dot 1s infinite;
+    animation-delay: 0.1s;
+  }
+
+  .three:after {
+    content: "•";
+    color: white;
+    opacity: 0;
+    animation: dot 1s infinite;
+    animation-delay: 0.2s;
+  }
+
+  @keyframes dot {
+      0% { opacity: 0; }
+     50% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+}
+
 
 button.play-pause.paused {
   background-image: image-url('play.png');
@@ -263,9 +326,37 @@ button.play-pause:active {
 
 div.track-index-item {
   position: relative;
+  width: 817px;
 }
 
 div.track-index {
   margin: auto;
   max-width: 817px;
+}
+
+button.like-button {
+  border: 1px solid #e5e5e5;
+  background: white;
+  font-weight: bold;
+  color: #a9a9a9;
+  position: relative;
+  line-height: 0;
+}
+
+button.like-button:hover {
+  border-color: #ff5300;
+  color: #ff5300;
+}
+
+button.like-button.liked {
+  background: #ff5300;
+  border-color: #ff5300;
+  color: white;
+}
+
+.heart {
+  position: absolute;
+  display: block;
+  left: 50%;
+  transform: translateX(-50%);
 }

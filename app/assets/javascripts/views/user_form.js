@@ -7,7 +7,6 @@ CloudSound.Views.UserForm = Backbone.View.extend({
 
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.collection, "sync", this.render);
   },
 
   events: {
@@ -28,14 +27,17 @@ CloudSound.Views.UserForm = Backbone.View.extend({
     var attrs = $(e.currentTarget).serializeJSON().user;
     this.model.save(attrs, {
       success: function() {
-        CloudSound.currentUser.fetch();
+        CloudSound.currentUser.fetch({
+          success: function() {
+            Backbone.history.navigate('users/' + CloudSound.currentUser.id + '/edit', {trigger: true});
+          },
+        });
         that.collection.add(that.model, { merge: true });
-        Backbone.history.navigate('', {trigger: true})
       },
       error: function(data){
         alert("Form invalid. Let the user know what went wrong.");
         console.log(data);
-      }
+      },
     });
 
   },

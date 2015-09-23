@@ -25,6 +25,15 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update(update_params)
+      render :show
+    else
+      render json: @user.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
   def index
     @users = User.all
     render :index
@@ -39,6 +48,10 @@ class Api::UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:email, :password)
+  end
+
+  def update_params
+    params.require(:user).permit(:image, :display_name, :username, :fname, :lname, :location, :email)
   end
 
 end

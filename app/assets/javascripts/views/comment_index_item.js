@@ -22,11 +22,15 @@ CloudSound.Views.CommentIndexItem = Backbone.View.extend({
   },
 
   showButtons: function() {
-    this.$('a.comment-button').addClass('active');
+    if (CloudSound.currentUser.get('id') === this.model.get('commenter_id')) {
+      this.$('a.comment-button').addClass('active');
+    }
   },
 
   hideButtons: function() {
-    this.$('a.comment-button').removeClass('active');
+    if (CloudSound.currentUser.get('id') === this.model.get('commenter_id')) {
+      this.$('a.comment-button').removeClass('active');
+    }
   },
 
   deleteComment: function(e) {

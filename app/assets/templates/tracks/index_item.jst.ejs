@@ -1,4 +1,5 @@
 <% var author = track.author() %>
+<% track.get('likes') ? likesCount = track.get('likes').length : likesCount = 0 %>
 
 <div class="player-area-small group">
 
@@ -8,23 +9,33 @@
     <img class="main" src="<%= author.get('image_url') %>" width="120" height="120" />
   <% } %>
 
-  <div class="player group">
-    <button class="play-pause paused"></button>
-    <div class="name-details">
-      <div class="display-name"><%= author.escape('display_name') %></div>
-      <br>
-      <div class="track-title"><a href="#tracks/<%= track.get('id') %>"><%= track.escape('title') %></a></div>
+  <div class="player">
+    <div class="info-and-button group">
+      <button class="play-pause loading">
+        <div class="loading-animation">
+          <span class="one"></span><span class="two"></span><span class="three"></span>
+        </div>
+      </button>
+      <div class="name-details">
+        <div class="display-name"><a href="#users/<%= author.get('id') %>"><%= author.escape('display_name') %></a></div>
+        <br>
+        <div class="track-title"><a href="#tracks/<%= track.get('id') %>"><%= track.escape('title') %></a></div>
+      </div>
+    </div>
+    <br>
+    <div id="audio-wave" class="small">
+      <div class="loading-text">
+        Loading...
+      </div>
+      <div class="track-times hidden">
+        <div class="cursor-time"></div>
+        <div class="end-time"></div>
+      </div>
     </div>
   </div>
   <br>
-  <div id="audio-wave" class="small">
-    <div class="cursor-time">0:00</div>
-    <div class="end-time"></div>
-  </div>
 
 </div>
-
-<br>
 
 <div class="comment-form-area">
 
@@ -32,11 +43,15 @@
 
 <div class="info-and-buttons">
 
-  <button class="like-button">Like</button>
+  <button class="like-button">
+    <div class="heart">♥</div>
+  </button>
 
   <ul class="track-info">
-    <li>Plays: <%= track.get('plays') %></li>
-    <li>Likes: <%= track.get('likes') %></li>
+    <li class="plays">Plays: <%= track.get('plays') %></li>
+    <li class="likes">Likes: <%= track.likes().length %></li>
   </ul>
 
 </div>
+
+<br>

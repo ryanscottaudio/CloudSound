@@ -7,7 +7,6 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.collection, "sync", this.render);
   },
 
   events: {
@@ -82,7 +81,7 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
     formData.append("track[image]", this.$('#input-post-image')[0].files[0]);
     this.model.saveFormData(formData, {
       success: function() {
-        // that.collection.add(that.model);
+        that.collection.add(that.model);
         Backbone.history.navigate('tracks/' + that.model.id, {trigger: true})
       },
       error: function(model, response) {

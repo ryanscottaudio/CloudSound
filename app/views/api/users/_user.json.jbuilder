@@ -1,4 +1,4 @@
-json.extract!(user, :id, :display_name)
+json.extract!(user, :id, :display_name, :username)
 json.image_url asset_path(user.image.url(:original))
 
 if !short
@@ -6,5 +6,5 @@ if !short
     json.extract!(user, :location, :fname, :lname)
   end
   # json.followers user.followers.count
-  json.tracks user.tracks.count
+  json.tracks user.tracks.to_a.count
 end
