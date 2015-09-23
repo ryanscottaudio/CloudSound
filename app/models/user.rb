@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true, unless: :uid?
   validates :uid, presence: true, uniqueness: {scope: :provider}, unless: :email?
 
-  has_attached_file :image, default_url: "missinguser.png"
+  has_attached_file :image, default_url: "missinguser.png", s3_protocol: ""
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   has_many :tracks,
