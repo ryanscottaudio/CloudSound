@@ -11,6 +11,9 @@
     <div class="user-container">
       <img class="thumb" src="<%= CloudSound.currentUser.get('image_url') %>" width="26" height="26" />
       <a class="username" href="#users/<%= CloudSound.currentUser.id %>"><%= CloudSound.currentUser.escape("display_name") %></a>
+      <div class="dropdown">
+        <a href="#users/<%= CloudSound.currentUser.id %>/edit">Edit</a>
+      </div>
     </div>
     <a class="sign-out" href="#">Sign Out</a>
   <% } else { %>

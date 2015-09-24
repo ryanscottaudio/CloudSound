@@ -168,15 +168,23 @@ input.comment-input.focused {
 }
 
 div.comment-surround {
+  float: left;
   border: solid 1px #e5e5e5;
   background: #f2f2f2;
-  width: 805px;
   padding: 5px;
 }
 
 div.comment-surround.focused {
   background: #e5e5e5;
   border-color: #ccc;
+}
+
+.comment-form-image img {
+  position: relative;
+  display: block;
+  float: left;
+  width: 31px;
+  height: 31px;
 }
 
 div#audio-wave {
@@ -337,10 +345,14 @@ div.track-index {
 button.like-button {
   border: 1px solid #e5e5e5;
   background: white;
-  font-weight: bold;
   color: #a9a9a9;
   position: relative;
-  line-height: 0;
+  background-size: 16px 16px;
+  background-image: image-url('heartblack.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 32px;
+  height: 26px;
 }
 
 button.like-button:hover {
@@ -349,14 +361,7 @@ button.like-button:hover {
 }
 
 button.like-button.liked {
-  background: #ff5300;
   border-color: #ff5300;
   color: white;
-}
-
-.heart {
-  position: absolute;
-  display: block;
-  left: 50%;
-  transform: translateX(-50%);
+  background-image: image-url('heartorange.svg');
 }

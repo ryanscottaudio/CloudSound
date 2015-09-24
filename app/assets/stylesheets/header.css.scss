@@ -17,7 +17,6 @@
 .header-interior img.thumb {
   display: block;
   margin: 10px 10px;
-  text-align: center;
   background: white;
 }
 
@@ -31,7 +30,7 @@
 
 .header-interior div.user-container {
   width: auto;
-  min-width: 103px; 
+  min-width: 104px;
   display: block;
   border-right: 1px solid #111;
 }
@@ -89,4 +88,32 @@
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
+}
+
+.user-container {
+  position: relative;
+}
+
+.user-container:hover .dropdown {
+  display: block;
+}
+
+.dropdown {
+  top: calc(100% - 1px);
+  display: none;
+  font-size: 14px;
+  position: absolute;
+  left: -1px;
+  border-top: solid 1px #111;
+  border-bottom: solid 1px #111;
+  border-right: solid 1px #111;
+  border-left: solid 1px #111;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  overflow: hidden;
+  background: #333;
+}
+
+.dropdown a {
+  border: 0;
 }
