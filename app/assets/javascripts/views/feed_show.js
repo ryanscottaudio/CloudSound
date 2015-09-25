@@ -7,7 +7,6 @@ CloudSound.Views.FeedShow = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
-    this.model.fetch();
   },
 
   render: function() {
@@ -18,11 +17,9 @@ CloudSound.Views.FeedShow = Backbone.CompositeView.extend({
   },
 
   addTracksIndex: function () {
-    var tracks = this.model.get('display_tracks');
-    var tracksCollection = new CloudSound.Collections.Tracks({});
-    tracksCollection.set(tracks, {parse: true});
+    that = this;
     var tracksIndexView = new CloudSound.Views.TrackIndex({
-      collection: tracksCollection,
+      collection: that.model.displayTracks(),
     });
     this.addSubview('div.tracks-index', tracksIndexView);
   },

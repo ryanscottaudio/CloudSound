@@ -77,7 +77,7 @@ function renderWave(options) {
   wave.on('error', hideProgress);
 
   wave.on("loading", function (percent, xhr) {
-    wave.xhr = xhr;
+    wave.xhr =  wave.xhr || xhr;
   });
 
   wave.on("ready", function() {

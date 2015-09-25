@@ -21,6 +21,10 @@ CloudSound.Models.User = Backbone.CFModel.extend({
       this.followees().set(response.followees, {parse: true});
       delete response.followees;
     };
+    if (response.display_tracks) {
+      this.displayTracks().set(response.display_tracks, {parse: true});
+      delete response.display_tracks;
+    };
     return response;
   },
 
@@ -43,6 +47,13 @@ CloudSound.Models.User = Backbone.CFModel.extend({
       this._followees = new CloudSound.Collections.Follows([], {followee: this});
     };
     return this._followees;
+  },
+
+  displayTracks: function() {
+    if (!this._displayTracks) {
+      this._displayTracks = new CloudSound.Collections.Tracks([], {user: this});
+    };
+    return this._displayTracks;
   },
 });
 
@@ -104,5 +115,4 @@ CloudSound.Models.CurrentUser = CloudSound.Models.User.extend ({
       console.log("signed out", this);
     }
   },
-
 });
