@@ -17,20 +17,14 @@ CloudSound.Views.UserShow = Backbone.CompositeView.extend({
     this.$el.html(this.template({user: this.model}));
     this.setFollowed();
     this.addTracksIndex();
-    this.addHeader();
+    addHeader.call(this);
     return this;
-  },
-
-  addHeader: function() {
-    that = this;
-    var headerView = new CloudSound.Views.Header();
-    this.addSubview('div.header', headerView);
   },
 
   addTracksIndex: function () {
     that = this;
     var tracksIndexView = new CloudSound.Views.TrackIndex({
-      collection: that.collection,
+      collection: that.model.tracks(),
     });
     this.addSubview('div.tracks-index', tracksIndexView);
   },

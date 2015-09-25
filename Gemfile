@@ -11,6 +11,7 @@ gem 'figaro'
 
 gem 'omniauth-facebook'
 
+gem 'pgsearch'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'

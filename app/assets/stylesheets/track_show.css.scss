@@ -425,3 +425,14 @@ ul.track-info {
     height: 12px;
   }
 }
+
+.progress-bar {
+  width: 0;
+  display: block;
+  border-radius: 4px;
+  height: 100%;
+  opacity: 1;
+  position: absolute;
+  transition: width 4s ease;
+  transition: opacity .5s ease;
+}

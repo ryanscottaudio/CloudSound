@@ -1,5 +1,4 @@
 <% var author = track.author() %>
-<% track.get('likes') ? likesCount = track.get('likes').length : likesCount = 0 %>
 
 <div class="player-area-small group">
 
@@ -24,8 +23,8 @@
     </div>
     <br>
     <div id="audio-wave" class="small">
-      <div class="loading-text">
-        Loading...
+      <div id="progress-bar">
+        <div class="progress-bar"></div>
       </div>
       <div class="track-times hidden">
         <div class="cursor-time"></div>
@@ -51,9 +50,9 @@
     <li class="plays-image"></li>
     <li class="plays-count"><%= track.get('plays') %></li>
     <li class="likes-image"></li>
-    <li class="likes-count"><%= track.get('likes').length %></li>
+    <li class="likes-count"><%= track.likes().length %></li>
     <li class="comments-image"></li>
-    <li class="comments-count"><%= track.get('comments').length %></li>
+    <li class="comments-count"><%= track.comments().length %></li>
   </ul>
 
 </div>

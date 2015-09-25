@@ -19,9 +19,3 @@ CloudSound.Collections.Tracks = Backbone.GofCollection.extend({
   },
 
 })
-
-CloudSound.Collections.Feed = CloudSound.Collections.Tracks.extend({
-
-  url: "api/feed",
-
-})

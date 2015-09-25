@@ -16,15 +16,9 @@ CloudSound.Views.UserEdit = Backbone.CompositeView.extend({
 
   render: function() {
     this.$el.html(this.template({user: this.model}));
-    this.addHeader();
+    addHeader.call(this);
 
     return this;
-  },
-
-  addHeader: function() {
-    that = this;
-    var headerView = new CloudSound.Views.Header();
-    this.addSubview('div.header', headerView);
   },
 
   pictureChange: function(e) {

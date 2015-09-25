@@ -17,17 +17,11 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
   render: function() {
     this.$el.html(this.template({track: this.model}));
     this.setLiked();
-    this.renderWave();
+    renderWave.call(this, {height: 100, color: '#FFFFFF'});
     this.addCommentForm();
     this.addCommentsIndex();
-    this.addHeader();
+    addHeader.call(this);
     return this;
-  },
-
-  addHeader: function() {
-    that = this;
-    var headerView = new CloudSound.Views.Header();
-    this.addSubview('div.header', headerView);
   },
 
   addCommentForm: function () {
@@ -47,44 +41,6 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
       collection: that.collection,
     });
     this.addSubview('div.lower-comment-area', commentsIndexView);
-  },
-
-  renderWave: function () {
-
-    var wave = Object.create(WaveSurfer);
-    this.wave = wave;
-    this.wave.playability = false;
-
-    wave.init({
-      barWidth: 2,
-      cursorWidth: 0,
-      container: this.$('div#audio-wave')[0],
-      waveColor: '#FFFFFF',
-      progressColor: '#FF5100',
-      cursorColor: '#FF5100',
-      normalize: true,
-      fillParent: true,
-      height: 100,
-    });
-
-    wave.on("ready", function() {
-      this.$('.loading-text').addClass('hidden');
-      this.$('button.play-pause').removeClass('loading');
-      this.$('button.play-pause').addClass('paused');
-      this.$('.track-times').removeClass('hidden');
-      this.$('.cursor-time').html('0:00');
-      this.$('.end-time').html(secondsToHms(wave.getDuration()));
-      this.wave.playability = true;
-      wave.on("audioprocess", function() {
-        this.$('.cursor-time').html(secondsToHms(wave.getCurrentTime()));
-      }.bind(this));
-    }.bind(this));
-
-    wave.on("finish", function() {
-      this.endTrack();
-    }.bind(this));
-
-    wave.load(this.model.get('audio_url'));
   },
 
   playPause: function() {
