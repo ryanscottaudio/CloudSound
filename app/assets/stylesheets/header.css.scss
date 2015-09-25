@@ -87,6 +87,7 @@
   margin: auto;
   position: absolute;
   left: 50%;
+  border: 0;
   transform: translate(-50%, 0);
 }
 
@@ -116,4 +117,9 @@
 
 .dropdown a {
   border: 0;
+}
+
+.right {
+  float: right;
+  border-left: 1px solid #111;
 }

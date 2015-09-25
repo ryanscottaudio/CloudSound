@@ -2,22 +2,26 @@
   <a class="logo-block" href="#">
     <span class="logo-block"></span>
   </a>
-  <a class="home" href="#">Home</a>
-  <form class="search-container">
-    <input class="search" placeholder="Search">
-  </form>
-  <% if (CloudSound.currentUser.isSignedIn()) { %>
-    <a class="upload" href="#tracks/new">Upload</a>
-    <div class="user-container">
-      <img class="thumb" src="<%= CloudSound.currentUser.get('image_url') %>" width="26" height="26" />
-      <a class="username" href="#users/<%= CloudSound.currentUser.id %>"><%= CloudSound.currentUser.escape("display_name") %></a>
-      <div class="dropdown">
-        <a href="#users/<%= CloudSound.currentUser.id %>/edit">Edit</a>
+  <div class="right">
+
+    <a class="home" href="#">Home</a>
+    <!-- <form class="search-container">
+      <input class="search" placeholder="Search">
+    </form> -->
+    <% if (CloudSound.currentUser.isSignedIn()) { %>
+      <a class="upload" href="#tracks/new">Upload</a>
+      <div class="user-container">
+        <img class="thumb" src="<%= CloudSound.currentUser.get('image_url') %>" width="26" height="26" />
+        <a class="username" href="#users/<%= CloudSound.currentUser.id %>"><%= CloudSound.currentUser.escape("display_name") %></a>
+        <div class="dropdown">
+          <a href="#users/<%= CloudSound.currentUser.id %>/edit">Edit</a>
+        </div>
       </div>
-    </div>
-    <a class="sign-out" href="#">Sign Out</a>
-  <% } else { %>
-    <a class="create-account" href="#users/new">Create Account</a>
-    <a class="sign-in" href="#session/new">Sign In</a>
-  <% } %>
+      <a class="sign-out" href="#">Sign Out</a>
+    <% } else { %>
+      <a class="create-account" href="#users/new">New User</a>
+      <a class="sign-in" href="#session/new">Sign In</a>
+    <% } %>
+
+  </div>
 </div>
