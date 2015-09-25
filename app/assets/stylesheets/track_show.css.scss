@@ -390,34 +390,38 @@ button.like-button.liked {
 ul.track-info li {
   float: left;
   position: relative;
-  background-size: 16px 16px;
-  // margin: 0 10px;
+  width: auto;
 }
 
-ul.track-info li div {
+ul.track-info li {
+  background-size: 16px 16px;
   background-repeat: no-repeat;
   background-position: center;
   display: inline-block;
-  width: 32px;
-  height: 26px;
-  background-size: 16px 16px;
-}
-
-ul.track-info li span {
   font-family: "Lucida Grande";
   color: #999;
-  display: inline-block;
-  vertical-align: middle;
+  display: block;
+  font-size: 10px;
+  line-height: 12px;
+  margin: 6px 3px;
 }
 
-span.plays-image {
-  background-image: image-url('plays.svg');
-}
+ul.track-info {
+  li.plays-image {
+    background-image: image-url('plays.svg');
+    width: 12px;
+    height: 12px;
+  }
 
-span.likes-image {
-  background-image: image-url('heartgray.svg');
-}
+  li.likes-image {
+    background-image: image-url('heartgray.svg');
+    width: 12px;
+    height: 12px;
+  }
 
-span.comments-image {
-  background-image: image-url('comments.svg');
+  li.comments-image {
+    background-image: image-url('comments.svg');
+    width: 12px;
+    height: 12px;
+  }
 }

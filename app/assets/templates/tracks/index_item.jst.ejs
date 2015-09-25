@@ -48,18 +48,12 @@
   <% } %>
 
   <ul class="track-info group">
-    <li class="plays">
-      <div class="plays"></div>
-      <span class="plays"><%= track.get('plays') %></span>
-    </li>
-    <li class="likes">
-      <div class="likes"></div>
-      <span class="likes"><%= track.get('likes').length %></span>
-    </li>
-    <li class="comments">
-      <div class="comments"></div>
-      <span class="comments"><%= track.get('comments').length %></span>
-    </li>
+    <li class="plays-image"></li>
+    <li class="plays-count"><%= track.get('plays') %></li>
+    <li class="likes-image"></li>
+    <li class="likes-count"><%= track.get('likes').length %></li>
+    <li class="comments-image"></li>
+    <li class="comments-count"><%= track.get('comments').length %></li>
   </ul>
 
 </div>
