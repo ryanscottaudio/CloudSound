@@ -62,13 +62,13 @@ Backbone.CompositeView = Backbone.View.extend({
 
   remove: function () {
     if (this.wave) {
-      this.wave.xhr.abort();
+      // this.wave.xhr.abort();
       this.wave.destroy();
     }
     Backbone.View.prototype.remove.call(this);
     this.eachSubview(function (subview) {
       if (subview.wave) {
-        subview.wave.xhr.abort();
+        // subview.wave.xhr.abort();
         subview.wave.destroy();
       }
 
@@ -78,7 +78,7 @@ Backbone.CompositeView = Backbone.View.extend({
 
   removeSubview: function (selector, subview) {
     if (subview.wave) {
-      subview.wave.xhr.abort();
+      // subview.wave.xhr.abort();
       subview.wave.destroy();
     }
     subview.remove();

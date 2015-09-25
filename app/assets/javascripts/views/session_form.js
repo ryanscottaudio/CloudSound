@@ -22,12 +22,13 @@ CloudSound.Views.SessionForm = Backbone.View.extend({
 
   submit: function(e) {
     e.preventDefault();
+    that = this;
     var attrs = $(e.currentTarget).serializeJSON().user;
     CloudSound.currentUser.signIn({
       email: attrs.email,
       password: attrs.password,
       error: function() {
-        alert("WRONG");
+        that.$('.errors').html("We couldn't sign you in; are you sure you had the right email and password?")
       },
     })
   },

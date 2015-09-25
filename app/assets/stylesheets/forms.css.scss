@@ -1,0 +1,32 @@
+form.userEdit, form.trackForm {
+  background: white;
+  margin: auto;
+  max-width: 1240px;
+  padding: 30px;
+  display: block;
+}
+
+form.userEdit > * , form.trackForm > * {
+  display: block;
+}
+
+form.userEdit, form.trackForm {
+
+  div.form-buttons {
+    margin-top: 20px;
+    padding-top: 4px;
+  }
+
+  input {
+    margin: 2px 0 15px 0;
+  }
+
+   .preview-image {
+    margin: 2px 0 15px 0;
+  }
+
+}
+
+.error-message {
+  color: red;
+}

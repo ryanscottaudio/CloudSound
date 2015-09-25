@@ -1,7 +1,7 @@
 CloudSound.Views.CommentIndexItem = Backbone.View.extend({
 
   tagName: 'li',
-  className: 'comment',
+  className: 'comment group',
 
   template: JST['comments/index_item'],
 

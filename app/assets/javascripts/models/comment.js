@@ -12,11 +12,11 @@ CloudSound.Models.Comment = Backbone.Model.extend({
 
   parse: function(response) {
     if (response.author) {
-      this.author().set(response.author);
+      this.author().set(response.author, {parse: true});
       delete response.author;
     };
     if (response.track) {
-      this.track().set(response.track);
+      this.track().set(response.track, {parse: true});
       delete response.track;
     };
     return response;

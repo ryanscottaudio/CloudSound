@@ -24,6 +24,10 @@ CloudSound.Views.UserForm = Backbone.View.extend({
 
     that = this;
 
+    if (!this.doChecks()) {
+      return;
+    }
+
     var attrs = $(e.currentTarget).serializeJSON().user;
     this.model.save(attrs, {
       success: function() {
@@ -35,11 +39,53 @@ CloudSound.Views.UserForm = Backbone.View.extend({
         that.collection.add(that.model, { merge: true });
       },
       error: function(data){
-        alert("Form invalid. Let the user know what went wrong.");
-        console.log(data);
+        that.$('.errors').html("That email address already has an account!")
       },
     });
 
+  },
+
+  doChecks: function() {
+
+    var pass = true;
+
+    if (that.$('#email').val().length < 1) {
+      that.$('.errors-email').html("Please enter an email address.");
+      that.$('#email').css('border-color', 'red');
+      pass = false;
+    } else {
+      that.$('.errors-email').empty();
+      that.$('#email').css('border-color', '#ccc');
+    }
+
+    if (that.$('#password').val().length < 6) {
+      that.$('.errors-password').html("Please enter at least 6 characters.");
+      that.$('#password').css('border-color', 'red');
+      pass = false;
+    } else {
+      that.$('.errors-password').empty();
+      that.$('#password').css('border-color', '#ccc');
+    }
+
+    if (that.$('#password_confirmation').val() !== that.$('#password').val()) {
+      that.$('.errors-password-confirm').html("Your passwords do not match.");
+      that.$('#password_confirmation').css('border-color', 'red');
+      pass = false;
+    } else {
+      that.$('.errors-password-confirm').empty();
+      that.$('#password_confirmation').css('border-color', '#ccc');
+    }
+
+    if (!that.$('#terms_agree').prop('checked')) {
+      that.$('.errors-checkbox').html("You must agree to the terms and conditions.");
+      that.$('#terms_agree').css('border-color', 'red');
+      pass = false;
+    } else {
+      that.$('.errors-checkbox').empty();
+      that.$('#terms_agree').css('border-color', '#ccc');
+    }
+
+    return pass;
   },
 
 })

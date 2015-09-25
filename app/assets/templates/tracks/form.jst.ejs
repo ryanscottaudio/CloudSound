@@ -2,50 +2,50 @@
 
 <form class="trackForm">
 
-  <label>
-    Audio
-    <input type="file" name="track[audio]" id='input-post-audio'>
-  </label>
+  <h3 class="errors" ></h3>
 
-  <br>
+  <label class="sign-in-input-text">
+    Audio
+  </label>
+    <input type="file" name="track[audio]" id='input-post-audio'>
+
+
 
   <div id="preview-post-audio"></div>
 
-  <br>
 
-  <label>
+
+  <label class="sign-in-input-text">
     Picture
+  </label>
     <input type="file" name="track[image]" id='input-post-image'>
-  </label>
 
-  <br>
 
-  <img src="" id="preview-post-image" width="300" height="300">
 
-  <br>
+  <img src="" id="preview-post-image" class="preview-image" width="300" height="300">
 
-  <label>
+
+
+  <label class="sign-in-input-text">
     Title
+  </label>
     <input type="text" class="cs-input" name="track[title]" id='input-post-title' value="<%= track.get('title') %>">
-  </label>
 
-  <br>
 
-  <label>
+
+  <label class="sign-in-input-text">
     URL
+  </label>
     <input type="text" class="cs-input" name="track[url]" id='input-post-url' value="<%= track.get('url') %>">
-  </label>
 
-  <br>
 
-  <label>
+
+  <label class="sign-in-input-text">
     Description
-    <textarea name="track[description]" id='input-post-description'>
-      <%= track.get('url') %>
-    </textarea>
   </label>
+    <input type="text" class="cs-input" name="track[description]" id='input-post-description' value="<%= track.get('description') %>">
 
-  <br>
+
 
   <!-- <label>
     Private?
@@ -56,9 +56,10 @@
     >
   </label>
 
-  <br> -->
-
-  <a href="#">Cancel</a>
-  <button class="save">Save</button>
+   -->
+  <div class="form-buttons">
+    <a href="#" class="cancel-link">Cancel</a>
+    <button class="save">Save</button>
+  </div>
 
 </form>

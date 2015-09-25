@@ -35,8 +35,6 @@
 
 </div>
 
-<br>
-
 <div class="comment-area">
 
   <div class="upper-comment-area">
@@ -45,17 +43,19 @@
 
     </div>
 
-    <br>
-
-    <div class="info-and-buttons">
+    <div class="info-and-buttons group">
 
       <% if (CloudSound.currentUser.isSignedIn()) { %>
         <button class="like-button"></button>
       <% } %>
 
-      <ul class="track-info">
-        <li class="plays">Plays: <%= track.get('plays') %></li>
-        <li class="likes">Likes: <%= track.likes().length %></li>
+      <ul class="track-info group">
+        <li class="plays-image"></li>
+        <li class="plays-count"><%= track.get('plays') %></li>
+        <li class="likes-image"></li>
+        <li class="likes-count"><%= track.likes().length %></li>
+        <li class="comments-image"></li>
+        <li class="comments-count"><%= track.comments().length %></li>
       </ul>
 
     </div>
@@ -70,16 +70,15 @@
 
       <img class="mini" src="<%= author.get('image_url') %>" width="120" height="120" />
 
-      <br>
-
-      <div class="author-name"><%= author.get('display_name') %></div>
+      <div class="author-name"><a href="#users/<%= author.id %>"><%= author.get('display_name') %></a></div>
 
       <br>
 
-      <ul class="author-info">
-        <li>Followers: <%= track.author.followers %></li>
-        <li>Tracks: <%= author.get('tracks') %></li>
-        <li>Followers: <%= author.get('followers') %></li>
+      <ul class="author-info group">
+        <li class="followers-image"></li>
+        <li class="followers-count"><%= author.get('follows') %></li>
+        <li class="tracks-image"></li>
+        <li class="tracks-count"><%= author.get('tracks') %></li>
       </ul>
 
     </div>

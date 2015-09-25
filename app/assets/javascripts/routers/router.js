@@ -26,10 +26,18 @@ CloudSound.Routers.Router = Backbone.Router.extend({
   },
 
   feedShow: function() {
-    var feedView = new CloudSound.Views.FeedShow({
-      model: CloudSound.currentUser,
-    });
-    this._swapview(feedView);
+    if (CloudSound.currentUser.id) {
+      var feedView = new CloudSound.Views.FeedShow({
+        model: CloudSound.currentUser,
+      });
+      this._swapview(feedView);
+    } else {
+      var exploreView = new CloudSound.Views.ExploreShow({
+        collection: this.tracks,
+      });
+      this._swapview(exploreView);
+      this.tracks.fetch();
+    }
   },
 
   userNew: function() {

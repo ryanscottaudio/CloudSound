@@ -1,8 +1,9 @@
 <% author = comment.author() %>
 <img class="comment-image" src="<%= author.get('image_url') %>" width="40" height="40" />
-<div><%= author.escape('display_name') %> says<%= comment.get('time') ? " at " + secondsToHms(comment.get('time')) : "" %>:</div>
-<div class="comment-content"><%= comment.escape('content') %></div>
+<div class="actual-comment">
+  <div class="comment-author"><a href="#users/<%= author.id %>"><%= author.escape('display_name') %></a> says<%= comment.get('time') ? " at " + secondsToHms(comment.get('time')) : "" %>:</div>
+  <div class="comment-content"><%= comment.escape('content') %></div>
+</div>
 <% if (CloudSound.currentUser.id === author.id) { %>
-  <a class="delete-comment comment-button" href="#">Delete</a>
+  <a class="delete-comment comment-button" href="#"></a>
 <% } %>
-<br>

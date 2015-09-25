@@ -37,14 +37,14 @@ CloudSound.Models.User = Backbone.CFModel.extend({
 
   followers: function() {
     if (!this._followers) {
-      this._followers = new CloudSound.Collections.Follows([], {follower: this});
+      this._followers = new CloudSound.Collections.Follows([], {followee: this});
     };
     return this._followers;
   },
 
   followees: function() {
     if (!this._followees) {
-      this._followees = new CloudSound.Collections.Follows([], {followee: this});
+      this._followees = new CloudSound.Collections.Follows([], {follower: this});
     };
     return this._followees;
   },
@@ -82,6 +82,7 @@ CloudSound.Models.CurrentUser = CloudSound.Models.User.extend ({
       data: credentials,
       dataType: "json",
       success: function(data) {
+        console.log(data);
         model.set(data);
         options.success && options.success();
       },

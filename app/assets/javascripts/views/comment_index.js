@@ -26,10 +26,21 @@ CloudSound.Views.CommentIndex = Backbone.CompositeView.extend({
   addCommentView: function (comment) {
     var commentView = new CloudSound.Views.CommentIndexItem({model: comment});
     this.addSubview('ul', commentView);
+    this.updateCommentsCount();
   },
 
   removeCommentView: function (comment) {
     this.removeModelSubview('ul', comment);
+    this.$('.number-of-comments').html(this.collection.length + ' comments');
+    this.updateCommentsCount();
+  },
+
+  updateCommentsCount: function () {
+    if (this.collection.length === 1) {
+      this.$('.number-of-comments').html(this.collection.length + ' comment');
+    } else {
+      this.$('.number-of-comments').html(this.collection.length + ' comments');
+    }
   },
 
 })

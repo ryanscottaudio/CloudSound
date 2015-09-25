@@ -3,6 +3,13 @@ div.track {
   position: relative;
   max-width: 100%;
   margin: 0 auto;
+  background: #f2f2f2;
+}
+
+div.comment-area {
+  padding: 30px;
+  max-width: 1240px;
+  background: white;
 }
 
 div.player-area {
@@ -140,9 +147,9 @@ div.track-title {
 
 }
 
-.track-index-item ul.track-info {
-    display: block;
-    float: right;
+ul.track-info {
+  display: block;
+  float: right;
 }
 
 a.delete-comment {
@@ -183,7 +190,7 @@ div.comment-surround {
   border: solid 1px #e5e5e5;
   background: #f2f2f2;
   padding: 5px;
-  width: calc(100% - 12px - 31px);
+  width: calc(100% - 31px);
 }
 
 div.comment-surround.focused {

@@ -2,11 +2,15 @@
 
 </div>
 
-<% if current_user && (!current_user.display_name ||
-      current_user.display_name == "" ||
-      !current_user.image_file_name) %>
+<% if current_user %>
   <script type="text/javascript">
-    var needsToEdit = true;
     var currentUserId = <%= current_user.id %>;
   </script>
+  <% if !current_user.display_name ||
+        current_user.display_name == "" ||
+        !current_user.image_file_name %>
+    <script type="text/javascript">
+      var needsToEdit = true;
+    </script>
+  <% end %>
 <% end %>

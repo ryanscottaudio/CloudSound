@@ -14,7 +14,7 @@ CloudSound.Models.Track = Backbone.CFModel.extend({
       delete response.comments;
     };
     if (response.author) {
-      this.author().set(response.author);
+      this.author().set(response.author, {parse: true});
       delete response.author;
     };
     if (response.likes) {

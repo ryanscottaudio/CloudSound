@@ -1,55 +1,58 @@
 <div class="header"></div>
 
-<br>
+<form class="userEdit group">
 
-<form class="userEdit">
+  <h3 class="errors" ></h3>
 
-  <label>
+  <label class="sign-in-input-text">
     Picture
+  </label>
     <input type="file" name="user[image]" id='input-user-image'>
-  </label>
-
-  <br>
-
-  <img src="<%= user.get('image_url') %>" id="preview-user-image" width="300" height="300">
 
 
-  <br>
 
-  <label>
+  <img src="<%= user.get('image_url') %>" id="preview-user-image" class="preview-image" width="300" height="300">
+
+
+
+
+  <!-- <label class="sign-in-input-text">
     Username
-    <input type="text" class="cs-input" name="user[username]" id='input-user-username' value="<%= user.escape('username') %>">
   </label>
+    <input type="text" class="cs-input" name="user[username]" id='input-user-username' value="<%= user.escape('username') %>"> -->
 
-  <br>
 
-  <label>
+
+  <label class="sign-in-input-text">
     Display Name
+  </label>
     <input type="text" class="cs-input" name="user[display_name]" id='input-user-display-name' value="<%= user.escape('display_name') %>" placeholder="This is how you will be identified.">
-  </label>
 
-  <br>
+  <div class="floats group">
+    <div class="floated-input">
+      <label class="sign-in-input-text">
+        First Name
+      </label>
+        <input type="text" class="cs-input small" name="user[fname]" id='input-user-fname' value="<%= user.escape('fname') %>">
+    </div>
 
-  <label>
-    First Name
-    <input type="text" class="cs-input small" name="user[fname]" id='input-user-fname' value="<%= user.escape('fname') %>">
-  </label>
+    <div class="floated-input last">
+      <label class="sign-in-input-text">
+        Last Name
+      </label>
+        <input type="text" class="cs-input small" name="user[lname]" id='input-user-lname' value="<%= user.escape('lname') %>">
+    </div>
+  </div>
 
-  <label>
-    Last Name
-    <input type="text" class="cs-input small" name="user[lname]" id='input-user-lname' value="<%= user.escape('lname') %>">
-  </label>
-
-  <br>
-
-  <label>
+  <label class="sign-in-input-text after-floated">
     Location
-    <input type="text" class="cs-input" name="user[location]" id='input-user-location' value="<%= user.escape('location') %>">
   </label>
+    <input type="text" class="cs-input" name="user[location]" id='input-user-location' value="<%= user.escape('location') %>">
 
-  <br>
 
-  <a href="#">Cancel</a>
-  <button class="save">Save</button>
+  <div class="form-buttons">
+    <a href="#" class="cancel-link">Cancel</a>
+    <button class="save">Save</button>
+  </div>
 
 </form>

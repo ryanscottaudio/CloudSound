@@ -20,26 +20,29 @@
 </div>
 
 <form class="sign-in group">
+
+  <h3 class="errors error-message"></h3>
+
   <label class="sign-in-input-text" for="email">What's your email address?</label><br>
   <input class="cs-input" maxlength="255" id="email" type="text" name="user[email]" value="<%= user.escape('email') %>"> <br>
-  <div class="error"></div>
+  <h3 class="errors-email error-message"></h3>
 
   <div class="floated-input">
     <label class="sign-in-input-text" for="password">Choose a password</label><br>
     <input class="cs-input small" id="password" type="password" name="user[password]" value=""> <br>
-    <div class="error"></div>
+    <h3 class="errors-password error-message"></h3>
   </div>
 
   <div class="floated-input last">
     <label class="sign-in-input-text" for="password_confirmation">Re-type password</label><br>
     <input class="cs-input small" id="password_confirmation" type="password" name="user[password_confirmation]" value=""> <br>
-    <div class="error"></div>
+    <h3 class="errors-password-confirm error-message"></h3>
   </div>
 
   <input id="terms_agree" type="checkbox" name="user[agree]">
   <label class="sign-in-checkbox-text" for="terms_agree">I agree to the <a class='form-link' href="#">Terms of Use</a> and <a class='form-link' href="#">Privacy Policy</a>
-  <div class="error"></div>
   </label>
+  <h3 class="errors-checkbox error-message"></h3>
 
   <div class="form-buttons">
     <a href="#" class="cancel-link">Cancel</a>

@@ -1,0 +1,125 @@
+div.comment-area {
+
+  form.comment {
+    margin-top: 0;
+  }
+
+  li.comment {
+    margin: 20px 0;
+    display: block;
+  }
+
+  li.comment > * {
+    float: left;
+  }
+
+  div.actual-comment {
+
+    div.comment-author {
+      color: #ccc;
+      font-size: 11px;
+      padding-bottom: 2px;
+    }
+
+    div.comment-author a {
+      font-size: 12px;
+      color: #999;
+    }
+
+    div.comment-author a:hover {
+      color: #333;
+    }
+
+    div.comment-content {
+      font-size: 14px;
+    }
+
+  }
+
+  img.comment-image {
+    margin-right: 20px;
+  }
+
+  div.number-of-comments {
+    color: #999;
+    font-size: 14px;
+  }
+
+  div.barrier {
+    height: 1px;
+    background: rgb(229, 229, 229);
+    margin-top: 20px;
+    position: relative;
+    width: 100%;
+  }
+
+
+  div.author-info-area {
+    margin-right: 40px;
+  }
+
+  div.comments-index {
+    width: calc(100% - 160px);
+  }
+
+  div.author-name {
+    margin-top: 20px;
+  }
+
+  div.author-name a {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  ul.author-info li {
+    float: left;
+    position: relative;
+    width: auto;
+  }
+
+  ul.author-info li {
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    font-family: "Lucida Grande";
+    color: #999;
+    display: block;
+    font-size: 10px;
+    line-height: 12px;
+    margin: 6px 3px;
+  }
+
+  ul.author-info {
+    li.followers-image {
+      background-image: image-url('followers.svg');
+      width: 12px;
+      height: 12px;
+    }
+
+    li.tracks-image {
+      background-image: image-url('tracks.svg');
+      width: 12px;
+      height: 12px;
+    }
+
+  }
+
+  a.delete-comment {
+    border: 1px solid #e5e5e5;
+    background: white;
+    position: relative;
+    background-size: 16px 16px;
+    background-image: image-url('delete.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 32px;
+    height: 26px;
+    margin: 10px 0 0 10px;
+  }
+
+  a.delete-comment:hover {
+    border-color: #ccc;
+  }
+
+}

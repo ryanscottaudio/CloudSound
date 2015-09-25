@@ -19,7 +19,7 @@
    src: font-url('Interstate-Light.otf') format('truetype');
  }
 
- html, body, h1, h2, h3, h4, h5, a, li, ul, input, button, label, div, span {
+ html, body, h1, h2, h3, h4, h5, a, li, ul, input, button, label, div, span, form {
    margin: 0;
    padding: 0;
    border: 0;
@@ -63,6 +63,20 @@
    text-align: center;
    vertical-align: baseline;
    box-sizing: border-box;
+ }
+
+ html {
+   height: 100%;
+ }
+
+ body {
+   background: #f2f2f2;
+   height: 100%;
+ }
+
+ .sessionTab, .userTab {
+   background: white;
+   height: 100%;
  }
 
  a.form-link {
@@ -230,10 +244,11 @@
  }
 
  form.sign-in div.form-buttons {
-   position: absolute;
+   position: relative;
    margin-top: 20px;
    padding-top: 4px;
-   right: 0;
+   left: 100%;
+   transform: translateX(-50%);
  }
 
  div.author-info-area {
@@ -242,4 +257,17 @@
 
  div.comments-index {
    float: left;
+ }
+
+ a.fb {
+   background: #39579a;
+   color: white;
+   padding: 5px;
+   border-radius: 4px;
+   position: relative;
+   display: inline-block;
+   left: 50%;
+   transform: translateX(-50%);
+   font-size: 16px;
+   margin-top: 30px;
  }

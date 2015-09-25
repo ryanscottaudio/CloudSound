@@ -1,4 +1,11 @@
-<div class="number-of-comments"><%= commentCount %> comments</div>
+<% if (commentCount === 1) { %>
+  <div class="number-of-comments"><%= commentCount %> comment</div>
+<% } else { %>
+  <div class="number-of-comments"><%= commentCount %> comments</div>
+<% } %>
+
+<div class="barrier">
+</div>
 
 <ul>
 

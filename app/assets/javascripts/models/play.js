@@ -12,11 +12,11 @@ CloudSound.Models.Play = Backbone.Model.extend({
 
   parse: function(response) {
     if (response.player) {
-      this.player().set(response.player);
+      this.player().set(response.player, {parse: true});
       delete response.player;
     };
     if (response.track) {
-      this.track().set(response.track);
+      this.track().set(response.track, {parse: true});
       delete response.track;
     };
     return response;
