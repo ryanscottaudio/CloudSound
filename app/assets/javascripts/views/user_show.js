@@ -49,7 +49,8 @@ CloudSound.Views.UserShow = Backbone.CompositeView.extend({
           this.follow = follow;
           this.model.followers().add(follow);
           this.$('button.follow-button').toggleClass('followed');
-          this.$('li.follows').html('Followers: ' + this.model.followers().length)
+          this.$('li.follows').html('Followers: ' + this.model.followers().length);
+          CloudSound.currentUser.fetch();
         }.bind(this),
       });
     } else {
@@ -58,6 +59,7 @@ CloudSound.Views.UserShow = Backbone.CompositeView.extend({
           this.follow = undefined;
           this.$('button.follow-button').toggleClass('followed');
           this.$('li.follows').html('Followers: ' + this.model.followers().length)
+          CloudSound.currentUser.fetch();
         }.bind(this),
       });
     }

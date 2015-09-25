@@ -9,6 +9,8 @@ CloudSound.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "feedShow",
 
+    "explore": "exploreShow",
+
     "_=_": "preventLittleMan",
 
     "tracks/new": "trackNew",
@@ -38,6 +40,14 @@ CloudSound.Routers.Router = Backbone.Router.extend({
       this._swapview(exploreView);
       this.tracks.fetch();
     }
+  },
+
+  exploreShow: function() {
+    var exploreView = new CloudSound.Views.ExploreShow({
+      collection: this.tracks,
+    });
+    this._swapview(exploreView);
+    this.tracks.fetch();
   },
 
   userNew: function() {
