@@ -96,7 +96,7 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     play.save(playAttrs, {
       success: function() {
         this.model.set({plays: this.model.get('plays') + 1});
-        this.$('li.plays').html('Plays: ' + this.model.get('plays'));
+        this.$('li.plays').html(this.model.get('plays'));
         this.wave.playability = false;
       }.bind(this),
     });
@@ -130,7 +130,7 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
           this.like = like;
           this.model.likes().add(like);
           this.$('button.like-button').toggleClass('liked');
-          this.$('li.likes').html('Likes: ' + this.model.likes().length)
+          this.$('li.likes').html(this.model.likes().length)
         }.bind(this),
       });
     } else {
@@ -138,7 +138,7 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
         success: function() {
           this.like = undefined;
           this.$('button.like-button').toggleClass('liked');
-          this.$('li.likes').html('Likes: ' + this.model.likes().length)
+          this.$('li.likes').html(this.model.likes().length)
         }.bind(this),
       });
     }

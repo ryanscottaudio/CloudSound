@@ -1,6 +1,6 @@
 CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
 
-  tagName: 'form',
+  tagName: 'div',
   className: 'trackForm',
 
   template: JST['tracks/form'],
@@ -11,8 +11,7 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
 
   events: {
     "change #input-post-image": "pictureChange",
-    "change #input-post-audio": "audioChange",
-    "click button.save": "submit",
+    "click button.save": "checkSubmit",
   },
 
   render: function() {
@@ -47,38 +46,28 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
     this.$("#preview-post-image").attr("src", newPic)
   },
 
-  audioChange: function(e) {
-    var audio = e.currentTarget.files[0];
-    var reader = new FileReader();
+  checkSubmit: function(e) {
+    e.preventDefault();
 
-    reader.onloadend = function(){
-      this._updateAudioPreview();
-    }.bind(this);
-
-    if (audio) {
-      reader.readAsDataURL(audio);
-      this.$("#preview-post-audio").html("Uploading...")
-    } else {
-      this.$("#preview-post-audio").html("");
+    if (!this.$('button.save').hasClass('uploading')) {
+      this.submit();
     }
   },
 
-  _updateAudioPreview: function() {
-    this.$("#preview-post-audio").html("Uploaded!")
-  },
-
-  submit: function(e) {
-    e.preventDefault();
+  submit: function() {
 
     that = this;
 
-    var attrs = this.$el.serializeJSON();
+    this.$('button.save').addClass('uploading');
+    this.$('button.save').html('Uploading...');
+    var attrs = this.$('form.trackForm').serializeJSON();
     var formData = new FormData();
     for (var key in attrs.track) {
       formData.append("track[" + key + "]", attrs.track[key]);
     }
     formData.append("track[audio]", this.$('#input-post-audio')[0].files[0]);
     formData.append("track[image]", this.$('#input-post-image')[0].files[0]);
+    Object.freeze(this.$el);
     this.model.saveFormData(formData, {
       success: function() {
         that.collection.add(that.model);
@@ -86,6 +75,8 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
       },
       error: function(model, response) {
         debugger;
+        that.$('button.save').removeClass('uploading');
+        that.$('button.save').html('Save');
       },
     });
 

@@ -1,0 +1,28 @@
+button.follow-button {
+  border: 1px solid #e5e5e5;
+  background: white;
+  position: relative;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: auto;
+  height: 26px;
+  color: black;
+}
+
+button.follow-button:after {
+  content: "Follow";
+}
+
+button.follow-button:hover {
+  border-color: #ccc;
+}
+
+button.follow-button.followed {
+  border-color: #ff5300;
+  color: #ff5300;
+}
+
+button.follow-button.followed:after {
+  content: "Following";
+}

@@ -15,7 +15,6 @@ CloudSound.Models.Comment = Backbone.Model.extend({
       this.author().set(response.author);
       delete response.author;
     };
-    return response;
     if (response.track) {
       this.track().set(response.track);
       delete response.track;

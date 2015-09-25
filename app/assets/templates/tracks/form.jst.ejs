@@ -1,60 +1,64 @@
 <div class="header"></div>
 
-<label>
-  Audio
-  <input type="file" name="track[audio]" id='input-post-audio'>
-</label>
+<form class="trackForm">
 
-<br>
+  <label>
+    Audio
+    <input type="file" name="track[audio]" id='input-post-audio'>
+  </label>
 
-<div id="preview-post-audio"></div>
+  <br>
 
-<br>
+  <div id="preview-post-audio"></div>
 
-<label>
-  Picture
-  <input type="file" name="track[image]" id='input-post-image'>
-</label>
+  <br>
 
-<br>
+  <label>
+    Picture
+    <input type="file" name="track[image]" id='input-post-image'>
+  </label>
 
-<img src="" id="preview-post-image" width="300" height="300">
+  <br>
 
-<br>
+  <img src="" id="preview-post-image" width="300" height="300">
 
-<label>
-  Title
-  <input type="text" class="cs-input" name="track[title]" id='input-post-title' value="<%= track.get('title') %>">
-</label>
+  <br>
 
-<br>
+  <label>
+    Title
+    <input type="text" class="cs-input" name="track[title]" id='input-post-title' value="<%= track.get('title') %>">
+  </label>
 
-<label>
-  URL
-  <input type="text" class="cs-input" name="track[url]" id='input-post-url' value="<%= track.get('url') %>">
-</label>
+  <br>
 
-<br>
+  <label>
+    URL
+    <input type="text" class="cs-input" name="track[url]" id='input-post-url' value="<%= track.get('url') %>">
+  </label>
 
-<label>
-  Description
-  <textarea name="track[description]" id='input-post-description'>
-    <%= track.get('url') %>
-  </textarea>
-</label>
+  <br>
 
-<br>
+  <label>
+    Description
+    <textarea name="track[description]" id='input-post-description'>
+      <%= track.get('url') %>
+    </textarea>
+  </label>
 
-<label>
-  Private?
-  <input id='input-post-private' type="checkbox" name="track[private]"
-    <% if (track.get('private')) { %>
-      <%= "checked" %>
-    <% } %>
-  >
-</label>
+  <br>
 
-<br>
+  <!-- <label>
+    Private?
+    <input id='input-post-private' type="checkbox" name="track[private]"
+      <% if (track.get('private')) { %>
+        <%= "checked" %>
+      <% } %>
+    >
+  </label>
 
-<a href="#">Cancel</a>
-<button class="save">Save</button>
+  <br> -->
+
+  <a href="#">Cancel</a>
+  <button class="save">Save</button>
+
+</form>

@@ -19,7 +19,7 @@
    src: font-url('Interstate-Light.otf') format('truetype');
  }
 
- html, body, h1, h2, h3, h4, h5, a, li, ul, input, button, label {
+ html, body, h1, h2, h3, h4, h5, a, li, ul, input, button, label, div, span {
    margin: 0;
    padding: 0;
    border: 0;
@@ -37,6 +37,7 @@
    color: #333333;
 
    list-style-type: none;
+   box-sizing: border-box;
  }
 
  .group:after {

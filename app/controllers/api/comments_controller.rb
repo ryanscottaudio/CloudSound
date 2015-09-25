@@ -1,8 +1,10 @@
 class Api::CommentsController < ApplicationController
   def create
-    @comment = current_user.comments.new(comment_params)
-    @comment.save
-    render :show
+    if logged_in?
+      @comment = current_user.comments.new(comment_params)
+      @comment.save
+      render :show
+    end
   end
 
   # def show
@@ -17,8 +19,10 @@ class Api::CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy
-    render :show
+    if logged_in? && current_user.id == @comment.commenter_id
+      @comment.destroy
+      render :show
+    end
   end
 
   private

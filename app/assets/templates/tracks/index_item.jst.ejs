@@ -10,7 +10,7 @@
   <% } %>
 
   <div class="player">
-    <div class="info-and-button group">
+    <div class="info-and-buttons group">
       <button class="play-pause loading">
         <div class="loading-animation">
           <span class="one"></span><span class="two"></span><span class="three"></span>
@@ -41,13 +41,25 @@
 
 </div>
 
-<div class="info-and-buttons">
+<div class="info-and-buttons group">
 
-  <button class="like-button"></button>
+  <% if (CloudSound.currentUser.isSignedIn()) { %>
+    <button class="like-button"></button>
+  <% } %>
 
-  <ul class="track-info">
-    <li class="plays">Plays: <%= track.get('plays') %></li>
-    <li class="likes">Likes: <%= track.likes().length %></li>
+  <ul class="track-info group">
+    <li class="plays">
+      <div class="plays"></div>
+      <span class="plays"><%= track.get('plays') %></span>
+    </li>
+    <li class="likes">
+      <div class="likes"></div>
+      <span class="likes"><%= track.get('likes').length %></span>
+    </li>
+    <li class="comments">
+      <div class="comments"></div>
+      <span class="comments"><%= track.get('comments').length %></span>
+    </li>
   </ul>
 
 </div>

@@ -27,10 +27,9 @@ CloudSound.Routers.Router = Backbone.Router.extend({
 
   feedShow: function() {
     var feedView = new CloudSound.Views.FeedShow({
-      collection: this.tracks,
+      model: CloudSound.currentUser,
     });
     this._swapview(feedView);
-    this.tracks.fetch();
   },
 
   userNew: function() {
@@ -53,6 +52,7 @@ CloudSound.Routers.Router = Backbone.Router.extend({
       return;
     } else if (CloudSound.currentUser.id !== id) {
       Backbone.history.navigate("users/" + CloudSound.currentUser.id + "/edit", {trigger: true});
+      id = CloudSound.currentUser.id;
     }
 
     var model = this.collection.getOrFetch(id);

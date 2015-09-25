@@ -1,6 +1,5 @@
 class Track < ActiveRecord::Base
 
-
   has_attached_file :audio, s3_protocol: ""
   validates_attachment_presence :audio
   validates_attachment_content_type :audio, content_type: /\Aaudio\/.*\Z/

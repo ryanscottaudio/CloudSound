@@ -1,10 +1,15 @@
 class Api::TracksController < ApplicationController
+
   def create
-    @track = current_user.tracks.new(track_params)
-    if @track.save
-      render :show
+    if logged_in?
+      @track = current_user.tracks.new(track_params)
+      if @track.save
+        render :show
+      else
+        render json: @track.errors.full_messages, status: :unprocessable_entity
+      end
     else
-      render json: @track.errors.full_messages, status: :unprocessable_entity
+      redirect_to root_url
     end
   end
 
@@ -15,7 +20,11 @@ class Api::TracksController < ApplicationController
 
   def destroy
     @track = Track.find(params[:id])
-    @track.destroy
+    if logged_in? && current_user.id == @track.author_id
+      @track.destroy
+    else
+      redirect_to root_url
+    end
   end
 
   def index
@@ -27,5 +36,5 @@ class Api::TracksController < ApplicationController
   def track_params
     params.require(:track).permit(:title, :url, :description, :private, :audio, :image)
   end
-  
+
 end

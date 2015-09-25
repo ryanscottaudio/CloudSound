@@ -15,7 +15,6 @@ CloudSound.Models.Play = Backbone.Model.extend({
       this.player().set(response.player);
       delete response.player;
     };
-    return response;
     if (response.track) {
       this.track().set(response.track);
       delete response.track;

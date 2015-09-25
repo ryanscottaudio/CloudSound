@@ -27,10 +27,14 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(update_params)
-      render :show
+    if logged_in? && current_user.id = @user.id
+      if @user.update(update_params)
+        render :show
+      else
+        render json: @user.errors.full_messages, status: :unprocessable_entity
+      end
     else
-      render json: @user.errors.full_messages, status: :unprocessable_entity
+      redirect_to root_url
     end
   end
 

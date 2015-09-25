@@ -15,7 +15,6 @@ CloudSound.Models.Like = Backbone.Model.extend({
       this.liker().set(response.liker);
       delete response.liker;
     };
-    return response;
     if (response.track) {
       this.track().set(response.track);
       delete response.track;

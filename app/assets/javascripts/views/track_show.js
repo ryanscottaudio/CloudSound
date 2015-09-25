@@ -103,7 +103,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
     play.save(playAttrs, {
       success: function() {
         this.model.set({plays: this.model.get('plays') + 1});
-        this.$('li.plays').html('Plays: ' + this.model.get('plays'));
+        this.$('li.plays').html(this.model.get('plays'));
         this.wave.playability = false;
       }.bind(this),
     });
@@ -122,7 +122,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
       track_id: this.model.id,
       liker_id: CloudSound.currentUser.id,
     };
-    this.like = this.model.likes().where(this.likeAttrs)[0]
+    this.like = this.model.likes().where(this.likeAttrs)[0];
     if (typeof this.like !== 'undefined') {
       this.$('button.like-button').toggleClass('liked');
     }
@@ -137,7 +137,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
           this.like = like;
           this.model.likes().add(like);
           this.$('button.like-button').toggleClass('liked');
-          this.$('li.likes').html('Likes: ' + this.model.likes().length)
+          this.$('li.likes').html(this.model.likes().length)
         }.bind(this),
       });
     } else {
@@ -145,7 +145,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
         success: function() {
           this.like = undefined;
           this.$('button.like-button').toggleClass('liked');
-          this.$('li.likes').html('Likes: ' + this.model.likes().length)
+          this.$('li.likes').html(this.model.likes().length)
         }.bind(this),
       });
     }

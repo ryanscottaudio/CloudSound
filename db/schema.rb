@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923204326) do
+ActiveRecord::Schema.define(version: 20150924162731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,20 @@ ActiveRecord::Schema.define(version: 20150923204326) do
     t.datetime "updated_at",   null: false
   end
 
+  add_index "comments", ["commenter_id"], name: "index_comments_on_commenter_id", using: :btree
+  add_index "comments", ["track_id"], name: "index_comments_on_track_id", using: :btree
+
+  create_table "follows", force: :cascade do |t|
+    t.integer  "follower_id", null: false
+    t.integer  "followee_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "follows", ["followee_id"], name: "index_follows_on_followee_id", using: :btree
+  add_index "follows", ["follower_id", "followee_id"], name: "index_follows_on_follower_id_and_followee_id", unique: true, using: :btree
+  add_index "follows", ["follower_id"], name: "index_follows_on_follower_id", using: :btree
+
   create_table "likes", force: :cascade do |t|
     t.integer  "track_id"
     t.integer  "liker_id"
@@ -32,12 +46,19 @@ ActiveRecord::Schema.define(version: 20150923204326) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "likes", ["liker_id", "track_id"], name: "index_likes_on_liker_id_and_track_id", unique: true, using: :btree
+  add_index "likes", ["liker_id"], name: "index_likes_on_liker_id", using: :btree
+  add_index "likes", ["track_id"], name: "index_likes_on_track_id", using: :btree
+
   create_table "plays", force: :cascade do |t|
     t.integer  "track_id",   null: false
-    t.integer  "player_id",  null: false
+    t.integer  "player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "plays", ["player_id"], name: "index_plays_on_player_id", using: :btree
+  add_index "plays", ["track_id"], name: "index_plays_on_track_id", using: :btree
 
   create_table "tracks", force: :cascade do |t|
     t.integer  "author_id",                          null: false

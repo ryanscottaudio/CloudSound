@@ -1,6 +1,6 @@
 CloudSound.Views.UserEdit = Backbone.CompositeView.extend({
 
-  tagName: 'form',
+  tagName: 'div',
   className: 'userEdit',
 
   template: JST['users/edit'],
@@ -51,7 +51,7 @@ CloudSound.Views.UserEdit = Backbone.CompositeView.extend({
 
     that = this;
 
-    var attrs = this.$el.serializeJSON();
+    var attrs = this.$('form.userEdit').serializeJSON();
     var formData = new FormData();
     for (var key in attrs.user) {
       formData.append("user[" + key + "]", attrs.user[key]);

@@ -49,7 +49,9 @@
 
     <div class="info-and-buttons">
 
-      <button class="like-button"></button>
+      <% if (CloudSound.currentUser.isSignedIn()) { %>
+        <button class="like-button"></button>
+      <% } %>
 
       <ul class="track-info">
         <li class="plays">Plays: <%= track.get('plays') %></li>
@@ -75,8 +77,9 @@
       <br>
 
       <ul class="author-info">
-        <!-- <li>Followers: <%= track.author.followers %></li> -->
+        <li>Followers: <%= track.author.followers %></li>
         <li>Tracks: <%= author.get('tracks') %></li>
+        <li>Followers: <%= author.get('followers') %></li>
       </ul>
 
     </div>

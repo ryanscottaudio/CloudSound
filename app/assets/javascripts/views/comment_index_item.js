@@ -8,7 +8,7 @@ CloudSound.Views.CommentIndexItem = Backbone.View.extend({
   events: {
     "mouseenter": "showButtons",
     "mouseleave": "hideButtons",
-    "click": "deleteComment",
+    "click .delete-comment": "deleteComment",
   },
 
   initialize: function() {

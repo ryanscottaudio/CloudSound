@@ -38,6 +38,22 @@ class User < ActiveRecord::Base
     through: :comments,
     source: :track
 
+  has_many :followers,
+    class_name: "Follow",
+    foreign_key: :followee_id
+
+  has_many :followees,
+    class_name: "Follow",
+    foreign_key: :follower_id
+
+  has_many :user_followers,
+    through: :followers,
+    source: :follower
+
+  has_many :user_followees,
+    through: :followees,
+    source: :followee
+
   after_initialize :ensure_session_token
 
   attr_reader :password

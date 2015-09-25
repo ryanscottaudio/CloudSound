@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :likes, only: [:create, :destroy]
       resources :comments, only: [:create, :update, :destroy]
     end
+    resources :follows, only: [:create, :destroy]
   end
 
   get "auth/:provider/callback", to: "api/sessions#omniauth", defaults: {format: :json}
