@@ -36,6 +36,9 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
   stopAll: function() {
     this.eachSubview(function (subview) {
       if (subview.wave) {
+        if (subview.wave.loading) {
+          subview.stopLoad();
+        }
         subview.wave.pause();
         this.$('div#audio-wave').removeClass('active');
         subview.eachSubview(function (subview) {subview.remove()});

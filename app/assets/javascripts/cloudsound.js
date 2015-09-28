@@ -90,6 +90,7 @@ function renderWave(options) {
 
   wave.on("ready", function() {
     wave.loaded = true;
+    wave.loading = false;
     wave.playPause();
     this.$('div#audio-wave').toggleClass('active');
     this.$('button.play-pause').removeClass('loading');

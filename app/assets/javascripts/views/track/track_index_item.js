@@ -23,7 +23,6 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     this.setLiked();
     renderWave.call(this, {height: 60, color: '#666666'});
     // this.addCommentsIndex();
-    console.log(this.collection);
     return this;
   },
 
@@ -61,7 +60,8 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
   },
 
   playPause: function() {
-    if (this.$('button.play-pause').hasClass('loading')) {
+    if (this.wave.loading) {
+      this.stopLoad();
       return;
     }
     if (!this.wave.loaded) {
@@ -69,6 +69,7 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
       this.$('button.play-pause').removeClass('paused');
       this.$('button.play-pause').addClass('loading')
       this.setPlaying();
+      this.wave.loading = true;
       return;
     }
     if (this.wave.playability === true) {
@@ -79,6 +80,10 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     this.$('div#audio-wave').toggleClass('active');
     this.$('button.play-pause').toggleClass('playing');
     this.$('button.play-pause').toggleClass('paused');
+  },
+
+  stopLoad: function() {
+    this.render();
   },
 
   addPlay: function() {
