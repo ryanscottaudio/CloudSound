@@ -11,6 +11,8 @@ gem 'figaro'
 
 gem 'omniauth-facebook'
 
+gem 'ruby-audio'
+
 gem 'ruby-audio-heroku'
 
 gem 'json-waveform'
