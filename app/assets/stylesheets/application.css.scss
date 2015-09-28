@@ -159,6 +159,9 @@
    position: relative;
  }
 
+ .sessionTab, .userTab {
+   height: 100vh;
+ }
 
  input.cs-input {
    background-color: #fff;
@@ -247,8 +250,7 @@
    position: relative;
    margin-top: 20px;
    padding-top: 4px;
-   left: 100%;
-   transform: translateX(-50%);
+   float: right;
  }
 
  div.author-info-area {

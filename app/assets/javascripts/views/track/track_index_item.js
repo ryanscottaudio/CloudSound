@@ -7,6 +7,7 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
 
   events: {
     "click button.play-pause": "playPause",
+    "click div#audio-wave": "initialPlay",
     "click button.like-button": "likeUnlike",
   },
 
@@ -53,7 +54,7 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     if (this.parentView.playingId !== this.model.id) {
       this.parentView.stopAll();
       this.parentView.playingId = this.model.id;
-      if (CloudSound.currentUser.isSignedIn()) {
+      if (CloudSound.currentUser.isSignedIn() && this.wave.loaded) {
         this.addCommentForm();
       }
     }
@@ -61,7 +62,6 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
 
   playPause: function() {
     if (this.wave.loading) {
-      this.stopLoad();
       return;
     }
     if (!this.wave.loaded) {
@@ -70,6 +70,11 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
       this.$('button.play-pause').addClass('loading')
       this.setPlaying();
       this.wave.loading = true;
+      this.wave.on("ready", function() {
+        if (CloudSound.currentUser.isSignedIn()) {
+          this.addCommentForm();
+        }
+      }.bind(this));
       return;
     }
     if (this.wave.playability === true) {
@@ -82,7 +87,28 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     this.$('button.play-pause').toggleClass('paused');
   },
 
+  initialPlay: function() {
+    if (this.wave.loading) {
+      return;
+    }
+    if (!this.wave.loaded) {
+      this.wave.xhr = this.wave.load(this.model.get('audio_url')).xhr;
+      this.$('button.play-pause').removeClass('paused');
+      this.$('button.play-pause').addClass('loading')
+      this.setPlaying();
+      this.wave.loading = true;
+      this.wave.on("ready", function() {
+        if (CloudSound.currentUser.isSignedIn()) {
+          this.addCommentForm();
+        }
+      }.bind(this));
+      return;
+    }
+  },
+
   stopLoad: function() {
+    this.wave.loading = false;
+    this.wave.loaded = false;
     this.render();
   },
 

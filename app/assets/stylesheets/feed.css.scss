@@ -7,21 +7,22 @@
   text-align: left;
   display: inline-block;
   margin-bottom: 20px;
-  left: 180px;
-  position: relative;
 }
 
 .feed-content {
+  display: block;
   margin: auto;
   max-width: 1240px;
   background: white;
   padding: 30px;
 }
 
-.user-header {
+.info-header {
   position: relative;
   margin-bottom: 20px;
-  left: 180px;
+  position: relative;
+  max-width: 817px;
+  margin: auto;
 }
 
 .user-header h1 {
@@ -44,4 +45,31 @@
 
 .dropdown {
   z-index: 10;
+}
+
+p.description {
+  margin: 0;
+  display: inline-block;
+  font-size: 16px;
+}
+
+h2 {
+  margin: 0;
+  display: block;
+  font-size: 16px;
+}
+
+div.user-left {
+  position: relative;
+  float: left;
+  width: 75%;
+}
+
+img.user-profile-pic {
+  position: relative;
+  float: right;
+  display: block;
+  width: 25%;
+  height: 100%;
+
 }
