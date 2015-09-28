@@ -41,6 +41,10 @@ function addHeader() {
 };
 
 function renderWave(options) {
+  if (this.wave) {
+    this.wave.destroy();
+  }
+
   var wave = Object.create(WaveSurfer);
   this.wave = wave;
   this.wave.playability = false;
@@ -55,6 +59,7 @@ function renderWave(options) {
     normalize: true,
     fillParent: true,
     height: options.height,
+    loaded: false,
   });
 
   var progressDiv = this.$('#progress-bar');
@@ -76,18 +81,24 @@ function renderWave(options) {
   wave.on('destroy', hideProgress);
   wave.on('error', hideProgress);
 
-  wave.on("loading", function (percent, xhr) {
-    wave.xhr =  wave.xhr || xhr;
-  });
+  // wave.on("loading", function (percent, xhr) {
+  //   if (typeof wave.destroyMe !== "undefined") {
+  //     xhr.abort();
+  //     wave.destroy();
+  //   }
+  // });
 
   wave.on("ready", function() {
-    this.$('.loading-text').addClass('hidden');
+    wave.loaded = true;
+    wave.playPause();
+    this.$('div#audio-wave').toggleClass('active');
     this.$('button.play-pause').removeClass('loading');
-    this.$('button.play-pause').addClass('paused');
+    this.$('button.play-pause').toggleClass('playing');
     this.$('.track-times').removeClass('hidden');
     this.$('.cursor-time').html('0:00');
     this.$('.end-time').html(secondsToHms(wave.getDuration()));
-    this.wave.playability = true;
+    this.wave.playability = false;
+    this.addPlay();
     wave.on("audioprocess", function() {
       this.$('.cursor-time').html(secondsToHms(wave.getCurrentTime()));
     }.bind(this));
@@ -96,6 +107,4 @@ function renderWave(options) {
   wave.on("finish", function() {
     this.endTrack();
   }.bind(this));
-
-  wave.load(this.model.get('audio_url'));
 };

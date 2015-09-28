@@ -15,6 +15,7 @@ CloudSound.Views.UserEdit = Backbone.CompositeView.extend({
   },
 
   render: function() {
+    this.eachSubview(function (subview) {subview.remove()});
     this.$el.html(this.template({user: this.model}));
     addHeader.call(this);
 

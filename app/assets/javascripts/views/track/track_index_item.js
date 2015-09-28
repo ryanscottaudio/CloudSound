@@ -10,16 +10,20 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     "click button.like-button": "likeUnlike",
   },
 
-  initialize: function() {
+  initialize: function(options) {
+    this.parentView = options.parentView;
+    this.comments = options.comments;
     this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model.comments(), "add remove", this.renderCommentNumber);
   },
 
   render: function() {
+    this.eachSubview(function (subview) {subview.remove()});
     this.$el.html(this.template({track: this.model}));
     this.setLiked();
     renderWave.call(this, {height: 60, color: '#666666'});
-    this.addCommentForm();
     // this.addCommentsIndex();
+    console.log(this.collection);
     return this;
   },
 
@@ -29,9 +33,13 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
       model: new CloudSound.Models.Comment(),
       parent: that,
       track: that.model,
-      collection: that.collection,
+      collection: that.comments,
     });
     this.addSubview('div.comment-form-area', commentFormView)
+  },
+
+  removeCommentForm: function () {
+    this.removeSubview('div.comment-form-area', commentFormView)
   },
 
   // addCommentsIndex: function () {
@@ -42,10 +50,29 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
   //   this.addSubview('div.lower-comment-area', commentsIndexView);
   // },
 
+  setPlaying: function() {
+    if (this.parentView.playingId !== this.model.id) {
+      this.parentView.stopAll();
+      this.parentView.playingId = this.model.id;
+      this.addCommentForm();
+    }
+  },
+
   playPause: function() {
+    if (this.$('button.play-pause').hasClass('loading')) {
+      return;
+    }
+    if (!this.wave.loaded) {
+      this.wave.xhr = this.wave.load(this.model.get('audio_url')).xhr;
+      this.$('button.play-pause').removeClass('paused');
+      this.$('button.play-pause').addClass('loading')
+      this.setPlaying();
+      return;
+    }
     if (this.wave.playability === true) {
       this.addPlay();
     }
+    this.setPlaying();
     this.wave.playPause();
     this.$('div#audio-wave').toggleClass('active');
     this.$('button.play-pause').toggleClass('playing');
@@ -104,6 +131,10 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
         }.bind(this),
       });
     }
+  },
+
+  renderCommentNumber: function() {
+    this.$('li.comments-count').html(this.model.comments().length)
   },
 
 })

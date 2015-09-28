@@ -10,6 +10,7 @@ CloudSound.Views.FeedShow = Backbone.CompositeView.extend({
   },
 
   render: function() {
+    this.eachSubview(function (subview) {subview.remove()});
     this.$el.html(this.template());
     this.addTracksIndex();
     addHeader.call(this);

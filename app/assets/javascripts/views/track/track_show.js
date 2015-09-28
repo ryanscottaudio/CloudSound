@@ -10,14 +10,18 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
     "click button.like-button": "likeUnlike",
   },
 
-  initialize: function() {
+  initialize: function(options) {
+    this.comments = options.comments;
     this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model.comments(), "add remove", this.renderCommentNumber);
   },
 
   render: function() {
+    this.eachSubview(function (subview) {subview.remove()});
     this.$el.html(this.template({track: this.model}));
     this.setLiked();
     renderWave.call(this, {height: 100, color: '#FFFFFF'});
+    this.wave.xhr = this.wave.load(this.model.get('audio_url')).xhr;
     this.addCommentForm();
     this.addCommentsIndex();
     addHeader.call(this);
@@ -30,7 +34,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
       model: new CloudSound.Models.Comment(),
       parent: that,
       track: that.model,
-      collection: that.collection,
+      collection: that.comments,
     });
     this.addSubview('div.comment-form-area', commentFormView)
   },
@@ -38,7 +42,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
   addCommentsIndex: function () {
     that = this;
     var commentsIndexView = new CloudSound.Views.CommentIndex({
-      collection: that.collection,
+      collection: that.comments,
     });
     this.addSubview('div.lower-comment-area', commentsIndexView);
   },
@@ -105,6 +109,10 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
         }.bind(this),
       });
     }
+  },
+
+  renderCommentNumber: function() {
+    this.$('li.comments-count').html(this.model.comments().length)
   },
 
 })

@@ -14,6 +14,7 @@ CloudSound.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   render: function() {
+    this.eachSubview(function (subview) {subview.remove()});
     this.$el.html(this.template({user: this.model}));
     this.setFollowed();
     this.addTracksIndex();

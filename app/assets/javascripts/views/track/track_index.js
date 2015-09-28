@@ -6,22 +6,24 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
   template: JST['tracks/index'],
 
   initialize: function() {
+    this.playingId = -1;
     this.listenTo(this.collection, "remove", this.removeTrackView);
   },
 
   render: function() {
+    this.eachSubview(function (subview) {subview.remove()});
     this.$el.html(this.template());
     this.addTracks();
     return this;
   },
 
   addTracks: function () {
-    var shortCollection = new CloudSound.Collections.Tracks(this.collection.first(10));
-    shortCollection.each(function (track) {
+    this.collection.each(function (track) {
       track.author().set(track.get('author'))
       var trackView = new CloudSound.Views.TrackIndexItem({
         model: track,
-        collection: track.comments(),
+        comments: track.comments(),
+        parentView: this,
       });
       this.addSubview('ul.tracks-list', trackView);
     }.bind(this));
@@ -29,6 +31,20 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
 
   removeTrackView: function (track) {
     this.removeModelSubview('ul.tracks-list', track);
+  },
+
+  stopAll: function() {
+    this.eachSubview(function (subview) {
+      if (subview.wave) {
+        subview.wave.pause();
+        this.$('div#audio-wave').removeClass('active');
+        subview.eachSubview(function (subview) {subview.remove()});
+        if (subview.$('button.play-pause').hasClass('playing')) {
+          subview.$('button.play-pause').removeClass('playing');
+          subview.$('button.play-pause').addClass('paused');
+        }
+      }
+    });
   },
 
 })

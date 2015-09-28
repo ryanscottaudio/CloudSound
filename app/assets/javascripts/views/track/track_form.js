@@ -15,6 +15,7 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
   },
 
   render: function() {
+    this.eachSubview(function (subview) {subview.remove()});
     this.$el.html(this.template({track: this.model}));
     addHeader.call(this);
 

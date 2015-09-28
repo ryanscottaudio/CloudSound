@@ -62,23 +62,28 @@ Backbone.CompositeView = Backbone.View.extend({
 
   remove: function () {
     if (this.wave) {
-      // this.wave.xhr.abort();
+      if (this.wave.xhr) {
+        this.wave.xhr.abort();
+      }
       this.wave.destroy();
     }
     Backbone.View.prototype.remove.call(this);
     this.eachSubview(function (subview) {
       if (subview.wave) {
-        // subview.wave.xhr.abort();
+        if (subview.wave.xhr) {
+          subview.wave.xhr.abort();
+        }
         subview.wave.destroy();
       }
-
       subview.remove();
     });
   },
 
   removeSubview: function (selector, subview) {
     if (subview.wave) {
-      // subview.wave.xhr.abort();
+      if (subview.wave.xhr) {
+        subview.wave.xhr.abort();
+      }
       subview.wave.destroy();
     }
     subview.remove();

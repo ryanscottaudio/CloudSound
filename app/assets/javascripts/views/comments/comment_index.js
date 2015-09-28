@@ -11,6 +11,7 @@ CloudSound.Views.CommentIndex = Backbone.CompositeView.extend({
   },
 
   render: function() {
+    this.eachSubview(function (subview) {subview.remove()});
     this.$el.html(this.template({commentCount: this.collection.length}));
     this.addComments();
     return this;
