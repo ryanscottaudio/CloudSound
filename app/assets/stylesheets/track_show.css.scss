@@ -223,23 +223,6 @@ div#audio-wave:hover, div#audio-wave.active {
   opacity: 1;
 }
 
-div#audio-wave .loading-text {
-  position: absolute;
-  line-height: 0;
-  font-size: 25px;
-  font-weight: bold;
-  display: block;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 50%;
-  text-align: center;
-  color: white;
-}
-
-div#audio-wave.small .loading-text {
-  color:inherit;
-}
-
 div#audio-wave.small {
   float: left;
   width: 682px;
@@ -442,6 +425,5 @@ ul.track-info {
   height: 100%;
   opacity: 1;
   position: absolute;
-  transition: width 4s ease;
   transition: opacity .5s ease;
 }

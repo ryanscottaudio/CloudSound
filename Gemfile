@@ -11,6 +11,8 @@ gem 'figaro'
 
 gem 'omniauth-facebook'
 
+gem 'ruby-audio-heroku'
+
 gem 'json-waveform'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
