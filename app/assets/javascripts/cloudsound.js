@@ -62,24 +62,24 @@ function renderWave(options) {
     loaded: false,
   });
 
-  var progressDiv = this.$('#progress-bar');
-  var progressBar = this.$('.progress-bar');
-  progressDiv.css('display', 'block');
-  progressBar.css('background', options.color);
-
-  var showProgress = function (percent, xhr) {
-    progressBar.css('width', percent + '%');
-  };
-
-  var hideProgress = function () {
-    progressBar.css('opacity', '0');
-    setTimeout(function(){ progressDiv.css('display', 'none'); }, 500);
-  };
-
-  wave.on('loading', showProgress);
-  wave.on('ready', hideProgress);
-  wave.on('destroy', hideProgress);
-  wave.on('error', hideProgress);
+  // var progressDiv = this.$('#progress-bar');
+  // var progressBar = this.$('.progress-bar');
+  // progressDiv.css('display', 'block');
+  // progressBar.css('background', options.color);
+  //
+  // var showProgress = function (percent, xhr) {
+  //   progressBar.css('width', percent + '%');
+  // };
+  //
+  // var hideProgress = function () {
+  //   progressBar.css('opacity', '0');
+  //   setTimeout(function(){ progressDiv.css('display', 'none'); }, 500);
+  // };
+  //
+  // wave.on('loading', showProgress);
+  // wave.on('ready', hideProgress);
+  // wave.on('destroy', hideProgress);
+  // wave.on('error', hideProgress);
 
   // wave.on("loading", function (percent, xhr) {
   //   if (typeof wave.destroyMe !== "undefined") {
