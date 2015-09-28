@@ -22,7 +22,9 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
     this.setLiked();
     renderWave.call(this, {height: 100, color: '#FFFFFF'});
     this.wave.xhr = this.wave.load(this.model.get('audio_url')).xhr;
-    this.addCommentForm();
+    if (CloudSound.currentUser.isSignedIn()) {
+      this.addCommentForm();
+    }
     this.addCommentsIndex();
     addHeader.call(this);
     return this;

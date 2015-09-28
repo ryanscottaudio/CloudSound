@@ -54,7 +54,9 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     if (this.parentView.playingId !== this.model.id) {
       this.parentView.stopAll();
       this.parentView.playingId = this.model.id;
-      this.addCommentForm();
+      if (CloudSound.currentUser.isSignedIn()) {
+        this.addCommentForm();
+      }
     }
   },
 
