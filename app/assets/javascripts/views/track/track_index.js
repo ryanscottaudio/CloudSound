@@ -19,7 +19,6 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
 
   addTracks: function () {
     this.collection.each(function (track) {
-      track.author().set(track.get('author'))
       var trackView = new CloudSound.Views.TrackIndexItem({
         model: track,
         comments: track.comments(),

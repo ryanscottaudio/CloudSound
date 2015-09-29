@@ -125,3 +125,65 @@
   float: right;
   border-left: 1px solid #111;
 }
+
+.modal {
+  display: block;
+  position: absolute;
+  top: -46px;
+  width: 100%;
+  height: calc(100vh + 46px);
+  pointer-events: none;
+}
+
+.modal.on {
+  pointer-events: auto;
+}
+
+.modal-background {
+  position: absolute;
+  z-index: 10;
+  display: block;
+  opacity: 0;
+  background: #000;
+  width: 100%;
+  height: 100%;
+  transition: opacity .25s ease;
+}
+
+.modal.on .modal-background {
+  opacity: .75;
+}
+
+.modal-menu {
+  background: white;
+  z-index: 11;
+  position: absolute;
+  // transform: translateY(-50%);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 500px;
+  width: 100%;
+  max-height: 398px;
+  height: 100%;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  top: -100%;
+  transition: top .5s ease;
+}
+
+.modal.on .modal-menu {
+  top: calc(46px * 3);
+}
+
+.sessionTab, .userTab {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.sign-in-bar {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  background: #2a2a2a;
+}

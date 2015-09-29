@@ -1,6 +1,7 @@
 CloudSound.Views.SessionForm = Backbone.View.extend({
 
   initialize: function(options) {
+    this.parent = options.parent;
     this.callback = options.callback;
     this.listenTo(CloudSound.currentUser, "signIn", this.signInCallback);
   },
@@ -10,12 +11,28 @@ CloudSound.Views.SessionForm = Backbone.View.extend({
 
   events: {
     "submit form": "submit",
+    "click .sign-in-tab": "signInTab",
+    "click .create-account-tab": "createAccountTab",
+    "click .cancel-link": "back",
+  },
+
+  signInTab: function(e) {
+    this.parent.signIn(e);
+  },
+
+  createAccountTab: function(e) {
+    this.parent.createAccount(e);
+  },
+
+  back: function(e) {
+    this.parent.back(e);
   },
 
   template: JST['sessions/form'],
 
   render: function() {
     this.$el.html(this.template());
+    this.$('.cs-input#email').focus();
 
     return this;
   },
@@ -30,7 +47,7 @@ CloudSound.Views.SessionForm = Backbone.View.extend({
       success: function() {
         CloudSound.currentUser.fetch({
           success: function() {
-            Backbone.history.navigate('', {trigger: true});
+            Backbone.history.navigate('#', {trigger: true});
           },
         });
       },
@@ -38,6 +55,7 @@ CloudSound.Views.SessionForm = Backbone.View.extend({
         that.$('.errors').html("We couldn't sign you in; are you sure you had the right email and password?")
       },
     })
+    this.parent.enableScroll();
   },
 
   signInCallback: function(e) {

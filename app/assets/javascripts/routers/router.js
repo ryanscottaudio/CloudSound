@@ -16,11 +16,11 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     "tracks/new": "trackNew",
     "tracks/:id": "trackShow",
 
-    "users/new": "userNew",
+    // "users/new": "userNew",
     "users/:id": "userShow",
     "users/:id/edit": "userEdit",
 
-    "session/new": "signIn",
+    // "session/new": "signIn",
   },
 
   preventLittleMan: function() {
@@ -34,35 +34,32 @@ CloudSound.Routers.Router = Backbone.Router.extend({
       });
       this._swapview(feedView);
     } else {
-      var exploreView = new CloudSound.Views.ExploreShow({
-        collection: this.tracks,
-      });
-      this._swapview(exploreView);
-      this.tracks.fetch();
+      this.exploreShow();
     }
   },
 
   exploreShow: function() {
     var exploreView = new CloudSound.Views.ExploreShow({
       collection: this.tracks,
+      model: CloudSound.currentUser,
     });
     this._swapview(exploreView);
     this.tracks.fetch();
   },
 
-  userNew: function() {
-    if (!this._requireSignedOut()) {
-      return;
-    }
-
-    var model = new this.collection.model();
-    var formView = new CloudSound.Views.UserForm({
-      collection: this.collection,
-      model: model,
-    });
-
-    this._swapview(formView);
-  },
+  // userNew: function() {
+  //   if (!this._requireSignedOut()) {
+  //     return;
+  //   }
+  //
+  //   var model = new this.collection.model();
+  //   var formView = new CloudSound.Views.UserForm({
+  //     collection: this.collection,
+  //     model: model,
+  //   });
+  //
+  //   this._swapview(formView);
+  // },
 
   userEdit: function(id) {
     if (!CloudSound.currentUser.id) {
@@ -90,16 +87,16 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     this._swapview(userView);
   },
 
-  signIn: function(callback) {
-    if (!this._requireSignedOut(callback)) {
-      return;
-    }
-
-    var signInView = new CloudSound.Views.SessionForm({
-      callback: callback,
-    });
-    this._swapview(signInView);
-  },
+  // signIn: function(callback) {
+  //   if (!this._requireSignedOut(callback)) {
+  //     return;
+  //   }
+  //
+  //   var signInView = new CloudSound.Views.SessionForm({
+  //     callback: callback,
+  //   });
+  //   this._swapview(signInView);
+  // },
 
   trackNew: function() {
     var track = new CloudSound.Models.Track()

@@ -23,6 +23,7 @@ CloudSound.Views.FeedShow = Backbone.CompositeView.extend({
       collection: that.model.displayTracks(),
     });
     this.addSubview('div.tracks-index', tracksIndexView);
+    this.tracksIndex = tracksIndexView;
   },
 
 })

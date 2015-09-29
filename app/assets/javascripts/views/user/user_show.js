@@ -28,6 +28,7 @@ CloudSound.Views.UserShow = Backbone.CompositeView.extend({
       collection: that.model.tracks(),
     });
     this.addSubview('div.tracks-index', tracksIndexView);
+    this.tracksIndex = tracksIndexView;
   },
 
   setFollowed: function() {

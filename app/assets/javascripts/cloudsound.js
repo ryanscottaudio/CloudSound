@@ -36,7 +36,7 @@ function secondsToHms(d) {
 };
 
 function addHeader() {
-  var headerView = new CloudSound.Views.Header();
+  var headerView = new CloudSound.Views.Header({parent: this});
   this.addSubview('div.header', headerView);
 };
 
@@ -66,17 +66,17 @@ function renderWave(options) {
   var progressBar = this.$('.progress-bar');
   progressDiv.css('display', 'block');
   progressBar.css('background', options.color);
-
-  var showProgress = function (percent, xhr) {
-    progressBar.css('width', percent + '%');
-  };
-
+  //
+  // var showProgress = function (percent, xhr) {
+  //   progressBar.css('width', percent + '%');
+  // };
+  //
   var hideProgress = function () {
     progressBar.css('opacity', '0');
     setTimeout(function(){ progressDiv.css('display', 'none'); }, 500);
   };
-
-  wave.on('loading', showProgress);
+  //
+  // wave.on('loading', showProgress);
   wave.on('ready', hideProgress);
   wave.on('destroy', hideProgress);
   wave.on('error', hideProgress);

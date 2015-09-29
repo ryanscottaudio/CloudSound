@@ -82,7 +82,6 @@ CloudSound.Models.CurrentUser = CloudSound.Models.User.extend ({
       data: credentials,
       dataType: "json",
       success: function(data) {
-        console.log(data);
         model.set(data);
         options.success && options.success();
       },
@@ -110,10 +109,8 @@ CloudSound.Models.CurrentUser = CloudSound.Models.User.extend ({
   fireSessionEvent: function() {
     if (this.isSignedIn()) {
       this.trigger("signIn");
-      console.log("signed in", this);
     } else {
       this.trigger("signOut");
-      console.log("signed out", this);
     }
   },
 });

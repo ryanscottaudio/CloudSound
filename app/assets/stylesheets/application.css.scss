@@ -76,7 +76,6 @@
 
  .sessionTab, .userTab {
    background: white;
-   height: 100%;
  }
 
  a.form-link {
@@ -157,10 +156,6 @@
 
  div.sign-in-bar {
    position: relative;
- }
-
- .sessionTab, .userTab {
-   height: 100vh;
  }
 
  input.cs-input {

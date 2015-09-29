@@ -5,16 +5,33 @@ CloudSound.Views.UserForm = Backbone.View.extend({
 
   template: JST['users/form'],
 
-  initialize: function() {
+  initialize: function(options) {
+    this.parent = options.parent;
     this.listenTo(this.model, "sync", this.render);
   },
 
   events: {
     "submit form": "submit",
+    "click .sign-in-tab": "signInTab",
+    "click .create-account-tab": "createAccountTab",
+    "click .cancel-link": "back",
+  },
+
+  signInTab: function(e) {
+    this.parent.signIn(e);
+  },
+
+  createAccountTab: function(e) {
+    this.parent.createAccount(e);
+  },
+
+  back: function(e) {
+    this.parent.back(e);
   },
 
   render: function() {
     this.$el.html(this.template({user: this.model}));
+    this.$('.cs-input#email').focus();
 
     return this;
   },
@@ -42,7 +59,7 @@ CloudSound.Views.UserForm = Backbone.View.extend({
         that.$('.errors').html("That email address already has an account!")
       },
     });
-
+    this.parent.enableScroll();
   },
 
   doChecks: function() {

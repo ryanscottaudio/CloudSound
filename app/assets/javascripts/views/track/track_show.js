@@ -40,7 +40,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
       track: that.model,
       collection: that.comments,
     });
-    this.addSubview('div.comment-form-area', commentFormView)
+    this.addSubview('div.comment-form-area', commentFormView);
   },
 
   addCommentsIndex: function () {
