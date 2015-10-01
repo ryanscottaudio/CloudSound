@@ -89,6 +89,10 @@
   position: absolute;
   left: 50%;
   border: 0;
+  -ms-transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  -moz-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
 }
 
@@ -159,8 +163,11 @@
   background: white;
   z-index: 11;
   position: absolute;
-  // transform: translateY(-50%);
   left: 50%;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
   transform: translateX(-50%);
   max-width: 500px;
   width: 100%;
