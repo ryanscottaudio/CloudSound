@@ -3,7 +3,7 @@ CloudSound.Routers.Router = Backbone.Router.extend({
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
     this.collection = new CloudSound.Collections.Users();
-    this.tracks = new CloudSound.Collections.Tracks({});
+    this.tracks = new CloudSound.Collections.Tracks([], {});
   },
 
   routes: {

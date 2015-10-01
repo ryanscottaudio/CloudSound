@@ -7,6 +7,7 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.playingId = -1;
+    this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, "remove", this.removeTrackView);
   },
 
