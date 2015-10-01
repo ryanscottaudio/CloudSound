@@ -47,7 +47,7 @@ CloudSound.Views.SessionForm = Backbone.View.extend({
       success: function() {
         CloudSound.currentUser.fetch({
           success: function() {
-            Backbone.history.navigate('#', {trigger: true});
+            Backbone.history.navigate('_=_', {trigger: true});
           },
         });
       },
