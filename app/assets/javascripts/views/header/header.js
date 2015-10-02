@@ -10,6 +10,10 @@ CloudSound.Views.Header = Backbone.CompositeView.extend({
     "click .sign-in-tab-link": "signIn",
     "click .create-account": "createAccount",
     "click .modal-background": "back",
+    "click a.guest": "signInGuest",
+    "click .sign-in-tab": "signIn",
+    "click .create-account-tab": "createAccount",
+    "click .cancel-link": "back",
   },
 
   template: JST['header/show'],
@@ -86,6 +90,26 @@ CloudSound.Views.Header = Backbone.CompositeView.extend({
 
     this.$('.modal').removeClass('on');
     this.enableScroll();
+  },
+
+  signInGuest: function(e) {
+    e.preventDefault();
+    CloudSound.currentUser.signIn({
+      email: "guest@guest.com",
+      password: "password",
+      success: function() {
+        CloudSound.currentUser.fetch({
+          success: function() {
+            Backbone.history.navigate('_=_', {trigger: true});
+          },
+        });
+      },
+      error: function() {
+        that.$('.errors').html("We couldn't sign you in; are you sure you had the right email and password?")
+      },
+    })
+    this.enableScroll();
+
   },
 
 })

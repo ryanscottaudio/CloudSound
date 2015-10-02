@@ -1,34 +1,19 @@
 CloudSound.Views.SessionForm = Backbone.View.extend({
 
+  tagName: 'div',
+  className: 'sessionTab',
+
+  template: JST['sessions/form'],
+
   initialize: function(options) {
     this.parent = options.parent;
     this.callback = options.callback;
     this.listenTo(CloudSound.currentUser, "signIn", this.signInCallback);
   },
 
-  tagName: 'div',
-  className: 'sessionTab',
-
   events: {
     "submit form": "submit",
-    "click .sign-in-tab": "signInTab",
-    "click .create-account-tab": "createAccountTab",
-    "click .cancel-link": "back",
   },
-
-  signInTab: function(e) {
-    this.parent.signIn(e);
-  },
-
-  createAccountTab: function(e) {
-    this.parent.createAccount(e);
-  },
-
-  back: function(e) {
-    this.parent.back(e);
-  },
-
-  template: JST['sessions/form'],
 
   render: function() {
     this.$el.html(this.template());

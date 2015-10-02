@@ -12,21 +12,6 @@ CloudSound.Views.UserForm = Backbone.View.extend({
 
   events: {
     "submit form": "submit",
-    "click .sign-in-tab": "signInTab",
-    "click .create-account-tab": "createAccountTab",
-    "click .cancel-link": "back",
-  },
-
-  signInTab: function(e) {
-    this.parent.signIn(e);
-  },
-
-  createAccountTab: function(e) {
-    this.parent.createAccount(e);
-  },
-
-  back: function(e) {
-    this.parent.back(e);
   },
 
   render: function() {

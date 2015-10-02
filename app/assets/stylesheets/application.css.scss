@@ -260,12 +260,9 @@
    float: left;
  }
 
- a.fb {
-   background: #39579a;
-   color: white;
-   padding: 5px;
-   border-radius: 4px;
+ div.sign-in-buttons {
    position: relative;
+   margin-top: 30px;
    display: inline-block;
    left: 50%;
    -ms-transform: translateX(-50%);
@@ -273,6 +270,20 @@
    -moz-transform: translateX(-50%);
    -o-transform: translateX(-50%);
    transform: translateX(-50%);
+ }
+
+ a.fb, a.guest {
    font-size: 16px;
-   margin-top: 30px;
+   color: white;
+   padding: 5px;
+   border-radius: 4px;
+   display: inline-block;
+ }
+
+ a.fb {
+   background: #39579a;
+ }
+
+ a.guest {
+   background: green;
  }
