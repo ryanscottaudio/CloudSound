@@ -61,7 +61,9 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
       formData.append("track[" + key + "]", attrs.track[key]);
     }
     formData.append("track[audio]", this.$('#input-post-audio')[0].files[0]);
-    formData.append("track[image]", this.$('#input-post-image')[0].files[0]);
+    if (this.$('#input-post-image')[0].files[0]) {
+      formData.append("track[image]", this.$('#input-post-image')[0].files[0]);
+    }
     this.model.saveFormData(formData, {
       success: function(model) {
         Backbone.history.navigate('tracks/' + model.id, {trigger: true})
