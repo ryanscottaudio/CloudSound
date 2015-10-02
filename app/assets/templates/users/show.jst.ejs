@@ -8,13 +8,14 @@
       <h2><%= user.escape('fname') + " " + user.escape('lname') %></h2>
       <br>
       <h2><%= user.escape('location') %></h2>
+      <br>
+      <% if (CloudSound.currentUser.id) { %>
+        <button class="follow-button"></button>
+      <% } %>
     </div>
     <img class="user-profile-pic" src="<%= user.get('image_url') %>" width="340" height="340" />
   </div>
 
-  <% if (CloudSound.currentUser.id) { %>
-    <button class="follow-button"></button>
-  <% } %>
 
   <div class="tracks-index"></div>
 
