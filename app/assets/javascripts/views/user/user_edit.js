@@ -61,7 +61,11 @@ CloudSound.Views.UserEdit = Backbone.CompositeView.extend({
         Backbone.history.navigate('users/' + that.model.id, {trigger: true});
       },
       error: function(model, response) {
-        debugger;
+        if (response.responseJSON.indexOf('Image content type is invalid') != -1) {
+          that.$('.errors').html("That's not a valid image file. Please choose a different one.")
+        } else {
+          that.$('.errors').html("Something went wrong. Please try again.")
+        }
       },
     });
 
