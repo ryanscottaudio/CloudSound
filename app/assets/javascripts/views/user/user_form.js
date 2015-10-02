@@ -35,6 +35,7 @@ CloudSound.Views.UserForm = Backbone.View.extend({
       success: function() {
         CloudSound.currentUser.fetch({
           success: function() {
+            that.parent.enableScroll();
             Backbone.history.navigate('users/' + CloudSound.currentUser.id + '/edit', {trigger: true});
           },
         });
@@ -44,7 +45,6 @@ CloudSound.Views.UserForm = Backbone.View.extend({
         that.$('.errors').html("That email address already has an account!")
       },
     });
-    this.parent.enableScroll();
   },
 
   doChecks: function() {

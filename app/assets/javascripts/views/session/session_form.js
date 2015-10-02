@@ -32,6 +32,7 @@ CloudSound.Views.SessionForm = Backbone.View.extend({
       success: function() {
         CloudSound.currentUser.fetch({
           success: function() {
+            that.parent.enableScroll();
             Backbone.history.navigate('_=_', {trigger: true});
           },
         });
@@ -40,7 +41,6 @@ CloudSound.Views.SessionForm = Backbone.View.extend({
         that.$('.errors').html("We couldn't sign you in; are you sure you had the right email and password?")
       },
     })
-    this.parent.enableScroll();
   },
 
   signInCallback: function(e) {

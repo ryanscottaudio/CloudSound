@@ -50,8 +50,11 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
   },
 
   submit: function() {
-
     that = this;
+
+    if (!this.doChecks()) {
+      return;
+    }
 
     this.$('button.save').addClass('uploading');
     this.$('button.save').html('Uploading...');
@@ -69,12 +72,52 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
         Backbone.history.navigate('tracks/' + model.id, {trigger: true})
       },
       error: function(model, response) {
-        debugger;
+        if (response.responseJSON.indexOf('Audio content type is invalid') != -1) {
+          that.$('.errors').html("That's not a valid audio file. Please choose a different one.")
+        } else if (response.responseJSON.indexOf('Url has already been taken') != -1) {
+          that.$('.errors').html("That URL is taken. Please enter another one.")
+        } else {
+          that.$('.errors').html("Something went wrong. Please try again.")
+        }
         that.$('button.save').removeClass('uploading');
         that.$('button.save').html('Save');
       },
     });
 
+  },
+
+  doChecks: function() {
+
+    var pass = true;
+
+    if (that.$('#input-post-audio').val().length < 1) {
+      that.$('.errors-audio').html("Please choose an audio track to upload.");
+      that.$('#input-post-audio').css('border-color', 'red');
+      pass = false;
+    } else {
+      that.$('.errors-audio').empty();
+      that.$('#input-post-audio').css('border-color', '#ccc');
+    }
+
+    if (that.$('#input-post-title').val().length < 1) {
+      that.$('.errors-title').html("Please enter a title for your track.");
+      that.$('#input-post-title').css('border-color', 'red');
+      pass = false;
+    } else {
+      that.$('.errors-title').empty();
+      that.$('#input-post-title').css('border-color', '#ccc');
+    }
+
+    if (that.$('#input-post-url').val().length < 1) {
+      that.$('.errors-url').html("Please enter a URL for your track.");
+      that.$('#input-post-url').css('border-color', 'red');
+      pass = false;
+    } else {
+      that.$('.errors-url').empty();
+      that.$('#input-post-url').css('border-color', '#ccc');
+    }
+
+    return pass;
   },
 
 })

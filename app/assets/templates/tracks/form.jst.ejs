@@ -2,13 +2,13 @@
 
 <form class="trackForm">
 
-  <h3 class="errors" ></h3>
+  <h3 class="errors error-message" ></h3>
 
   <label class="sign-in-input-text">
     Audio
   </label>
     <input type="file" name="track[audio]" id='input-post-audio'>
-
+    <h3 class="errors-audio error-message"></h3>
 
 
   <div id="preview-post-audio"></div>
@@ -30,14 +30,14 @@
     Title
   </label>
     <input type="text" class="cs-input" name="track[title]" id='input-post-title' value="<%= track.get('title') %>">
-
+    <h3 class="errors-title error-message"></h3>
 
 
   <label class="sign-in-input-text">
     URL
   </label>
     <input type="text" class="cs-input" name="track[url]" id='input-post-url' value="<%= track.get('url') %>">
-
+    <h3 class="errors-url error-message"></h3>
 
 
   <label class="sign-in-input-text">
