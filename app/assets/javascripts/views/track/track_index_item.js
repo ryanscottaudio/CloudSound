@@ -6,7 +6,8 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
   template: JST['tracks/index_item'],
 
   events: {
-    "click button.play-pause": "playPause",
+    "click button.play-pause.notLoaded": "initialPlay",
+    "click button.play-pause.loaded": "playPause",
     "click div#audio-wave": "initialPlay",
     "click button.like-button": "likeUnlike",
   },
@@ -61,24 +62,12 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
   },
 
   playPause: function() {
-    if (this.wave.loading) {
-      return;
-    }
-    if (!this.wave.loaded) {
-      this.wave.xhr = this.wave.load(this.model.get('audio_url')).xhr;
-      this.$('button.play-pause').removeClass('paused');
-      this.$('button.play-pause').addClass('loading')
-      this.setPlaying();
-      this.wave.loading = true;
-      this.wave.on("ready", function() {
-        if (CloudSound.currentUser.isSignedIn()) {
-          this.addCommentForm();
-        }
-      }.bind(this));
-      return;
-    }
     if (this.wave.playability === true) {
       this.addPlay();
+    }
+    if (this.progress) {
+      this.wave.seekTo(this.progress);
+      this.progress = null;
     }
     this.setPlaying();
     this.wave.playPause();
@@ -87,7 +76,13 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     this.$('button.play-pause').toggleClass('paused');
   },
 
+  externalPause: function() {
+    this.progress = this.wave.getCurrentTime() / this.wave.getDuration();
+    this.wave.pause();
+  },
+
   initialPlay: function() {
+    this.$('button.play-pause').toggleClass('notLoaded');
     if (this.wave.loading) {
       return;
     }
@@ -101,12 +96,15 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
         if (CloudSound.currentUser.isSignedIn()) {
           this.addCommentForm();
         }
+        this.$('button.play-pause').toggleClass('loaded');
+        this.playPause;
       }.bind(this));
       return;
     }
   },
 
   stopLoad: function() {
+    this.$('button.play-pause').toggleClass('notLoaded');
     this.wave.loading = false;
     this.wave.loaded = false;
     this.render();

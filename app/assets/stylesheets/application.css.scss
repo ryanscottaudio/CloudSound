@@ -273,17 +273,20 @@
  }
 
  a.fb, a.guest {
-   font-size: 16px;
    color: white;
-   padding: 5px;
-   border-radius: 4px;
+   padding: 2px 11px 2px 10px;
+   border-radius: 3px;
    display: inline-block;
+   font-size: 14px;
+   line-height: 20px;
  }
 
  a.fb {
    background: #39579a;
+   border: #39579a solid;
  }
 
  a.guest {
    background: green;
+   border: green solid;
  }

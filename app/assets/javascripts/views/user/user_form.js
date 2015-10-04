@@ -24,8 +24,6 @@ CloudSound.Views.UserForm = Backbone.View.extend({
   submit: function(e) {
     e.preventDefault();
 
-    that = this;
-
     if (!this.doChecks()) {
       return;
     }
@@ -35,15 +33,15 @@ CloudSound.Views.UserForm = Backbone.View.extend({
       success: function() {
         CloudSound.currentUser.fetch({
           success: function() {
-            that.parent.enableScroll();
+            this.parent.enableScroll();
             Backbone.history.navigate('users/' + CloudSound.currentUser.id + '/edit', {trigger: true});
-          },
+          }.bind(this),
         });
-        that.collection.add(that.model, { merge: true });
-      },
+        this.collection.add(that.model, { merge: true });
+      }.bind(this),
       error: function(data){
-        that.$('.errors').html("That email address already has an account!")
-      },
+        this.$('.errors').html("That email address already has an account!")
+      }.bind(this),
     });
   },
 

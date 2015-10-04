@@ -6,6 +6,7 @@ CloudSound.Views.ExploreShow = Backbone.CompositeView.extend({
   template: JST['explore/index'],
 
   initialize: function() {
+    // this.listenTo(this.collection, "sync", this.render);
   },
 
   render: function() {

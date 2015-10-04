@@ -43,8 +43,13 @@ CloudSound.Routers.Router = Backbone.Router.extend({
       collection: this.tracks,
       model: CloudSound.currentUser,
     });
-    this._swapview(exploreView);
     this.tracks.fetch();
+    this._swapview(exploreView);
+
+
+    // this.tracks.fetch({success: function() {
+    //   this._swapview(exploreView);
+    // }.bind(this)});
   },
 
   // userNew: function() {

@@ -24,7 +24,6 @@ CloudSound.Views.SessionForm = Backbone.View.extend({
 
   submit: function(e) {
     e.preventDefault();
-    that = this;
     var attrs = $(e.currentTarget).serializeJSON().user;
     CloudSound.currentUser.signIn({
       email: attrs.email,
@@ -32,14 +31,14 @@ CloudSound.Views.SessionForm = Backbone.View.extend({
       success: function() {
         CloudSound.currentUser.fetch({
           success: function() {
-            that.parent.enableScroll();
+            this.parent.enableScroll();
             Backbone.history.navigate('_=_', {trigger: true});
-          },
+          }.bind(this),
         });
-      },
+      }.bind(this),
       error: function() {
-        that.$('.errors').html("We couldn't sign you in; are you sure you had the right email and password?")
-      },
+        this.$('.errors').html("We couldn't sign you in; are you sure you had the right email and password?")
+      }.bind(this),
     })
   },
 

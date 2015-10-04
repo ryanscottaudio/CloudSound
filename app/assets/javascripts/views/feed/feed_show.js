@@ -7,6 +7,7 @@ CloudSound.Views.FeedShow = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.collection, "sync", this.render);
   },
 
   render: function() {

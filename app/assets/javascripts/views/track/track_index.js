@@ -38,10 +38,12 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
       if (subview.wave) {
         if (subview.wave.loading) {
           subview.stopLoad();
+        } else if (subview.wave.isPlaying()) {
+          subview.externalPause();
         }
-        subview.wave.pause();
         this.$('div#audio-wave').removeClass('active');
         subview.eachSubview(function (subview) {subview.remove()});
+        //this removes the comment form
         if (subview.$('button.play-pause').hasClass('playing')) {
           subview.$('button.play-pause').removeClass('playing');
           subview.$('button.play-pause').addClass('paused');
