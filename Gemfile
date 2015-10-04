@@ -11,6 +11,10 @@ gem 'figaro'
 
 gem 'omniauth-facebook'
 
+gem 'kaminari'
+
+gem 'pg_search'
+
 # gem 'ruby-audio'
 #
 # gem 'ruby-audio-heroku'

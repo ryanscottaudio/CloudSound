@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   has_attached_file :image, default_url: "missinguser.png", s3_protocol: ""
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
+  include PgSearch
+  multisearchable against: [:display_name, :username]
+
   has_many :tracks,
     foreign_key: :author_id,
     dependent: :destroy

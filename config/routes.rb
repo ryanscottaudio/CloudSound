@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :update, :destroy]
     end
     resources :follows, only: [:create, :destroy]
+    get "/search", to: "static_pages#search"
   end
 
   get "auth/:provider/callback", to: "api/sessions#omniauth", defaults: {format: :json}

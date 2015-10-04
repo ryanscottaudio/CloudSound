@@ -11,6 +11,9 @@ class Track < ActiveRecord::Base
   validates :author_id, :title, :url, presence: true
   validates :url, uniqueness: true
 
+  include PgSearch
+  multisearchable against: [:title, :url, :description]
+
   belongs_to :author,
     class_name: "User"
 
