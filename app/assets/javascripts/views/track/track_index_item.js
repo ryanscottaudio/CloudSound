@@ -7,6 +7,7 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
 
   events: {
     "click button.play-pause.notLoaded": "initialPlay",
+    "click button.play-pause.loading": "stopLoad",
     "click button.play-pause.loaded": "playPause",
     "click div#audio-wave": "initialPlay",
     "click button.like-button": "likeUnlike",
