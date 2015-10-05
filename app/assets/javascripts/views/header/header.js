@@ -14,6 +14,7 @@ CloudSound.Views.Header = Backbone.CompositeView.extend({
     "click .sign-in-tab": "signIn",
     "click .create-account-tab": "createAccount",
     "click .cancel-link": "back",
+    "submit .search-container": "search",
   },
 
   template: JST['header/show'],
@@ -111,5 +112,11 @@ CloudSound.Views.Header = Backbone.CompositeView.extend({
     this.enableScroll();
 
   },
+
+  search: function(e) {
+    e.preventDefault();
+
+    Backbone.history.navigate('search/' + this.$('.search').val(), {trigger: true});
+  }
 
 })

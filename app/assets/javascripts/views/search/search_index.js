@@ -1,38 +1,67 @@
-CloudSound.Views.Search = Backbone.View.extend({
+CloudSound.Views.SearchIndex = Backbone.CompositeView.extend({
 
-	initialize: function () {
-		this.bindScroll(); // for infinite scroll
-		this.searchResults = new Demo.Collections.SearchResults();
-		this.searchResults.pageNum = 1;
+	initialize: function (options) {
+		this.term = options.term;
+    this.playingId = -1;
+		this.bindScroll();
+		this.searchResults = new CloudSound.Collections.SearchResults();
+		this.pageNum = 1;
+		this.search();
 		this.listenTo(this.searchResults, "sync", this.render);
 	},
 
-	events: {
-		"change .query": "search",
-		"click .next-page": "nextPage",
-		"click .prev-page": "prevPage" // not implemented, but you can figure it out
-	},
-
-	template: JST.search,
+	template: JST['search/index'],
 
 	render: function () {
-		var content = this.template({
-			results: this.searchResults
-		});
-		this.$el.html(content);
-
+    this.eachSubview(function (subview) {subview.remove()});
+		this.$el.html(this.template({term: this.term}));
+		this.addItems();
+    addHeader.call(this);
 		return this;
 	},
 
-	search: function (event) {
-		event.preventDefault();
-		this.searchResults.pageNum = 1;
-		this.searchResults.query = this.$(".query").val();
+	addItems: function () {
+		this.searchResults.each(function (item) {
+			if (item.get('display_name')) {
+				var view = new CloudSound.Views.UserIndexItem({
+					model: item,
+				});
+			} else if (item.get('title')) {
+				var view = new CloudSound.Views.TrackIndexItem({
+					model: item,
+					comments: item.comments(),
+					parentView: this,
+				});
+			}
+  		this.addSubview('ul.items-list', view);
+		}.bind(this));
+	},
+
+	stopAll: function() {
+		this.eachSubview(function (subview) {
+			if (subview.wave) {
+				if (subview.wave.loading) {
+					subview.stopLoad();
+				} else if (subview.wave.isPlaying()) {
+					subview.externalPause();
+				}
+				this.$('div#audio-wave').removeClass('active');
+				subview.eachSubview(function (subview) {subview.remove()});
+				//this removes the comment form
+				if (subview.$('button.play-pause').hasClass('playing')) {
+					subview.$('button.play-pause').removeClass('playing');
+					subview.$('button.play-pause').addClass('paused');
+				}
+			}
+		});
+	},
+
+	search: function () {
 
 		this.searchResults.fetch({
 			data: {
-				query: this.searchResults.query,
-				page: 1
+				query: this.term,
+				page: 1,
 			}
 		});
 	},
@@ -50,41 +79,42 @@ CloudSound.Views.Search = Backbone.View.extend({
 		}
 	},
 
-	nextPage: function (event) {
-		this.searchResults.fetch({
-			data: {
-				query: this.searchResults.query,
-				page: this.searchResults.pageNum + 1
-			},
-			success: function () {
-				this.searchResults.pageNum = this.searchResults.pageNum + 1;
-			}.bind(this)
-		});
-	},
-
-	// Infinite scroll can be improved even more by using subviews.
-	// Right now, we're rerendering the whole view when we add the
-	// 25 results of the next page. Instead, a better approach would be
-	// to `append` the html for each new result. This is way easy if we
-	// have a subview for each result. We would also `listenTo` collection
-	// `add` instead of `sync`. The callback to the `add` gets passed the
-	// model that was just added, so at that point you can instantiate a
-	// subview and append it to the list.
 	nextPageInfiniteScroll: function () {
 		if (this.requestingNextPage) return;
 
 		this.requestingNextPage = true;
-		this.searchResults.fetch({
-			remove: false,
+		this.newSearchResults = new CloudSound.Collections.SearchResults();
+    this.newSearchResults.fetch({
+			remove: true,
 			data: {
-				query: this.searchResults.query,
-				page: this.searchResults.pageNum + 1
+				query: this.term,
+				page: this.pageNum + 1
 			},
 			success: function () {
 				this.requestingNextPage = false;
-				this.searchResults.pageNum++;
+				this.pageNum++;
+        this.appendItems(this.newSearchResults);
+        this.searchResults.add(this.newSearchResults.models);
+        this.newSearchResults = null;
 			}.bind(this)
 		});
-	}
+	},
+
+  appendItems: function (items) {
+    items.each(function (item) {
+      if (item.type = "User") {
+        var view = new CloudSound.Views.UserIndexItem({
+          model: item,
+        });
+      } else if (item.type = "Track") {
+        var view = new CloudSound.Views.TrackIndexItem({
+          model: item,
+          comments: track.comments(),
+          parentView: this,
+        });
+      }
+      this.addSubview('ul.items-list', view);
+    }.bind(this));
+  },
 
 });

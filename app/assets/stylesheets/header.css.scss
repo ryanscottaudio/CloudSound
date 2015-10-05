@@ -7,7 +7,6 @@
   width: 100%;
   max-width: 1240px;
   margin: auto;
-  border-left: 1px solid #111;
 }
 
 .header-interior * {
@@ -53,9 +52,13 @@
 }
 
 .header-interior .search-container {
-  border-right: 1px solid #111;
+  // border-right: 1px solid #111;
   padding: 9px;
-  width: 687px;
+  // width: 100%;
+}
+
+input.search {
+  width: 100%;
 }
 
 .header-interior input {

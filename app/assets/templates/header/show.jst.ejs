@@ -2,12 +2,11 @@
   <a class="logo-block" href="#">
     <span class="logo-block"></span>
   </a>
+  <form class="search-container">
+    <input class="search" placeholder="Search">
+  </form>
   <div class="right">
-
     <a class="explore" href="#explore">Explore</a>
-    <!-- <form class="search-container">
-      <input class="search" placeholder="Search">
-    </form> -->
     <% if (CloudSound.currentUser.isSignedIn()) { %>
       <a class="upload" href="#tracks/new">Upload</a>
       <div class="user-container">

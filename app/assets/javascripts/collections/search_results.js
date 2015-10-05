@@ -10,7 +10,7 @@ CloudSound.Collections.SearchResults = Backbone.Collection.extend({
 		var type = attrs._type;
 		delete attrs._type;
 
-		return new CloudSound.Models[type](attrs);
+		return new CloudSound.Models[type](attrs, {parse: true});
 	},
 
 	comparator: function(obj1, obj2) {

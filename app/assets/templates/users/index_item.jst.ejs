@@ -1,0 +1,24 @@
+<div class="player-area-small group">
+
+  <img class="main" src="<%= user.get('image_url') %>" width="120" height="120" />
+
+  <div class="name-details">
+    <div class="track-title"><a href="#users/<%= user.get('id') %>"><%= user.escape('display_name') %></a></div>
+  </div>
+
+</div>
+
+<div class="info-and-buttons group">
+
+  <% if (CloudSound.currentUser.isSignedIn()) { %>
+    <button class="follow-button"></button>
+  <% } %>
+
+  <ul class="track-info group">
+    <li class="followers-image"></li>
+    <li class="followers-count"><%= user.followers().length %></li>
+    <li class="tracks-image"></li>
+    <li class="tracks-count"><%= user.tracks().length %></li>
+  </ul>
+
+</div>

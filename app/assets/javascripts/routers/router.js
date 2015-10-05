@@ -16,11 +16,10 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     "tracks/new": "trackNew",
     "tracks/:id": "trackShow",
 
-    // "users/new": "userNew",
     "users/:id": "userShow",
     "users/:id/edit": "userEdit",
 
-    // "session/new": "signIn",
+    "search/:term": "search",
   },
 
   preventLittleMan: function() {
@@ -119,6 +118,12 @@ CloudSound.Routers.Router = Backbone.Router.extend({
       comments: track.comments(),
     });
     this._swapview(trackView);
+  },
+
+  search: function (term) {
+    var searchView = new CloudSound.Views.SearchIndex({term: term});
+
+    this._swapview(searchView);
   },
 
   _swapview: function(newView) {

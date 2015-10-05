@@ -351,13 +351,19 @@ button.play-pause:active {
   background-color: #f82e00;
 }
 
-div.track-index-item {
+div.track-index-item, div.user-index-item {
   position: relative;
   width: 817px;
 }
 
 div.track-index {
   margin: auto;
+  max-width: 817px;
+}
+
+div.search-index {
+  margin:auto;
+  margin-top: 20px;
   max-width: 817px;
 }
 
@@ -417,6 +423,18 @@ ul.track-info {
 
   li.comments-image {
     background-image: image-url('comments.svg');
+    width: 12px;
+    height: 12px;
+  }
+
+  li.followers-image {
+    background-image: image-url('followers.svg');
+    width: 12px;
+    height: 12px;
+  }
+
+  li.tracks-image {
+    background-image: image-url('tracks.svg');
     width: 12px;
     height: 12px;
   }
