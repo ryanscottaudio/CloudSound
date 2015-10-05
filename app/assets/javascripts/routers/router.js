@@ -28,9 +28,12 @@ CloudSound.Routers.Router = Backbone.Router.extend({
 
   feedShow: function() {
     if (CloudSound.currentUser.id) {
+      var feedCollection = new CloudSound.Collections.FeedResults();
       var feedView = new CloudSound.Views.FeedShow({
+        collection: feedCollection,
         model: CloudSound.currentUser,
       });
+      feedCollection.fetch();
       this._swapview(feedView);
     } else {
       this.exploreShow();
@@ -38,17 +41,13 @@ CloudSound.Routers.Router = Backbone.Router.extend({
   },
 
   exploreShow: function() {
+    var exploreCollection = new CloudSound.Collections.ExploreResults();
     var exploreView = new CloudSound.Views.ExploreShow({
-      collection: this.tracks,
+      collection: exploreCollection,
       model: CloudSound.currentUser,
     });
-    this.tracks.fetch();
+    exploreCollection.fetch();
     this._swapview(exploreView);
-
-
-    // this.tracks.fetch({success: function() {
-    //   this._swapview(exploreView);
-    // }.bind(this)});
   },
 
   // userNew: function() {

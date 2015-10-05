@@ -19,3 +19,19 @@ CloudSound.Collections.Tracks = Backbone.GofCollection.extend({
   },
 
 })
+
+CloudSound.Collections.FeedResults = CloudSound.Collections.Tracks.extend({
+
+  initialize : function() {},
+
+	url: "/api/feed",
+
+});
+
+CloudSound.Collections.ExploreResults = CloudSound.Collections.Tracks.extend({
+
+  initialize : function() {},
+
+	url: "/api/explore",
+
+});

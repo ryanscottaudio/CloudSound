@@ -1,6 +1,7 @@
 class Api::UsersController < ApplicationController
   def show
-    @user = User.includes(:likes, :comments, tracks: [:likes, :plays, comments: :commenter]).find(params[:id])
+    @user = User.includes(:likes, :comments).find(params[:id])
+    @tracks = @user.tracks.order('created_at DESC').page(params[:page])
     render :show
   end
 

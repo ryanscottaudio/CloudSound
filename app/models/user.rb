@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     through: :followees,
     source: :followee
 
+  has_many :feed_tracks,
+    through: :user_followees,
+    source: :tracks
+
   after_initialize :ensure_session_token
 
   attr_reader :password

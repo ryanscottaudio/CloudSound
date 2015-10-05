@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
     resources :follows, only: [:create, :destroy]
     get "/search", to: "static_pages#search"
+    get "/explore", to: "static_pages#explore"
+    get "/feed", to: "static_pages#feed"
   end
 
   get "auth/:provider/callback", to: "api/sessions#omniauth", defaults: {format: :json}

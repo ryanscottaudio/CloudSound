@@ -9,4 +9,16 @@ class Api::StaticPagesController < ApplicationController
     render :search
   end
 
+  def explore
+    @tracks = Track.order('created_at DESC').page(params[:page])
+
+    render :index
+  end
+
+  def feed
+    @tracks = current_user.feed_tracks.order('created_at DESC').page(params[:page])
+
+    render :index
+  end
+
 end
