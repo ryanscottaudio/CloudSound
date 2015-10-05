@@ -28,7 +28,8 @@ class Api::TracksController < ApplicationController
   end
 
   def index
-    @tracks = Track.all
+    @tracks = Track.order('created_at DESC').page(params[:page])
+
     render :index
   end
 

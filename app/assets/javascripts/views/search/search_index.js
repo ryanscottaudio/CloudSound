@@ -57,7 +57,6 @@ CloudSound.Views.SearchIndex = Backbone.CompositeView.extend({
 	},
 
 	search: function () {
-
 		this.searchResults.fetch({
 			data: {
 				query: this.term,

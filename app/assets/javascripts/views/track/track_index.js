@@ -7,7 +7,7 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.playingId = -1;
-    this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(this.collection, "add", this.addTrackView);
     this.listenTo(this.collection, "remove", this.removeTrackView);
   },
 
@@ -27,6 +27,15 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
       });
       this.addSubview('ul.tracks-list', trackView);
     }.bind(this));
+  },
+
+  addTrackView: function (track) {
+    var trackView = new CloudSound.Views.TrackIndexItem({
+      model: track,
+      comments: track.comments(),
+      parentView: this,
+    });
+    this.addSubview('ul.tracks-list', trackView);
   },
 
   removeTrackView: function (track) {
