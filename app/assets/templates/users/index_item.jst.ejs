@@ -16,11 +16,11 @@
     <button class="follow-button"></button>
   <% } %>
 
-  <ul class="track-info group">
+  <ul class="author-info group">
     <li class="followers-image"></li>
     <li class="followers-count"><%= user.followers().length %></li>
     <li class="tracks-image"></li>
-    <li class="tracks-count"><%= user.tracks().length %></li>
+    <li class="tracks-count"><%= user.get('tracks_count') %></li>
   </ul>
 
 </div>

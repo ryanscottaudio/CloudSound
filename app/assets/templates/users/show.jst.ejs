@@ -12,10 +12,15 @@
       <% if (CloudSound.currentUser.id) { %>
         <button class="follow-button"></button>
       <% } %>
+      <ul class="author-info group">
+        <li class="followers-image"></li>
+        <li class="followers-count"><%= user.followers().length %></li>
+        <li class="tracks-image"></li>
+        <li class="tracks-count"><%= user.get('tracks_count') %></li>
+      </ul>
     </div>
     <img class="user-profile-pic" src="<%= user.get('image_url') %>" width="340" height="340" />
   </div>
-
 
   <div class="tracks-index"></div>
 

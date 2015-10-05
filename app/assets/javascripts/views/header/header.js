@@ -15,13 +15,14 @@ CloudSound.Views.Header = Backbone.CompositeView.extend({
     "click .create-account-tab": "createAccount",
     "click .cancel-link": "back",
     "submit .search-container": "search",
+    "input .search": "updateSearchDropdown",
   },
 
   template: JST['header/show'],
 
   render: function() {
     this.$el.html(this.template());
-
+    this.addSearchDropdown();
     return this;
   },
 
@@ -117,6 +118,18 @@ CloudSound.Views.Header = Backbone.CompositeView.extend({
     e.preventDefault();
 
     Backbone.history.navigate('search/' + this.$('.search').val(), {trigger: true});
-  }
+  },
+
+  addSearchDropdown: function() {
+    var searchDropdown = new CloudSound.Views.SearchDropdown;
+    this.addSubview('.search-container', searchDropdown);
+    this.searchDropdown = searchDropdown;
+  },
+
+  updateSearchDropdown: function(e) {
+    e.preventDefault();
+
+    this.searchDropdown.search(this.$('.search').val());
+  },
 
 })
