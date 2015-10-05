@@ -1,6 +1,8 @@
 <div class="player-area-small group">
 
-  <img class="main" src="<%= user.get('image_url') %>" width="120" height="120" />
+  <a href="#users/<%= user.get('id') %>">
+    <img class="main" src="<%= user.get('image_url') %>" width="120" height="120" />
+  </a>
 
   <div class="name-details">
     <div class="track-title"><a href="#users/<%= user.get('id') %>"><%= user.escape('display_name') %></a></div>

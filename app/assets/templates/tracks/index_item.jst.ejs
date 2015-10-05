@@ -2,11 +2,13 @@
 
 <div class="player-area-small group">
 
-  <% if (track.get('image_url')) { %>
-    <img class="main" src="<%= track.get('image_url') %>" width="120" height="120" />
-  <% } else { %>
-    <img class="main" src="<%= author.get('image_url') %>" width="120" height="120" />
-  <% } %>
+  <a href="#tracks/<%= track.get('id') %>">
+    <% if (track.get('image_url')) { %>
+      <img class="main" src="<%= track.get('image_url') %>" width="120" height="120" />
+    <% } else { %>
+      <img class="main" src="<%= author.get('image_url') %>" width="120" height="120" />
+    <% } %>
+  </a>
 
   <div class="player">
     <div class="info-and-buttons group">
