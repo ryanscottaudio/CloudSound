@@ -1,10 +1,12 @@
 CloudSound.Collections.Tracks = Backbone.GofCollection.extend({
 
-  initialize: function(options) {
+  initialize: function(models, options) {
     this.user = options.user;
   },
 
-  url: "api/tracks",
+  url: function() {
+    return this.user.url() + "/tracks";
+  },
 
   model: CloudSound.Models.Track,
 

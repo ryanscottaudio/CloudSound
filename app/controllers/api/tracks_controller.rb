@@ -28,7 +28,7 @@ class Api::TracksController < ApplicationController
   end
 
   def index
-    @tracks = Track.order('created_at DESC').page(params[:page])
+    @tracks = Track.where(author_id: params[:user_id]).order('created_at DESC').page(params[:page])
 
     render :index
   end
