@@ -12,6 +12,7 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
     this.listenTo(this.collection, "remove", this.removeTrackView);
     this.bindScroll();
     this.pageNum = 1;
+
     this.collection.fetch({success: function(response) {
       this.lastPage = response.lastPage;
       this.$('.loading-spinner').removeClass('loader');
