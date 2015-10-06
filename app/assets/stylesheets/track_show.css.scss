@@ -455,9 +455,9 @@ ul.track-info {
   transition: opacity .5s ease;
 }
 
-.track-index-item, .user-index-item, .info-header, .track {
+.track-index-item, .user-index-item, .info-header, .player-area, .comment-area, .comment {
   opacity: 1;
-  transition: opacity 1s ease;
+  transition: opacity .5s ease;
 }
 
 .transitioning {

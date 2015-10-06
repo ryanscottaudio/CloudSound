@@ -11,8 +11,16 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
   },
 
   initialize: function(options) {
+    this.model.fetch({success: function() {
+      this.render();
+      setTimeout(function() {
+        this.$('.player-area').removeClass('transitioning');
+        this.$('.comment-area').removeClass('transitioning');
+      }.bind(this), 0)
+      this.$('.loading-spinner').removeClass('loader');
+    }.bind(this)});
     this.comments = options.comments;
-    this.listenTo(this.model, "sync", this.render);
+    // this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.model.comments(), "add remove", this.renderCommentNumber);
   },
 
@@ -41,6 +49,9 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
       collection: that.comments,
     });
     this.addSubview('div.comment-form-area', commentFormView);
+    setTimeout(function() {
+      this.$('form.comment').removeClass('transitioning');
+    }.bind(this), 0);
   },
 
   addCommentsIndex: function () {

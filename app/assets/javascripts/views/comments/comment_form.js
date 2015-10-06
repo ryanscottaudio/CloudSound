@@ -1,7 +1,7 @@
 CloudSound.Views.CommentForm = Backbone.View.extend({
 
   tagName: 'form',
-  className: 'comment group',
+  className: 'comment group transitioning',
 
   template: JST['comments/form'],
 

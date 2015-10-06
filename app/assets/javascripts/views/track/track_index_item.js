@@ -44,6 +44,9 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
       collection: that.comments,
     });
     this.addSubview('div.comment-form-area', commentFormView)
+    setTimeout(function() {
+      this.$('form.comment').removeClass('transitioning');
+    }.bind(this), 0);
   },
 
   removeCommentForm: function () {
