@@ -6,7 +6,15 @@
 
   <div class="name-details">
     <div class="track-title"><a href="#users/<%= user.get('id') %>"><%= user.escape('display_name') %></a></div>
+
+    <ul class="author-info group">
+      <li class="followers-image"></li>
+      <li class="followers-count"><%= user.followers().length %></li>
+      <li class="tracks-image"></li>
+      <li class="tracks-count"><%= user.get('tracks_count') %></li>
+    </ul>
   </div>
+
 
 </div>
 
@@ -15,12 +23,5 @@
   <% if (CloudSound.currentUser.isSignedIn()) { %>
     <button class="follow-button"></button>
   <% } %>
-
-  <ul class="author-info group">
-    <li class="followers-image"></li>
-    <li class="followers-count"><%= user.followers().length %></li>
-    <li class="tracks-image"></li>
-    <li class="tracks-count"><%= user.get('tracks_count') %></li>
-  </ul>
 
 </div>
