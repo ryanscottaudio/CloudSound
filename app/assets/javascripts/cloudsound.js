@@ -65,7 +65,7 @@ function renderWave(options) {
   var progressDiv = this.$('#progress-bar');
   var progressBar = this.$('.progress-bar');
   progressDiv.css('display', 'block');
-  progressBar.css('background', options.color);
+  progressBar.css('background', '#999999');
   //
   // var showProgress = function (percent, xhr) {
   //   progressBar.css('width', percent + '%');
