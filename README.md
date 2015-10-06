@@ -1,6 +1,7 @@
 # CloudSound
 
 [Live link][live]
+
 [Heroku link][heroku]
 
 [live]: http://cloudsound.xyz
@@ -20,7 +21,7 @@ CloudSound is a SoundCloud-inspired social network for music-makers built on Rai
 - View a feed of the latest tracks from followed users
 - Search for tracks and users using PgSearch and a polymorphic table
 
-### Todos
+## To Do
 - Track genres/tags
 - Notifications
 - Custom user/track urls
