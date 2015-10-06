@@ -1,6 +1,7 @@
 CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
 
   tagName: 'div',
+
   className: 'track-index',
 
   template: JST['tracks/index'],
@@ -9,27 +10,18 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
     this.playingId = -1;
     this.listenTo(this.collection, "add", this.addTrackView);
     this.listenTo(this.collection, "remove", this.removeTrackView);
-
     this.bindScroll();
     this.pageNum = 1;
+    this.collection.fetch({success: function(response) {
+      this.lastPage = response.lastPage;
+      this.$('.loading-spinner').removeClass('loader');
+    }.bind(this)});
   },
 
   render: function() {
     this.eachSubview(function (subview) {subview.remove()});
     this.$el.html(this.template());
-    this.addTracks();
     return this;
-  },
-
-  addTracks: function () {
-    this.collection.each(function (track) {
-      var trackView = new CloudSound.Views.TrackIndexItem({
-        model: track,
-        comments: track.comments(),
-        parentView: this,
-      });
-      this.addSubview('ul.tracks-list', trackView);
-    }.bind(this));
   },
 
   addTrackView: function (track) {
@@ -78,8 +70,9 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
   },
 
   nextPageInfiniteScroll: function () {
-    if (this.requestingNextPage) return;
+    if (this.requestingNextPage || this.pageNum === this.lastPage) return;
 
+    this.$('.loading-spinner').addClass('loader');
     this.requestingNextPage = true;
     this.collection.fetch({
       remove: false,
@@ -89,6 +82,7 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
       success: function () {
         this.requestingNextPage = false;
         this.pageNum++;
+        this.$('.loading-spinner').removeClass('loader');
       }.bind(this)
     });
   },

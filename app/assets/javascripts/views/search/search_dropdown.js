@@ -24,7 +24,6 @@ CloudSound.Views.SearchDropdown = Backbone.CompositeView.extend({
 			});
   		this.addSubview('ul.items-list', view);
 		}.bind(this));
-    console.log(this)
 	},
 
 	search: function (term) {

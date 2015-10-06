@@ -1,41 +1,47 @@
 CloudSound.Views.SearchIndex = Backbone.CompositeView.extend({
 
+	tagName: 'div',
+
+	className: 'searchIndex',
+
+	template: JST['search/index'],
+
 	initialize: function (options) {
 		this.term = options.term;
     this.playingId = -1;
 		this.bindScroll();
 		this.searchResults = new CloudSound.Collections.SearchResults();
 		this.pageNum = 1;
+		this.listenTo(this.searchResults, "add", this.addItemView);
+		this.listenTo(this.searchResults, "remove", this.removeItemView);
 		this.search();
-		this.listenTo(this.searchResults, "sync", this.render);
 	},
-
-	template: JST['search/index'],
 
 	render: function () {
     this.eachSubview(function (subview) {subview.remove()});
 		this.$el.html(this.template({term: this.term}));
-		this.addItems();
     addHeader.call(this);
 		return this;
 	},
 
-	addItems: function () {
-		this.searchResults.each(function (item) {
-			if (item.get('display_name')) {
-				var view = new CloudSound.Views.UserIndexItem({
-					model: item,
-				});
-			} else if (item.get('title')) {
-				var view = new CloudSound.Views.TrackIndexItem({
-					model: item,
-					comments: item.comments(),
-					parentView: this,
-				});
-			}
-  		this.addSubview('ul.items-list', view);
-		}.bind(this));
-	},
+	addItemView: function (item) {
+		if (item.get('display_name')) {
+			var view = new CloudSound.Views.UserIndexItem({
+				model: item,
+			});
+		} else if (item.get('title')) {
+			var view = new CloudSound.Views.TrackIndexItem({
+				model: item,
+				comments: item.comments(),
+				parentView: this,
+			});
+		}
+		this.addSubview('ul.items-list', view);
+  },
+
+  removeItemView: function (item) {
+    this.removeModelSubview('ul.items-list', item);
+  },
 
 	stopAll: function() {
 		this.eachSubview(function (subview) {
@@ -61,7 +67,11 @@ CloudSound.Views.SearchIndex = Backbone.CompositeView.extend({
 			data: {
 				query: this.term,
 				page: 1,
-			}
+			},
+			success: function(response) {
+	      this.lastPage = response.lastPage;
+	      this.$('.loading-spinner').removeClass('loader');
+	    }.bind(this),
 		});
 	},
 
@@ -79,12 +89,12 @@ CloudSound.Views.SearchIndex = Backbone.CompositeView.extend({
 	},
 
 	nextPageInfiniteScroll: function () {
-		if (this.requestingNextPage) return;
+		if (this.requestingNextPage || this.pageNum === this.lastPage) return;
 
+    this.$('.loading-spinner').addClass('loader');
 		this.requestingNextPage = true;
-		this.newSearchResults = new CloudSound.Collections.SearchResults();
-    this.newSearchResults.fetch({
-			remove: true,
+    this.searchResults.fetch({
+			remove: false,
 			data: {
 				query: this.term,
 				page: this.pageNum + 1
@@ -92,28 +102,9 @@ CloudSound.Views.SearchIndex = Backbone.CompositeView.extend({
 			success: function () {
 				this.requestingNextPage = false;
 				this.pageNum++;
-        this.appendItems(this.newSearchResults);
-        this.searchResults.add(this.newSearchResults.models);
-        this.newSearchResults = null;
+				this.$('.loading-spinner').removeClass('loader');
 			}.bind(this)
 		});
 	},
-
-  appendItems: function (items) {
-    items.each(function (item) {
-      if (item.type = "User") {
-        var view = new CloudSound.Views.UserIndexItem({
-          model: item,
-        });
-      } else if (item.type = "Track") {
-        var view = new CloudSound.Views.TrackIndexItem({
-          model: item,
-          comments: track.comments(),
-          parentView: this,
-        });
-      }
-      this.addSubview('ul.items-list', view);
-    }.bind(this));
-  },
 
 });

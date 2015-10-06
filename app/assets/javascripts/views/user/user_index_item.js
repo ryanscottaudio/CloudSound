@@ -17,6 +17,12 @@ CloudSound.Views.UserIndexItem = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template({user: this.model}));
     this.setFollowed();
+
+    this.$el.addClass('transitioning');
+    setTimeout(function() {
+      this.$el.removeClass('transitioning');
+    }.bind(this), 0)
+
     return this;
   },
 

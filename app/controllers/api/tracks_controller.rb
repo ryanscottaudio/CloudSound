@@ -29,6 +29,7 @@ class Api::TracksController < ApplicationController
 
   def index
     @tracks = Track.where(author_id: params[:user_id]).order('created_at DESC').page(params[:page])
+    @total_pages = @tracks.total_pages
 
     render :index
   end

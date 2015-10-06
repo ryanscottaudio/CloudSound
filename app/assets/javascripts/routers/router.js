@@ -33,7 +33,6 @@ CloudSound.Routers.Router = Backbone.Router.extend({
         collection: feedCollection,
         model: CloudSound.currentUser,
       });
-      feedCollection.fetch();
       this._swapview(feedView);
     } else {
       this.exploreShow();
@@ -46,7 +45,6 @@ CloudSound.Routers.Router = Backbone.Router.extend({
       collection: exploreCollection,
       model: CloudSound.currentUser,
     });
-    exploreCollection.fetch();
     this._swapview(exploreView);
   },
 

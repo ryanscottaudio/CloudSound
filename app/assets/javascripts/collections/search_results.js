@@ -23,4 +23,11 @@ CloudSound.Collections.SearchResults = Backbone.Collection.extend({
 		}
 	},
 
+	parse: function(response) {
+    this.lastPage = response.last_page;
+    delete response.last_page;
+
+    return response.items;
+  },
+
 });

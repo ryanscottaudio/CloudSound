@@ -1,4 +1,4 @@
-json.results do
+json.items do
   json.array! @search_results do |search_result|
     if search_result.searchable_type == "Track"
       json.partial! "api/tracks/feed", track: search_result.searchable
@@ -9,3 +9,4 @@ json.results do
     end
   end
 end
+json.last_page @total_pages

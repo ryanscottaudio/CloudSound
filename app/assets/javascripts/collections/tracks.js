@@ -20,6 +20,13 @@ CloudSound.Collections.Tracks = Backbone.GofCollection.extend({
     }
   },
 
+  parse: function(response) {
+    this.lastPage = response.last_page;
+    delete response.last_page;
+
+    return response.tracks;
+  },
+
 })
 
 CloudSound.Collections.FeedResults = CloudSound.Collections.Tracks.extend({

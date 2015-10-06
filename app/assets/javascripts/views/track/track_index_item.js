@@ -26,6 +26,12 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     this.setLiked();
     renderWave.call(this, {height: 60, color: '#666666'});
     // this.addCommentsIndex();
+
+    this.$el.addClass('transitioning');
+    setTimeout(function() {
+      this.$el.removeClass('transitioning');
+    }.bind(this), 0)
+
     return this;
   },
 
