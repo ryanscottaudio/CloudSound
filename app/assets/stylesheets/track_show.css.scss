@@ -455,11 +455,11 @@ ul.track-info {
   transition: opacity .5s ease;
 }
 
-.track-index-item, .user-index-item {
+.track-index-item, .user-index-item, .info-header {
   opacity: 1;
   transition: opacity 1s ease;
 }
 
-.track-index-item.transitioning, .user-index-item.transitioning {
+.transitioning {
   opacity: 0;
 }
