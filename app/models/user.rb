@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   validates :session_token, uniqueness: true
   validates :password, length: {minimum: 6, allow_nil: true}
 
+  validates :username, uniqueness: true, if: 'username.present?'
+
   validates :email, presence: true, uniqueness: true, unless: :uid?
   validates :uid, presence: true, uniqueness: {scope: :provider}, unless: :email?
 

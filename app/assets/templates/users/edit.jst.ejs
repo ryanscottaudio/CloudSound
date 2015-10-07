@@ -2,8 +2,6 @@
 
 <form class="userEdit group">
 
-  <h3 class="errors error-message" ></h3>
-
   <label class="sign-in-input-text">
     Picture
   </label>
@@ -13,20 +11,15 @@
 
   <img src="<%= user.get('image_url') %>" id="preview-user-image" class="preview-image" width="300" height="300">
 
-
-
-
-  <!-- <label class="sign-in-input-text">
-    Username
+  <label class="sign-in-input-text">
+    URL
   </label>
-    <input type="text" class="cs-input" name="user[username]" id='input-user-username' value="<%= user.escape('username') %>"> -->
-
-
+    <input type="text" class="cs-input" name="user[username]" id='input-user-username' value="<%= user.escape('username') %>" placeholder="This is what you can give out to fans.">
 
   <label class="sign-in-input-text">
     Display Name
   </label>
-    <input type="text" class="cs-input" name="user[display_name]" id='input-user-display-name' value="<%= user.escape('display_name') %>" placeholder="This is how you will be identified.">
+    <input type="text" class="cs-input" name="user[display_name]" id='input-user-display-name' value="<%= user.escape('display_name') %>" placeholder="This is how you will be shown on CloudSound.">
 
   <div class="floats group">
     <div class="floated-input">
@@ -49,6 +42,7 @@
   </label>
     <input type="text" class="cs-input" name="user[location]" id='input-user-location' value="<%= user.escape('location') %>">
 
+  <h3 class="errors error-message" ></h3>
 
   <div class="form-buttons">
     <a href="#" class="cancel-link">Cancel</a>

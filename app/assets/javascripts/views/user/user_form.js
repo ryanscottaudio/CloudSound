@@ -37,7 +37,6 @@ CloudSound.Views.UserForm = Backbone.View.extend({
             Backbone.history.navigate('users/' + CloudSound.currentUser.id + '/edit', {trigger: true});
           }.bind(this),
         });
-        this.collection.add(that.model, { merge: true });
       }.bind(this),
       error: function(data){
         this.$('.errors').html("That email address already has an account!")
@@ -49,40 +48,40 @@ CloudSound.Views.UserForm = Backbone.View.extend({
 
     var pass = true;
 
-    if (that.$('#email').val().length < 1) {
-      that.$('.errors-email').html("Please enter an email address.");
-      that.$('#email').css('border-color', 'red');
+    if (this.$('#email').val().length < 1) {
+      this.$('.errors-email').html("Please enter an email address.");
+      this.$('#email').css('border-color', 'red');
       pass = false;
     } else {
-      that.$('.errors-email').empty();
-      that.$('#email').css('border-color', '#ccc');
+      this.$('.errors-email').empty();
+      this.$('#email').css('border-color', '#ccc');
     }
 
-    if (that.$('#password').val().length < 6) {
-      that.$('.errors-password').html("Please enter at least 6 characters.");
-      that.$('#password').css('border-color', 'red');
+    if (this.$('#password').val().length < 6) {
+      this.$('.errors-password').html("Please enter at least 6 characters.");
+      this.$('#password').css('border-color', 'red');
       pass = false;
     } else {
-      that.$('.errors-password').empty();
-      that.$('#password').css('border-color', '#ccc');
+      this.$('.errors-password').empty();
+      this.$('#password').css('border-color', '#ccc');
     }
 
-    if (that.$('#password_confirmation').val() !== that.$('#password').val()) {
-      that.$('.errors-password-confirm').html("Your passwords do not match.");
-      that.$('#password_confirmation').css('border-color', 'red');
+    if (this.$('#password_confirmation').val() !== this.$('#password').val()) {
+      this.$('.errors-password-confirm').html("Your passwords do not match.");
+      this.$('#password_confirmation').css('border-color', 'red');
       pass = false;
     } else {
-      that.$('.errors-password-confirm').empty();
-      that.$('#password_confirmation').css('border-color', '#ccc');
+      this.$('.errors-password-confirm').empty();
+      this.$('#password_confirmation').css('border-color', '#ccc');
     }
 
-    if (!that.$('#terms_agree').prop('checked')) {
-      that.$('.errors-checkbox').html("You must agree to the terms and conditions.");
-      that.$('#terms_agree').css('border-color', 'red');
+    if (!this.$('#terms_agree').prop('checked')) {
+      this.$('.errors-checkbox').html("You must agree to the terms and conditions.");
+      this.$('#terms_agree').css('border-color', 'red');
       pass = false;
     } else {
-      that.$('.errors-checkbox').empty();
-      that.$('#terms_agree').css('border-color', '#ccc');
+      this.$('.errors-checkbox').empty();
+      this.$('#terms_agree').css('border-color', '#ccc');
     }
 
     return pass;
