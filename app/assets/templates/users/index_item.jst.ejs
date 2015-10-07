@@ -1,11 +1,14 @@
 <div class="player-area-small group">
 
-  <a href="#users/<%= user.get('id') %>">
-    <img class="main" src="<%= user.get('image_url') %>" width="120" height="120" />
-  </a>
-
   <div class="name-details">
     <div class="track-title"><a href="#users/<%= user.get('id') %>"><%= user.escape('display_name') %></a></div>
+    <br>
+    <br>
+    <div class="display-name"><a><%= user.escape('fname') %> <%= user.escape('lname') %></a></div>
+    <br>
+    <br>
+    <div class="display-name"><a href="#search/<%= user.escape('location') %>"><%= user.escape('location') %></a></div>
+
 
     <ul class="author-info group">
       <li class="followers-image"></li>
@@ -15,6 +18,9 @@
     </ul>
   </div>
 
+  <a href="#users/<%= user.get('id') %>">
+    <img class="main-user" src="<%= user.get('image_url') %>" width="120" height="120" />
+  </a>
 
 </div>
 

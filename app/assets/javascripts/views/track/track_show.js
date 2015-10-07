@@ -12,7 +12,6 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
 
   initialize: function(options) {
     this.model.fetch({success: function() {
-      debugger
       this.render();
       setTimeout(function() {
         this.$('.player-area').removeClass('transitioning');

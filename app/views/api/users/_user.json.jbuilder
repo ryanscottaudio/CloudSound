@@ -9,7 +9,7 @@ if !short
       json.partial!('api/follows/follow', follow: follower)
     end
   end
-  if !medium
-    json.extract!(user, :location, :fname, :lname)
-  end
+  json.extract!(user, :location, :fname, :lname)
+  # if !medium
+  # end
 end

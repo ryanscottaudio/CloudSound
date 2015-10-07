@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   include PgSearch
-  multisearchable against: [:display_name]
+  multisearchable against: [:display_name, :location]
 
   has_many :tracks,
     foreign_key: :author_id,
