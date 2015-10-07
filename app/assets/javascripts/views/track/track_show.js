@@ -29,12 +29,14 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
     this.$el.html(this.template({track: this.model}));
     this.setLiked();
     renderWave.call(this, {height: 100, color: '#FFFFFF'});
-    this.wave.xhr = this.wave.load(this.model.get('audio_url')).xhr;
-    this.wave.on("ready", function() {
-      if (CloudSound.currentUser.isSignedIn()) {
-        this.addCommentForm();
-      }
-    }.bind(this));
+    if (this.model.get('audio_url')) {
+      this.wave.xhr = this.wave.load(this.model.get('audio_url')).xhr;
+      this.wave.on("ready", function() {
+        if (CloudSound.currentUser.isSignedIn()) {
+          this.addCommentForm();
+        }
+      }.bind(this));
+    }
     this.addCommentsIndex();
     addHeader.call(this);
     return this;
