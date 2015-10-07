@@ -20,11 +20,12 @@ CloudSound is a SoundCloud-inspired social network for music-makers built on Rai
 - Follow users
 - View a feed of the latest tracks from followed users
 - Search for tracks and users using PgSearch and a polymorphic table
+- Find users using vanity URLs (e.g. cloudsound.xyz/username leads to username's public page)
 
 ## To Do
 - Track genres/tags
 - Notifications
-- Custom user/track urls
+- Track vanity URLs
 - User/track analytics
 - Create playlists
 - Editing tracks

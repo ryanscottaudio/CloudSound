@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root to: "site#root"
+  get ":username", to: "site#find_by_username"
 
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:new, :create, :update, :show, :destroy, :index] do
@@ -19,5 +20,6 @@ Rails.application.routes.draw do
   end
 
   get "auth/:provider/callback", to: "api/sessions#omniauth", defaults: {format: :json}
+
 
 end

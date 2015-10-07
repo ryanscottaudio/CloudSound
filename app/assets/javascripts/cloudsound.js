@@ -17,6 +17,11 @@ window.CloudSound = {
     });
     Backbone.history.start();
 
+    if (showUserId) {
+      this.router.userShow(showUserId);
+      // Backbone.history.navigate('users/' + showUserId, {trigger: true});
+    }
+
     if (typeof(needsToEdit) != "undefined") {
       Backbone.history.navigate('users/' + currentUserId + '/edit', {trigger: true});
     }

@@ -14,3 +14,9 @@
     </script>
   <% end %>
 <% end %>
+
+<% if @user_id %>
+  <script type="text/javascript">
+    var showUserId = <%= @user_id %>;
+  </script>
+<% end %>

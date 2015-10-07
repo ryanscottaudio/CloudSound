@@ -11,6 +11,8 @@ CloudSound.Routers.Router = Backbone.Router.extend({
 
     "explore": "exploreShow",
 
+    "404": 'fourOhFour',
+
     "_=_": "preventLittleMan",
 
     "tracks/new": "trackNew",
@@ -80,12 +82,16 @@ CloudSound.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function(id) {
-    var user = this.collection.getOrFetch(id)
-    var userView = new CloudSound.Views.UserShow({
-      model: user,
-      collection: user.tracks(),
-    });
-    this._swapview(userView);
+    if (id === -1) {
+      Backbone.history.navigate("404", {trigger: true})
+    } else {
+      var user = this.collection.getOrFetch(id)
+      var userView = new CloudSound.Views.UserShow({
+        model: user,
+        collection: user.tracks(),
+      });
+      this._swapview(userView);
+    }
   },
 
   // signIn: function(callback) {
@@ -121,6 +127,12 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     var searchView = new CloudSound.Views.SearchIndex({term: term});
 
     this._swapview(searchView);
+  },
+
+  fourOhFour: function() {
+    var fourOhFourView = new CloudSound.Views.FourOhFour();
+
+    this._swapview(fourOhFourView);
   },
 
   _swapview: function(newView) {
