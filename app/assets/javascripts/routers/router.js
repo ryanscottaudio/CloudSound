@@ -82,7 +82,7 @@ CloudSound.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function(id) {
-    if (id === -1) {
+    if (id === '-1') {
       Backbone.history.navigate("404", {trigger: true})
     } else {
       var user = this.collection.getOrFetch(id)

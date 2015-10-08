@@ -6,13 +6,8 @@ class SiteController < ApplicationController
 
   def find_by_username
     user = User.find_by(username: params[:username])
-    if user
-      @user_id = user.id
-      render :root
-    else
-      @user_id = -1
-      render :root
-    end
+    @user_id = (user ? user.id : -1)
+    render :root
   end
 
 end
