@@ -56,6 +56,7 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
       return;
     }
 
+    this.$('.loading-spinner-small').addClass('loader-small');
     this.$('button.save').addClass('uploading');
     this.$('button.save').html('Uploading...');
     var attrs = this.$('form.trackForm').serializeJSON();
@@ -79,6 +80,7 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
         } else {
           that.$('.errors').html("Something went wrong. Please try again.")
         }
+        that.$('.loading-spinner-small').removeClass('loader-small');
         that.$('button.save').removeClass('uploading');
         that.$('button.save').html('Save');
       },

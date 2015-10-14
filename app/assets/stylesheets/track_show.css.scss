@@ -311,8 +311,8 @@ button.play-pause.loading {
     content: "•";
     color: white;
     opacity: 0;
-    -webkit-animation: dot 1s infinite;
-    animation: dot 1s infinite;
+    -webkit-animation: dot .75s infinite;
+    animation: dot .75s infinite;
   }
 
   .one:after {
