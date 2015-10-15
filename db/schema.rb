@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007033622) do
+ActiveRecord::Schema.define(version: 20151015204938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,9 +86,11 @@ ActiveRecord::Schema.define(version: 20151007033622) do
     t.string   "audio_content_type"
     t.integer  "audio_file_size"
     t.datetime "audio_updated_at"
+    t.string   "slug"
   end
 
   add_index "tracks", ["author_id"], name: "index_tracks_on_author_id", using: :btree
+  add_index "tracks", ["slug"], name: "index_tracks_on_slug", unique: true, using: :btree
   add_index "tracks", ["url"], name: "index_tracks_on_url", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -108,10 +110,13 @@ ActiveRecord::Schema.define(version: 20151007033622) do
     t.datetime "image_updated_at"
     t.string   "provider"
     t.string   "uid"
+    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end
