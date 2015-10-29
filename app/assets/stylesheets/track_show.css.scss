@@ -372,20 +372,46 @@ div.search-index {
   max-width: 817px;
 }
 
-button.like-button {
+button.like-button, button.delete-button {
   border: 1px solid #e5e5e5;
   background: white;
   position: relative;
   background-size: 16px 16px;
-  background-image: image-url('heartblack.svg');
   background-repeat: no-repeat;
   background-position: center;
   width: 32px;
   height: 26px;
   margin: 0 0 10px 0;
+  float: left;
+  margin-right: 5px;
 }
 
-button.like-button:hover {
+button.like-button {
+  background-image: image-url('heartblack.svg');
+}
+
+button.delete-button {
+  background-image: image-url('delete.png');
+  background-position: 7px calc(50% + 1px);
+  color: black;
+  -ms-transform: width .25s;
+  -webkit-transform: width .25s;
+  -moz-transform: width .25s;
+  -o-transform: width .25s;
+  transition: width .25s;
+  overflow: hidden;
+}
+
+button.delete-button.sure {
+  background-image: url('');
+  width: 80px;
+}
+
+button.delete-button.sure:after {
+  content: "For real?";
+}
+
+button.like-button:hover, button.delete-button:hover {
   border-color: #ccc;
 }
 

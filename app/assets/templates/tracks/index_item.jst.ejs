@@ -46,6 +46,9 @@
 
   <% if (CloudSound.currentUser.isSignedIn()) { %>
     <button class="like-button"></button>
+    <% if (CloudSound.currentUser.get('id') === author.get('id')) { %>
+      <button class="delete-button"></button>
+    <% } %>
   <% } %>
 
   <ul class="track-info group">

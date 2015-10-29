@@ -21,7 +21,6 @@ class Api::CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     if logged_in? && current_user.id == @comment.commenter_id
       @comment.destroy
-      render :show
     end
   end
 

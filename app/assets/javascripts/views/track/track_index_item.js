@@ -11,6 +11,8 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     "click button.play-pause.loaded": "playPause",
     "click div#audio-wave": "initialPlay",
     "click button.like-button": "likeUnlike",
+    "click .delete-button": "primeDelete",
+    "click .delete-button.sure": "deleteTrack",
   },
 
   initialize: function(options) {
@@ -176,6 +178,17 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
 
   renderCommentNumber: function() {
     this.$('li.comments-count').html(this.model.comments().length)
+  },
+
+  primeDelete: function() {
+    this.$('button.delete-button').addClass('sure');
+    var timer = setTimeout(function() {
+      this.$('button.delete-button').removeClass('sure');
+    }.bind(this), 3000);
+  },
+
+  deleteTrack: function() {
+    this.model.destroy();
   },
 
 })
