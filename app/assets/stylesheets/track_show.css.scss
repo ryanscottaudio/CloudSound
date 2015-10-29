@@ -394,11 +394,11 @@ button.delete-button {
   background-image: image-url('delete.png');
   background-position: 7px calc(50% + 1px);
   color: black;
-  -ms-transform: width .25s;
-  -webkit-transform: width .25s;
-  -moz-transform: width .25s;
-  -o-transform: width .25s;
-  transition: width .25s;
+  -ms-transform: width .2s;
+  -webkit-transform: width .2s;
+  -moz-transform: width .2s;
+  -o-transform: width .2s;
+  transition: width .2s;
   overflow: hidden;
 }
 

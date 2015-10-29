@@ -3,7 +3,7 @@ Backbone.CFModel = Backbone.Model.extend({
   saveFormData: function (formData, options) {
     var method = this.isNew() ? "POST" : "PUT";
     var model = this;
-    $.ajax({
+    var request = $.ajax({
       xhr: function() {
         var xhr = new XMLHttpRequest();
           xhr.upload.addEventListener('progress', function(e) {
@@ -27,6 +27,7 @@ Backbone.CFModel = Backbone.Model.extend({
         options.error && options.error(model, response, options);
       },
     });
+    return request;
   },
 
 })

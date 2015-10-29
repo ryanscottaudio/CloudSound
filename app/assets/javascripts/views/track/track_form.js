@@ -12,6 +12,7 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
   events: {
     "change #input-post-image": "pictureChange",
     "click button.save": "checkSubmit",
+    "click a.cancel-link": "cancel",
   },
 
   render: function() {
@@ -68,17 +69,19 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
     if (this.$('#input-post-image')[0].files[0]) {
       formData.append("track[image]", this.$('#input-post-image')[0].files[0]);
     }
-    this.model.saveFormData(formData, {
+    this.request = this.model.saveFormData(formData, {
       success: function(model) {
         Backbone.history.navigate('tracks/' + model.id, {trigger: true})
       },
       error: function(model, response) {
-        if (response.responseJSON.indexOf('Audio content type is invalid') != -1) {
-          that.$('.errors').html("That's not a valid audio file. Please choose a different one.")
-        } else if (response.responseJSON.indexOf('Url has already been taken') != -1) {
-          that.$('.errors').html("That URL is taken. Please enter another one.")
-        } else {
-          that.$('.errors').html("Something went wrong. Please choose a different file.")
+        if (response.responseJSON) {
+          if (response.responseJSON.indexOf('Audio content type is invalid') != -1) {
+            that.$('.errors').html("That's not a valid audio file. Please choose a different one.")
+          } else if (response.responseJSON.indexOf('Url has already been taken') != -1) {
+            that.$('.errors').html("That URL is taken. Please enter another one.")
+          } else {
+            that.$('.errors').html("Something went wrong. Please choose a different file.")
+          }
         }
         that.$('.loading-spinner-small').removeClass('loader-small');
         that.$('button.save').removeClass('uploading');
@@ -121,5 +124,16 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
 
     return pass;
   },
+
+  cancel: function(e) {
+    e.preventDefault();
+
+    if (this.request) {
+      this.request.abort();
+      this.request = null;
+    } else {
+      Backbone.history.navigate("", {trigger: true});
+    }
+  }
 
 })
