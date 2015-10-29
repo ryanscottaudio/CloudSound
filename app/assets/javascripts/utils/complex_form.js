@@ -4,6 +4,15 @@ Backbone.CFModel = Backbone.Model.extend({
     var method = this.isNew() ? "POST" : "PUT";
     var model = this;
     $.ajax({
+      xhr: function() {
+        var xhr = new XMLHttpRequest();
+          xhr.upload.addEventListener('progress', function(e) {
+            if (e.lengthComputable) {
+              // console.log(e.loaded / e.total * 100 + '%');
+            }
+          }, false);
+        return xhr;
+      },
       url: _.result(model, "url"),
       type: method,
       data: formData,

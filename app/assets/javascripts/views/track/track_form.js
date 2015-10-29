@@ -78,7 +78,7 @@ CloudSound.Views.TrackForm = Backbone.CompositeView.extend({
         } else if (response.responseJSON.indexOf('Url has already been taken') != -1) {
           that.$('.errors').html("That URL is taken. Please enter another one.")
         } else {
-          that.$('.errors').html("Something went wrong. Please try again.")
+          that.$('.errors').html("Something went wrong. Please choose a different file.")
         }
         that.$('.loading-spinner-small').removeClass('loader-small');
         that.$('button.save').removeClass('uploading');

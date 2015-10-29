@@ -17,8 +17,7 @@ window.CloudSound = {
     });
     Backbone.history.start();
 
-    if (showUserId) {
-      // this.router.userShow(showUserId);
+    if (typeof(showUserId) != "undefined") {
       Backbone.history.navigate('users/' + showUserId, {trigger: true});
     }
 
