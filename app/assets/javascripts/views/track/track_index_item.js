@@ -39,20 +39,22 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
 
   addCommentForm: function () {
     that = this;
-    var commentFormView = new CloudSound.Views.CommentForm({
+    this.commentFormView = new CloudSound.Views.CommentForm({
       model: new CloudSound.Models.Comment(),
       parent: that,
       track: that.model,
       collection: that.model.comments(),
     });
-    this.addSubview('div.comment-form-area', commentFormView)
+    this.addSubview('div.comment-form-area', this.commentFormView)
     setTimeout(function() {
       this.$('form.comment').removeClass('transitioning');
     }.bind(this), 0);
   },
 
   removeCommentForm: function () {
-    this.removeSubview('div.comment-form-area', commentFormView)
+    if (this.commentFormView) {
+      this.removeSubview('div.comment-form-area', this.commentFormView)
+    }
   },
 
   setPlaying: function() {
