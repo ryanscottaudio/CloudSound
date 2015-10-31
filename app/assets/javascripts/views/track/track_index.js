@@ -28,7 +28,6 @@ CloudSound.Views.TrackIndex = Backbone.CompositeView.extend({
   addTrackView: function (track) {
     var trackView = new CloudSound.Views.TrackIndexItem({
       model: track,
-      comments: track.comments(),
       parentView: this,
     });
     this.addSubview('ul.tracks-list', trackView);

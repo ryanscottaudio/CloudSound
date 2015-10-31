@@ -18,9 +18,10 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
 
   initialize: function(options) {
     this.parentView = options.parentView;
-    this.comments = options.comments;
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.model.comments(), "add remove", this.renderCommentNumber);
+    this.listenTo(this.model.comments(), "add", this.addCommentPic);
+    this.listenTo(this.model.comments(), "remove", this.removeCommentPic);
   },
 
   render: function() {
@@ -28,8 +29,6 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
     this.$el.html(this.template({track: this.model}));
     this.setLiked();
     renderWave.call(this, {height: 60, color: '#666666'});
-    // this.addCommentsIndex();
-
     this.$el.addClass('transitioning');
     setTimeout(function() {
       this.$el.removeClass('transitioning');
@@ -44,7 +43,7 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
       model: new CloudSound.Models.Comment(),
       parent: that,
       track: that.model,
-      collection: that.comments,
+      collection: that.model.comments(),
     });
     this.addSubview('div.comment-form-area', commentFormView)
     setTimeout(function() {
@@ -55,14 +54,6 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
   removeCommentForm: function () {
     this.removeSubview('div.comment-form-area', commentFormView)
   },
-
-  // addCommentsIndex: function () {
-  //   that = this;
-  //   var commentsIndexView = new CloudSound.Views.CommentIndex({
-  //     collection: that.collection,
-  //   });
-  //   this.addSubview('div.lower-comment-area', commentsIndexView);
-  // },
 
   setPlaying: function() {
     if (this.parentView.playingId !== this.model.id) {
@@ -191,6 +182,27 @@ CloudSound.Views.TrackIndexItem = Backbone.CompositeView.extend({
 
   deleteTrack: function() {
     this.model.destroy();
+  },
+
+  addCommentPics: function () {
+    this.model.comments().each(function(comment) {
+      this.model.comments().remove(comment);
+      this.model.comments().add(comment);
+    }.bind(this));
+  },
+
+  addCommentPic: function (comment) {
+    if (comment.get('time')) {
+      var commentView = new CloudSound.Views.CommentPic({
+        model: comment,
+        parentView: this,
+      });
+      this.addSubview('.comment-pic-space', commentView);
+    };
+  },
+
+  removeCommentPic: function (comment) {
+    this.removeModelSubview('.comment-pic-space', comment);
   },
 
 })

@@ -123,3 +123,43 @@ ul.author-info, ul.track-info {
   }
 
 }
+
+.comment-pic {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+}
+
+.comment-picture {
+
+}
+
+.comment-text {
+  background: black;
+  padding: 1px 2px;
+  font-family: "Lucida Grande";
+  font-size: 10px;
+  font-weight: 100;
+  display: block;
+  opacity: 0;
+  position: absolute;
+  white-space: nowrap;
+  color: #666;
+  color: white;
+  -ms-transform: opacity .2s;
+  -webkit-transform: opacity .2s;
+  -moz-transform: opacity .2s;
+  -o-transform: opacity .2s;
+  transition: opacity .2s;
+}
+
+.comment-text a {
+  display: inline-block;
+  font: inherit;
+  color: #ff5500;
+  margin-right: 5px;
+}
+
+.comment-pic:hover .comment-text {
+  opacity: 1;
+}

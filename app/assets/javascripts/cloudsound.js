@@ -107,6 +107,7 @@ function renderWave(options) {
     wave.on("audioprocess", function() {
       this.$('.cursor-time').html(secondsToHms(wave.getCurrentTime()));
     }.bind(this));
+    this.addCommentPics();
   }.bind(this));
 
   wave.on("finish", function() {

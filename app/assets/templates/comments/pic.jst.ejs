@@ -1,0 +1,3 @@
+<% author = comment.author() %>
+<img class="comment-picture" src="<%= author.get('image_url') %>" width="25" height="25" />
+<div class="comment-text"><a href="#users/<%= author.id %>"><%= author.escape('display_name') %></a><%= comment.escape('content') %></div>

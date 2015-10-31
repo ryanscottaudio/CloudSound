@@ -118,7 +118,6 @@ CloudSound.Routers.Router = Backbone.Router.extend({
     var track = new CloudSound.Models.Track({id: id});
     var trackView = new CloudSound.Views.TrackShow({
       model: track,
-      comments: track.comments(),
     });
     this._swapview(trackView);
   },

@@ -13,7 +13,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
     "click .delete-button.sure": "deleteTrack",
   },
 
-  initialize: function(options) {
+  initialize: function() {
     this.model.fetch({success: function() {
       this.render();
       setTimeout(function() {
@@ -22,9 +22,10 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
       }.bind(this), 0)
       this.$('.loading-spinner').removeClass('loader');
     }.bind(this)});
-    this.comments = options.comments;
     // this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.model.comments(), "add remove", this.renderCommentNumber);
+    this.listenTo(this.model.comments(), "add", this.addCommentPic);
+    this.listenTo(this.model.comments(), "remove", this.removeCommentPic);
   },
 
   render: function() {
@@ -51,7 +52,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
       model: new CloudSound.Models.Comment(),
       parent: that,
       track: that.model,
-      collection: that.comments,
+      collection: that.model.comments(),
     });
     this.addSubview('div.comment-form-area', commentFormView);
     setTimeout(function() {
@@ -62,7 +63,7 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
   addCommentsIndex: function () {
     that = this;
     var commentsIndexView = new CloudSound.Views.CommentIndex({
-      collection: that.comments,
+      collection: that.model.comments(),
     });
     this.addSubview('div.lower-comment-area', commentsIndexView);
   },
@@ -146,6 +147,27 @@ CloudSound.Views.TrackShow = Backbone.CompositeView.extend({
   deleteTrack: function() {
     this.model.destroy();
     Backbone.history.navigate('', {trigger: true});
+  },
+
+  addCommentPics: function () {
+    this.model.comments().each(function(comment) {
+      this.model.comments().remove(comment);
+      this.model.comments().add(comment);
+    }.bind(this));
+  },
+
+  addCommentPic: function (comment) {
+    if (comment.get('time')) {
+      var commentView = new CloudSound.Views.CommentPic({
+        model: comment,
+        parentView: this,
+      });
+      this.addSubview('.comment-pic-space', commentView);
+    };
+  },
+
+  removeCommentPic: function (comment) {
+    this.removeModelSubview('.comment-pic-space', comment);
   },
 
 })
