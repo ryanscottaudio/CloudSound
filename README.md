@@ -30,3 +30,6 @@ CloudSound is a SoundCloud-inspired social network for music-makers built on Rai
 - Create playlists
 - Editing tracks
 - Follow suggestions
+- 
+
+YES
